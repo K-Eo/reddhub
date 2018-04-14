@@ -6,26 +6,31 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @stories = Story.all
+    authorize @stories
   end
 
   # GET /stories/1
   # GET /stories/1.json
   def show
+    authorize @story
   end
 
   # GET /stories/new
   def new
     @story = Story.new
+    authorize @story
   end
 
   # GET /stories/1/edit
   def edit
+    authorize @story
   end
 
   # POST /stories
   # POST /stories.json
   def create
     @story = current_user.stories.create(story_params)
+    authorize @story
 
     respond_to do |format|
       if @story.save
@@ -41,6 +46,7 @@ class StoriesController < ApplicationController
   # PATCH/PUT /stories/1
   # PATCH/PUT /stories/1.json
   def update
+    authorize @story
     respond_to do |format|
       if @story.update(story_params)
         format.html { redirect_to @story, notice: 'Story was successfully updated.' }
@@ -55,6 +61,7 @@ class StoriesController < ApplicationController
   # DELETE /stories/1
   # DELETE /stories/1.json
   def destroy
+    authorize @story
     @story.destroy
     respond_to do |format|
       format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
