@@ -2,7 +2,8 @@ require 'test_helper'
 
 class StoryTest < ActiveSupport::TestCase
   def setup
-    @story = Story.new(title: 'Foo Bar', content: 'Foo Baz')
+    @user = users(:eo)
+    @story = Story.new(title: 'Foo Bar', content: 'Foo Baz', user: @user)
   end
 
   test 'valid story' do
