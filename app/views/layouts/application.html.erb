@@ -10,9 +10,10 @@
   </head>
 
   <body>
-    <%= link_to 'ReddHub', root_path %>
-    <%= render 'devise/user_links' %>
+    <%= render 'layouts/nav' %>
     <%= render 'layouts/messages' %>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
