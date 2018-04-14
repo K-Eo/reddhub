@@ -12,6 +12,7 @@ class StoryPolicyTest < PolicyAssertions::Test
 
   def test_new_and_create
     assert_permit @user, Story
+    assert_not_permitted nil, Story
   end
 
   def test_update_and_edit

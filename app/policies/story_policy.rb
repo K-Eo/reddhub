@@ -8,7 +8,7 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    @user.present?
   end
 
   def update?
