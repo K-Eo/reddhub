@@ -1,1 +1,9 @@
 @import "bootstrap";
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-error, .alert-alert {
+  @extend .alert-danger;
+}
