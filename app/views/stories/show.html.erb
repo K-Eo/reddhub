@@ -1,14 +1,22 @@
-<p>
-  <strong>Title:</strong>
-  <%= @story.title %>
-</p>
+<div class="col-12">
+  <h2>
+    <%= @story.title %>
 
-<p>
-  <strong>Content:</strong>
-  <%= @story.content %>
-</p>
+    <% if policy(@story).edit? %>
+      <%= link_to 'Edit', edit_story_path(@story), class: 'btn btn-primary btn-sm' %>
+    <% end %>
 
-<% if policy(@story).edit? %>
-  <%= link_to 'Edit', edit_story_path(@story) %> |
-<% end %>
-<%= link_to 'Back', stories_path %>
+    <% if policy(@story).destroy? %>
+      <%= link_to 'Destroy',
+                  @story,
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'btn btn-danger btn-sm' %>
+    <% end %>
+  </h2>
+
+
+  <div>
+    <%= @story.content %>
+  </div>
+</div>

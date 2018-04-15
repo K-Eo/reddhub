@@ -6,7 +6,15 @@
   </button>
 
   <div class="collapse navbar-collapse" id="main-nav">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto mr-4">
+      <% if policy(Story).new? %>
+        <li class="nav-item">
+          <%= link_to 'Create Story', new_story_path, class: 'nav-link text-light' %>
+        </li>
+      <% end %>
+    </ul>
+
+    <ul class="navbar-nav">
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="user-links" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
