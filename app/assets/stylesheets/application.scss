@@ -7,3 +7,20 @@
 .alert-error, .alert-alert {
   @extend .alert-danger;
 }
+
+body {
+  background: $gray-100;
+}
+
+.navbar-default {
+  background-color: $white;
+
+  .navbar-brand {
+    color: $gray-900;
+    font-weight: $font-weight-bold;
+  }
+
+  .navbar-nav li a {
+    color: $gray-900;
+  }
+}
