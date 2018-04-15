@@ -1,3 +1,5 @@
+@import "bootstrap/functions";
+@import "variables";
 @import "bootstrap";
 
 .alert-notice {
@@ -6,10 +8,6 @@
 
 .alert-error, .alert-alert {
   @extend .alert-danger;
-}
-
-body {
-  background: $gray-100;
 }
 
 .navbar-default {
