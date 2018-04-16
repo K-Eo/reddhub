@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+eo:
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  email: eo@reddhub.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  username: eoeo
+  name: Eo Red
+
+kat:
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  email: kat@reddhub.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  username: katt
+  name: Kat Red

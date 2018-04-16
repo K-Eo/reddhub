@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-default border-bottom">
+  <div class="container">
+    <%= link_to 'ReddHub', root_path, class: 'navbar-brand' %>
+
+    <button
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-target="#main-nav"
+      data-toggle="collapse"
+      type="button"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="main-nav">
+      <ul class="navbar-nav ml-auto mr-4">
+        <% if policy(Story).new? %>
+          <li class="nav-item">
+            <%= link_to 'Create Story',
+                        new_story_path,
+                        class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a
+              aria-expanded="false"
+              aria-haspopup="true"
+              class="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              id="user-links"
+              role="button"
+            >
+              <%= current_user.name %>
+            </a>
+            <div
+              aria-labelledby="user-links"
+              class="dropdown-menu dropdown-menu-right"
+            >
+              <%= link_to 'Settings',
+                          edit_user_registration_path,
+                          class: 'dropdown-item' %>
+
+              <div class="dropdown-divider"></div>
+
+              <%= link_to 'Sign Out',
+                          destroy_user_session_path,
+                          method: :delete,
+                          class: 'dropdown-item' %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up',
+                        new_user_registration_path,
+                        class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
