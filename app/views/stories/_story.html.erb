@@ -5,6 +5,10 @@
         <%= link_to story.title, story, class: 'text-dark' if policy(story).show? %>
       </h5>
 
+      <h6 class="card-subtitle mb-2 text-muted font-weight-light">
+        By <span class="font-italic"><%= story.user.name %></span>
+      </h6>
+
       <p class="card-text">
         <%= story.content %>
       </p>
