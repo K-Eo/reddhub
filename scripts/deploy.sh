@@ -50,6 +50,12 @@ fi
 # Deploy
 git push heroku $CI_COMMIT_SHA:refs/heads/master
 
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 if test $MIGRATION_CHANGES -gt 0; then
   heroku run rake db:migrate --app $APP_NAME
   heroku scale worker=$PREV_WORKERS --app $APP_NAME
