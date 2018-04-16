@@ -6,7 +6,8 @@ class UserTest < ActiveSupport::TestCase
       email: 'foo@bar.com',
       password: 'password',
       password_confirmation: 'password',
-      username: 'foobar'
+      username: 'foobar',
+      name: 'Foo Bar'
     )
   end
 
@@ -79,5 +80,35 @@ class UserTest < ActiveSupport::TestCase
     )
 
     assert_not second.valid?
+  end
+
+  test 'invalid without name' do
+    @user.name = nil
+    assert_not @user.valid?
+  end
+
+  test 'invalid if name is too long' do
+    @user.name = 'f' * 97
+    assert_not @user.valid?
+  end
+
+  test 'invalid without correct format' do
+    @user.name = 'eo eo'
+    assert_not @user.valid?
+
+    @user.name = '1234567890'
+    assert_not @user.valid?
+
+    @user.name = '----'
+    assert_not @user.valid?
+
+    @user.name = 'Eo Eo Eo'
+    assert @user.valid?
+
+    @user.name = 'Eo Eo Eo'
+    assert @user.valid?
+
+    @user.name = 'Eo'
+    assert @user.valid?
   end
 end

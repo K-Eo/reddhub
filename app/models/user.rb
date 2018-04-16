@@ -11,4 +11,8 @@ class User < ApplicationRecord
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
                        length: { minimum: 4, maximum: 32 },
                        uniqueness: { case_sensitive: false }
+
+  validates :name, presence: true,
+                   length: { maximum: 96 },
+                   format: { with: /\A(\p{Lu}[\p{Ll}]+)(\s\p{Lu}[\p{Ll}]+)*\z/ }
 end

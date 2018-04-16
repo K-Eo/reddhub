@@ -10,6 +10,7 @@ eo:
   email: eo@reddhub.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   username: eoeo
+  name: Eo Red
 
 kat:
   confirmation_sent_at: <%= Time.zone.now - 2.hours %>
@@ -17,3 +18,4 @@ kat:
   email: kat@reddhub.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   username: katt
+  name: Kat Red
