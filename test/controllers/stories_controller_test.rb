@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class StoriesControllerTest < ActionDispatch::IntegrationTest
   class SignOut < ActionDispatch::IntegrationTest
@@ -17,7 +17,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should create story" do
-      assert_no_difference('Story.count') do
+      assert_no_difference("Story.count") do
         post stories_url, params: { story: { content: @story.content, title: @story.title } }
       end
 
@@ -40,7 +40,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should destroy story" do
-      assert_no_difference('Story.count') do
+      assert_no_difference("Story.count") do
         delete story_url(@story)
       end
 
@@ -65,7 +65,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should create story" do
-      assert_difference('Story.count') do
+      assert_difference("Story.count") do
         post stories_url, params: { story: { content: @story.content, title: @story.title } }
       end
 
@@ -88,7 +88,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should destroy story" do
-      assert_difference('Story.count', -1) do
+      assert_difference("Story.count", -1) do
         delete story_url(@story)
       end
 

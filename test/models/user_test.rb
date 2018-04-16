@@ -1,114 +1,114 @@
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   setup do
     @user = User.new(
-      email: 'foo@bar.com',
-      password: 'password',
-      password_confirmation: 'password',
-      username: 'foobar',
-      name: 'Foo Bar'
+      email: "foo@bar.com",
+      password: "password",
+      password_confirmation: "password",
+      username: "foobar",
+      name: "Foo Bar"
     )
   end
 
-  test 'valid user' do
+  test "valid user" do
     assert @user.valid?
   end
 
-  test 'invalid without username' do
+  test "invalid without username" do
     @user.username = nil
     assert_not @user.valid?
   end
 
-  test 'invalid with short username' do
-    @user.username = 'aaa'
+  test "invalid with short username" do
+    @user.username = "aaa"
     assert_not @user.valid?
   end
 
-  test 'invalid with not permitted characters in username' do
+  test "invalid with not permitted characters in username" do
     @user.username = '!@#$%^&*()+-={}[];\':"<>/\\|~`'
     assert_not @user.valid?
 
-    @user.username = '-foo'
+    @user.username = "-foo"
     assert_not @user.valid?
 
-    @user.username = 'foo-'
+    @user.username = "foo-"
     assert_not @user.valid?
 
-    @user.username = '.foo'
+    @user.username = ".foo"
     assert_not @user.valid?
 
-    @user.username = '.foo.'
+    @user.username = ".foo."
     assert_not @user.valid?
 
-    @user.username = 'aaa)'
-    assert_not @user.valid?
-  end
-
-  test 'invalid with too long username' do
-    @user.username = 'a' * 33
+    @user.username = "aaa)"
     assert_not @user.valid?
   end
 
-  test 'valid usernames' do 
-    @user.username = 'foobar'
+  test "invalid with too long username" do
+    @user.username = "a" * 33
+    assert_not @user.valid?
+  end
+
+  test "valid usernames" do
+    @user.username = "foobar"
     assert @user.valid?
 
-    @user.username = '_foobar'
+    @user.username = "_foobar"
     assert @user.valid?
 
-    @user.username = 'foo_bar'
+    @user.username = "foo_bar"
     assert @user.valid?
 
-    @user.username = 'foobar_'
+    @user.username = "foobar_"
     assert @user.valid?
 
-    @user.username = 'FOOBAR'
+    @user.username = "FOOBAR"
     assert @user.valid?
 
-    @user.username = 'Foobar'
+    @user.username = "Foobar"
     assert @user.valid?
   end
 
-  test 'invalid if username already exists' do
+  test "invalid if username already exists" do
     @user.save
     second = User.new(
-      email: 'second@mail.com',
-      password: 'password',
-      password_confirmation: 'password',
-      username: 'FOOBAR'
+      email: "second@mail.com",
+      password: "password",
+      password_confirmation: "password",
+      username: "FOOBAR"
     )
 
     assert_not second.valid?
   end
 
-  test 'invalid without name' do
+  test "invalid without name" do
     @user.name = nil
     assert_not @user.valid?
   end
 
-  test 'invalid if name is too long' do
-    @user.name = 'f' * 97
+  test "invalid if name is too long" do
+    @user.name = "f" * 97
     assert_not @user.valid?
   end
 
-  test 'invalid without correct format' do
-    @user.name = 'eo eo'
+  test "invalid without correct format" do
+    @user.name = "eo eo"
     assert_not @user.valid?
 
-    @user.name = '1234567890'
+    @user.name = "1234567890"
     assert_not @user.valid?
 
-    @user.name = '----'
+    @user.name = "----"
     assert_not @user.valid?
 
-    @user.name = 'Eo Eo Eo'
+    @user.name = "Eo Eo Eo"
     assert @user.valid?
 
-    @user.name = 'Eo Eo Eo'
+    @user.name = "Eo Eo Eo"
     assert @user.valid?
 
-    @user.name = 'Eo'
+    @user.name = "Eo"
     assert @user.valid?
   end
 end
