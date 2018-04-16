@@ -6,7 +6,12 @@
   <div class="card">
     <div class="card-body">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= f.input :email, autofocus: true, autocomplete: "email" %>
+        <%= f.input :username,
+                    autofocus: true,
+                    autocomplete: "username",
+                    hint: 'Use only letters, numbers and underscore.' %>
+
+        <%= f.input :email, autocomplete: "email" %>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div class="mb-3 text-primary">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
