@@ -1,5 +1,7 @@
 {
   "name": "reddhub",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "cropperjs": "^1.3.5"
+  }
 }

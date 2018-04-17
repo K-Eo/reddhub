@@ -1,6 +1,9 @@
 @import "bootstrap/functions";
 @import "variables";
 @import "bootstrap";
+@import "cropperjs/dist/cropper";
+
+@import "user/avatars";
 
 .alert-notice {
   @extend .alert-success;
