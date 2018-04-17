@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable
 
   has_many :stories, dependent: :destroy
+  has_one_attached :avatar
 
   validates :username, presence: true,
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
