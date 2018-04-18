@@ -2,5 +2,5 @@
   id="user_avatar_viewer"
   class="avatar-big-wrapper mb-4 d-block border rounded-circle mx-auto"
 >
-  <%= image_tag get_user_avatar(current_user), class: 'rounded-circle img-fluid' %>
+<%= current_user_avatar resize: "256x256", html: { class: 'rounded-circle img-fluid' } %>
 </div>

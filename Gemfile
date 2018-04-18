@@ -41,7 +41,8 @@ gem "policy-assertions"
 gem "bootstrap", "~> 4.0.0"
 gem "jquery-rails"
 gem "simple_form"
-gem 'webpacker', '~> 3.4'
+gem "webpacker", "~> 3.4"
+gem "mini_magick"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

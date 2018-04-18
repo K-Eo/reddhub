@@ -37,7 +37,7 @@
               id="user-links"
               role="button"
             >
-              <%= image_tag get_user_avatar, class: 'navbar-avatar rounded-circle border' %>
+              <%= current_user_avatar resize: "30x30", html: { class: 'navbar-avatar rounded-circle border'  } %>
             </a>
             <div
               aria-labelledby="user-links"

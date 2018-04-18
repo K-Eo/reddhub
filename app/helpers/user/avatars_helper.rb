@@ -1,10 +1,18 @@
 module User::AvatarsHelper
-  def get_user_avatar(user = nil)
-    user = user || current_user
+  def user_avatar(user, options)
+    options ||= {}
+    html = options.delete(:html) || {}
+
     if user.avatar.attached?
-      user.avatar
+      src = user.avatar.variant(options)
     else
-      "https://www.gravatar.com/avatar/1da67f9c292299c7512d9f0dc2c13f04?s=256&d=mm"
+      src = "https://www.gravatar.com/avatar/1da67f9c292299c7512d9f0dc2c13f04?s=256&d=mm"
     end
+
+    image_tag(src, html)
+  end
+
+  def current_user_avatar(options)
+    user_avatar(current_user, options)
   end
 end
