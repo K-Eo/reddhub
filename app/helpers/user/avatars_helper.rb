@@ -1,5 +1,6 @@
 module User::AvatarsHelper
-  def get_user_avatar(user)
+  def get_user_avatar(user = nil)
+    user = user || current_user
     if user.avatar.attached?
       user.avatar
     else
