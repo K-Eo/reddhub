@@ -48,4 +48,37 @@
   </div>
 </div>
 
-<%= render 'edit_avatar' %>
+
+<div class="mr-auto col-5 text-center">
+  <%= render 'user_avatar' %>
+
+  <div>
+    <label class="btn btn-success">
+      Change <input type="file" id="avatar_picker_trigger" hidden accept="image/x-png,image/jpeg" />
+    </label>
+  </div>
+
+  <div
+    class="modal fade"
+    id="avatar_picker_modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="avatar_picker_modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div>
+            <img id="avatar_preview" src="" class="img-fluid" %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="avatar_picker_save">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

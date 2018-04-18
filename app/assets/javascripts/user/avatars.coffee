@@ -1,16 +1,37 @@
-readURL = (input) ->
+MAX_AVATAR_SIZE = 1024 * 1024 * 10
+
+clear_avatar_trigger = ->
+  $('#avatar_picker_trigger')[0].value = ''
+
+read_url = (input) ->
   if input.files && input.files[0]
     reader = new FileReader()
+    size = input.files[0].size
+
+    if size > MAX_AVATAR_SIZE
+      clear_avatar_trigger()
+      alert 'Your file is too large. Are you sure is it an image?'
+      return
 
     reader.onload = (e) ->
-      $("#avatar_preview").attr 'src', e.target.result
-      $("#avatar_picker_modal").modal('show')
+      image = new Image()
+      image.onload = ->
+        if this.width < 256 and this.height < 256
+          clear_avatar_trigger()
+          alert 'Your image is too small. We need a picture with at least 256px by 256px.'
+          return
+
+        $("#avatar_preview").attr 'src', e.target.result
+        $("#avatar_picker_modal").modal('show')
+
+      image.src = e.target.result
 
     reader.readAsDataURL input.files[0]
 
 $(document).on 'turbolinks:load', ->
-  modal = $('#avatar_picker_modal')
   cropper = null
+  modal = $('#avatar_picker_modal')
+
   modal.on 'shown.bs.modal', ->
     image = document.getElementById 'avatar_preview'
     cropper = new Cropper image,
@@ -26,22 +47,25 @@ $(document).on 'turbolinks:load', ->
       toggleDragModeOnDblclick: false
       viewMode: 1
 
-    $('#avatar_picker_save').on 'click', ->
-      cropper.getCroppedCanvas().toBlob (blob) ->
-        formData = new FormData()
+  $('#avatar_picker_save').on 'click', ->
+    cropper.getCroppedCanvas().toBlob (blob) ->
+      formData = new FormData()
 
-        formData.append 'avatar', blob
+      formData.append 'avatar', blob
 
-        Rails.ajax
-          type: 'PUT'
-          url: '/avatars'
-          data: formData
+      Rails.ajax
+        type: 'PUT'
+        url: '/avatars'
+        data: formData
+        error: ->
+          $("#avatar_picker_modal").modal('hide')
+          alert 'Oh no! something went wrong. Please, check your internet connection and try again.'
 
   modal.on 'hidden.bs.modal', ->
     cropper.destroy()
     cropper = null
-    $('#avatar_picker_trigger')[0].value = ''
+    clear_avatar_trigger()
     
   $('#avatar_picker_trigger').change ->
-    readURL @
+    read_url @
   
