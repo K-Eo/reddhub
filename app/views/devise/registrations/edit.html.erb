@@ -49,33 +49,46 @@
 </div>
 
 
-<div class="mr-auto col-5 text-center">
+<div class="mr-auto col-5 text-center" data-controller="avatar">
   <%= render 'user_avatar' %>
 
-  <div>
-    <label class="btn btn-success">
-      Change <input type="file" id="avatar_picker_trigger" hidden accept="image/x-png,image/jpeg" />
-    </label>
-  </div>
+  <label class="btn btn-success">
+    Change
+    <input
+      accept="image/x-png,image/jpeg"
+      data-action="avatar#onPickImage"
+      data-target="avatar.trigger"
+      hidden
+      type="file"
+    />
+  </label>
 
   <div
-    class="modal fade"
-    id="avatar_picker_modal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="avatar_picker_modal"
     aria-hidden="true"
+    aria-labelledby="avatar_picker_modal"
+    class="modal fade"
+    role="dialog"
+    tabindex="-1"
+    data-target="avatar.modal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
           <div>
-            <img id="avatar_preview" src="" class="img-fluid" %>
+            <img data-target="avatar.preview" src="" class="img-fluid" %>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="avatar_picker_save">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button
+            data-target="avatar.save"
+            data-disabled-with="Saving..."
+            data-action="avatar#onSave"
+            type="button"
+            class="btn btn-primary"
+          >
+            Save changes
+          </button>
+          <button data-target="avatar.cancel" data-action="avatar#onCancel" type="button" class="btn btn-secondary">Close</button>
         </div>
       </div>
     </div>

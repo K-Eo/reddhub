@@ -17,4 +17,3 @@
 //= require popper
 //= require bootstrap
 //= require cropperjs/dist/cropper.js
-//= require_tree .

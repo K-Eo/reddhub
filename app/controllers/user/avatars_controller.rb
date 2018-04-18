@@ -4,6 +4,7 @@ class User::AvatarsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to edit_user_registration_path }
+      format.js
     end
   end
 end
