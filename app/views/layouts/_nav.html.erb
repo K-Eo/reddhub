@@ -43,6 +43,12 @@
               aria-labelledby="user-links"
               class="dropdown-menu dropdown-menu-right"
             >
+              <h6 class="dropdown-header user-dropdown text-dark">
+                <%= current_user.name %>
+              </h6>
+
+              <div class="dropdown-divider"></div>
+
               <%= link_to 'Settings',
                           edit_user_registration_path,
                           class: 'dropdown-item' %>
