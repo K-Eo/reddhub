@@ -60,6 +60,9 @@
       data-target="avatar.trigger"
       hidden
       type="file"
+      data-failure="Oh no! something went wrong. Please, check your internet connection and try again."
+      data-overweight="Your file is too large. Are you sure is it an image?"
+      data-small-size="Your image is too small. We need an image with at least 256px by 256px."
     />
   </label>
 
@@ -75,7 +78,7 @@
       <div class="modal-content">
         <div class="modal-body">
           <div>
-            <img data-target="avatar.preview" src="" class="img-fluid" %>
+            <img data-target="avatar.preview" src="" class="img-fluid" />
           </div>
         </div>
         <div class="modal-footer">

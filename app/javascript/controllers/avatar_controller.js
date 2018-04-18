@@ -29,6 +29,7 @@ export default class extends Controller {
 
   onSave() {
     const content = this.saveTarget.firstChild.data
+    const trigger = this.triggerTarget
 
     const setDisabled = () => {
       this.saveTarget.setAttribute('disabled', true)
@@ -61,7 +62,7 @@ export default class extends Controller {
         },
         error: () => {
           removeDisabled()
-          alert('Oh no! something went wrong. Please, check your internet connection and try again.')
+          alert(trigger.getAttribute('data-failure') || 'Check your internet connection and try again.')
         }
       })
     })
@@ -87,7 +88,7 @@ export default class extends Controller {
     const size = currentFile.size
 
     if (size > MAX_AVATAR_SIZE) {
-      alert('Your file is too large. Are you sure is it an image?')
+      alert(this.triggerTarget.getAttribute('data-overweight') || 'File too large')
       return 
     }
 
@@ -97,12 +98,13 @@ export default class extends Controller {
 
   onReadLoaded(e) {
     const image = new Image()
+    const trigger = this.triggerTarget
     const preview = this.previewTarget
     const modal = this.modalTarget
 
     image.onload = function() {
       if (this.width < 256 && this.height < 256) {
-        alert('Your image is too small. We need an image with at least 256px by 256px.')
+        alert(trigger.getAttribute('data-small-size') || 'Image with 256x256px at least.')
         return
       }
 
