@@ -1,5 +1,5 @@
 module User::AvatarsHelper
-  def user_avatar(user, options)
+  def user_avatar(user, options = nil)
     options ||= {}
     html = options.delete(:html) || {}
 
@@ -12,7 +12,7 @@ module User::AvatarsHelper
     image_tag(src, html)
   end
 
-  def current_user_avatar(options)
+  def current_user_avatar(options = nil)
     user_avatar(current_user, options)
   end
 end
