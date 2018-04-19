@@ -11,8 +11,4 @@ module User::AvatarsHelper
 
     image_tag(src, html)
   end
-
-  def current_user_avatar(options = nil)
-    user_avatar(current_user, options)
-  end
 end
