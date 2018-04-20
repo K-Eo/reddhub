@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - '**/templates/**/*'
     - '**/vendor/**/*'
+    - '**/node_modules/**/*'
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
