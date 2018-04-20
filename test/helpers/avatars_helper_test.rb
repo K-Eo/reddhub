@@ -13,7 +13,7 @@ class User::AvatarsHelperTest < ActionView::TestCase
   end
 
   test "should return user avatar" do
-    @user.avatar.attach(fixture_file_upload("images/avatar.png"))
+    @user.avatar.attach(fixture_file_upload("files/avatar.png"))
     result = user_avatar(@user)
 
     assert_match /<img src="/, result
@@ -21,7 +21,7 @@ class User::AvatarsHelperTest < ActionView::TestCase
   end
 
   test "passes aditional options" do
-    @user.avatar.attach(fixture_file_upload("images/avatar.png"))
+    @user.avatar.attach(fixture_file_upload("files/avatar.png"))
 
     assert_match(
       /class=\"foo bar\"/,
@@ -30,7 +30,7 @@ class User::AvatarsHelperTest < ActionView::TestCase
   end
 
   test "handles resize option" do
-    @user.avatar.attach(fixture_file_upload("images/avatar.png"))
+    @user.avatar.attach(fixture_file_upload("files/avatar.png"))
     original = user_avatar(@user)
     resized  = user_avatar(@user, resize: "30x30")
 

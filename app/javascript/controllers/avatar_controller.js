@@ -55,7 +55,6 @@ export default class extends Controller {
         type: 'PUT',
         url: '/avatars',
         data: formData,
-        dataType: 'script',
         success: () => {
           this.onCancel()
           removeDisabled()
