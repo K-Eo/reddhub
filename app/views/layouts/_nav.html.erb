@@ -18,7 +18,7 @@
       <ul class="navbar-nav ml-auto mr-4">
         <% if policy(Story).new? %>
           <li class="nav-item">
-            <%= link_to 'Create Story',
+            <%= link_to 'New Story',
                         new_story_path,
                         class: 'nav-link' %>
           </li>
@@ -37,12 +37,18 @@
               id="user-links"
               role="button"
             >
-              <%= current_user.name %>
+              <%= user_avatar current_user, resize: "30x30", html: { class: 'navbar-avatar rounded-circle border'  } %>
             </a>
             <div
               aria-labelledby="user-links"
               class="dropdown-menu dropdown-menu-right"
             >
+              <h6 class="dropdown-header user-dropdown text-dark">
+                <%= current_user.name %>
+              </h6>
+
+              <div class="dropdown-divider"></div>
+
               <%= link_to 'Settings',
                           edit_user_registration_path,
                           class: 'dropdown-item' %>

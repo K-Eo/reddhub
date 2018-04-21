@@ -1,8 +1,10 @@
-<div class="mx-auto col-5">
+<div class="col-12">
   <h3 class="text-center mb-5 mt-4 font-weight-light">
     Edit my account
   </h3>
+</div>
 
+<div class="ml-auto col-5">
   <div class="card">
     <div class="card-body">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, defaults: { required: false }) do |f| %>
@@ -46,4 +48,53 @@
   </div>
 </div>
 
+
+<div class="mr-auto col-5 text-center" data-controller="avatar">
+  <%= render 'user_avatar' %>
+
+  <label class="btn btn-success">
+    Change
+    <input
+      accept="image/x-png,image/jpeg"
+      data-action="avatar#onPickImage"
+      data-target="avatar.trigger"
+      hidden
+      type="file"
+      data-failure="Oh no! something went wrong. Please, check your internet connection and try again."
+      data-overweight="Your file is too large. Are you sure is it an image?"
+      data-small-size="Your image is too small. We need an image with at least 256px by 256px."
+    />
+  </label>
+
+  <div
+    aria-hidden="true"
+    aria-labelledby="avatar_picker_modal"
+    class="modal fade"
+    role="dialog"
+    tabindex="-1"
+    data-target="avatar.modal"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div>
+            <img data-target="avatar.preview" src="" class="img-fluid" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            data-target="avatar.save"
+            data-disabled-with="Saving..."
+            data-action="avatar#onSave"
+            type="button"
+            class="btn btn-primary"
+          >
+            Save changes
+          </button>
+          <button data-target="avatar.cancel" data-action="avatar#onCancel" type="button" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
