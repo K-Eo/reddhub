@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Install heroku"
+echo "Configure heroku"
 
 sudo mkdir -p /usr/local/lib /usr/local/bin
 sudo tar -xzf ./tools/heroku.tar.gz -C /usr/local/lib
