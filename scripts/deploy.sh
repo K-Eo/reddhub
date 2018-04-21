@@ -53,7 +53,9 @@ git push heroku $CI_COMMIT_SHA:refs/heads/master
 if [ $? -eq 0 ]; then
     echo OK
 else
+    heroku maintenance:off --app $APP_NAME
     echo FAIL
+    exit 1
 fi
 
 if test $MIGRATION_CHANGES -gt 0; then
