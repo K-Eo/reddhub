@@ -38,8 +38,6 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "devise"
 gem "pundit"
 gem "policy-assertions"
-gem "bootstrap", "~> 4.0.0"
-gem "jquery-rails"
 gem "simple_form"
 gem "webpacker", "~> 3.4"
 gem "mini_magick"

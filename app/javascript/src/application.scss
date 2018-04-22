@@ -1,3 +1,10 @@
+@import '~bootstrap/scss/functions';
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~cropperjs/dist/cropper';
+
+@import 'avatars';
+
 .navbar-avatar {
   max-width: 30px;
   max-height: 30px;
@@ -6,4 +13,30 @@
 
 .user-dropdown {
   padding: 0.2rem 1.5rem;
+}
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-error,
+.alert-alert {
+  @extend .alert-danger;
+}
+
+.navbar-default {
+  background-color: $white;
+
+  .navbar-brand {
+    color: $gray-900;
+    font-weight: $font-weight-bold;
+  }
+
+  .navbar-nav li a {
+    color: $gray-900;
+  }
+}
+
+.messages {
+  margin-top: -1px;
 }
