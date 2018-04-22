@@ -61,8 +61,11 @@ export default class extends Controller {
         },
         error: () => {
           removeDisabled()
-          alert(trigger.getAttribute('data-failure') || 'Check your internet connection and try again.')
-        }
+          alert(
+            trigger.getAttribute('data-failure') ||
+              'Check your internet connection and try again.'
+          )
+        },
       })
     })
   }
@@ -87,8 +90,10 @@ export default class extends Controller {
     const size = currentFile.size
 
     if (size > MAX_AVATAR_SIZE) {
-      alert(this.triggerTarget.getAttribute('data-overweight') || 'File too large')
-      return 
+      alert(
+        this.triggerTarget.getAttribute('data-overweight') || 'File too large'
+      )
+      return
     }
 
     reader.onload = e => this.onReadLoaded(e)
@@ -103,7 +108,10 @@ export default class extends Controller {
 
     image.onload = function() {
       if (this.width < 256 && this.height < 256) {
-        alert(trigger.getAttribute('data-small-size') || 'Image with 256x256px at least.')
+        alert(
+          trigger.getAttribute('data-small-size') ||
+            'Image with 256x256px at least.'
+        )
         return
       }
 
@@ -111,7 +119,7 @@ export default class extends Controller {
       $(modal).modal({
         backdrop: 'static',
         keyboard: false,
-        show: true
+        show: true,
       })
     }
 
