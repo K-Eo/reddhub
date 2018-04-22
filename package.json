@@ -2,6 +2,7 @@
   "name": "reddhub",
   "private": true,
   "scripts": {
+    "lint": "eslint 'app/javascript/**/*.js'",
     "prettier": "prettier -l 'app/javascript/**/*.{js,css,scss,json,md}'"
   },
   "dependencies": {
@@ -10,6 +11,8 @@
     "stimulus": "^1.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
     "prettier": "^1.12.1",
     "webpack-dev-server": "2.11.2"
   }
