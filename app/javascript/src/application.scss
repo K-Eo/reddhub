@@ -1,9 +1,9 @@
-@import "~bootstrap/scss/functions";
-@import "variables";
-@import "~bootstrap/scss/bootstrap";
-@import "~cropperjs/dist/cropper";
+@import '~bootstrap/scss/functions';
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~cropperjs/dist/cropper';
 
-@import "avatars";
+@import 'avatars';
 
 .navbar-avatar {
   max-width: 30px;
@@ -19,7 +19,8 @@
   @extend .alert-success;
 }
 
-.alert-error, .alert-alert {
+.alert-error,
+.alert-alert {
   @extend .alert-danger;
 }
 
