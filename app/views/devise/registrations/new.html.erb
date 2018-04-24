@@ -1,33 +1,25 @@
-<div class="mx-auto col-5">
-  <h3 class="text-center mb-5 mt-4 font-weight-light">Sign up</h3>
+<%= render "devise/shared/form", title: "Sign up" do %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: { required: false }) do |f| %>
+    <%= f.input :name,
+      autofocus: true,
+      autocomplete: "name" %>
 
-  <div class="card">
-    <div class="card-body">
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: { required: false }) do |f| %>
-        <%= f.input :name,
-                    autofocus: true,
-                    autocomplete: "name" %>
+    <%= f.input :username,
+      autocomplete: "username",
+      hint: 'This will be your username. Use only letters, numbers and underscore.' %>
 
-        <%= f.input :username,
-                    autocomplete: "username",
-                    hint: 'This will be your username. Use only letters, numbers and underscore.' %>
+    <%= f.input :email,
+      autocomplete: "email",
+      hint: "We'll never share your email address with anyone."%>
 
-        <%= f.input :email,
-                    autocomplete: "email",
-                    hint: "We'll never share your email address with anyone."%>
+    <%= f.input :password,
+      hint: "#{@minimum_password_length} characters minimum.",
+      autocomplete: "off" %>
 
-        <%= f.input :password,
-                    hint: "#{@minimum_password_length} characters minimum.",
-                    autocomplete: "off" %>
+    <%= f.input :password_confirmation, autocomplete: "off" %>
 
-        <%= f.input :password_confirmation, autocomplete: "off" %>
-
-        <div class="actions">
-          <%= f.button :submit, "Sign Up", class: 'btn-success' %>
-        </div>
-      <% end %>
+    <div class="actions">
+      <%= f.button :submit, "Sign Up", class: 'btn-success' %>
     </div>
-  </div>
-
-  <%= render "devise/shared/links" %>
-</div>
+  <% end %>
+<% end %>
