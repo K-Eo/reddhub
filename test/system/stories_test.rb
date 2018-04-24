@@ -8,13 +8,13 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     sign_in_as(@user)
-    visit stories_url
-    assert_selector "h3", text: "Stories"
+    visit root_url
+    assert_selector "h1", text: "Title of a longer featured blog post"
   end
 
   test "creating a Story" do
     sign_in_as(@user)
-    visit stories_url
+    visit root_url
     click_on "New Story"
 
     fill_in "Title", with: @story.title
@@ -26,7 +26,7 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "updating a Story" do
     sign_in_as(@user)
-    visit stories_url
+    visit root_url
 
     click_on "Story One"
 
@@ -41,7 +41,7 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "destroying a Story" do
     sign_in_as(@user)
-    visit stories_url
+    visit root_url
 
     click_on "Story One"
 
@@ -54,7 +54,7 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "can't edit other user story" do
     sign_in_as(@user)
-    visit stories_url
+    visit root_url
 
     click_on "Story Two"
 
@@ -63,7 +63,7 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "can't destroy other user story" do
     sign_in_as(@user)
-    visit stories_url
+    visit root_url
 
     click_on "Story Two"
 

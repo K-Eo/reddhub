@@ -6,11 +6,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       @story = stories(:one)
     end
 
-    test "should get index" do
-      get stories_url
-      assert_response :success
-    end
-
     test "should get new" do
       get new_story_url
       assert_redirected_to new_user_session_path
@@ -54,11 +49,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       @story = stories(:one)
     end
 
-    test "should get index" do
-      get stories_url
-      assert_response :success
-    end
-
     test "should get new" do
       get new_story_url
       assert_response :success
@@ -92,7 +82,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
         delete story_url(@story)
       end
 
-      assert_redirected_to stories_url
+      assert_redirected_to root_url
     end
   end
 end

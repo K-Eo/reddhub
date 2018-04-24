@@ -1,17 +1,8 @@
-<div class="col-4 mb-4">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">
-        <%= link_to story.title, story, class: 'text-dark' if policy(story).show? %>
-      </h5>
+<div class="story-post">
+  <h2 class="story-post-title">
+    <%= link_to story.title, story, class: 'text-dark' if policy(story).show? %>
+  </h2>
+  <p class="story-post-meta">January 1, 2014 by <a href="#"><%= story.user.name %></a></p>
+  <%= story.content %>
 
-      <h6 class="card-subtitle mb-2 text-muted font-weight-light">
-        By <span class="font-italic"><%= story.user.name %></span>
-      </h6>
-
-      <p class="card-text">
-        <%= story.content %>
-      </p>
-    </div>
-  </div>
 </div>

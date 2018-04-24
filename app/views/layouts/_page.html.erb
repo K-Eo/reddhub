@@ -1,11 +1,19 @@
-<div class="content-wrapper">
+<div class="<%= page_classes("content-wrapper") %>">
   <%= render 'layouts/nav' %>
   <%= render 'layouts/messages' %>
 
-  <div id="content-body" class="container mt-3">
-    <div class="row">
+  <div id="content-body" class="container mt-2">
+    <% if defined?(page_raw) && page_raw %>
       <%= yield %>
-    </div>
+    <% else %>
+      <div class="row">
+        <%= yield %>
+      </div>
+    <% end %>
   </div>
+
+  <% if defined?(page_footer) && page_footer %>
+    <%= render 'layouts/footer' %>
+  <% end %>
 </div>
 
