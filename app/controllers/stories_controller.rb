@@ -1,13 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:destroy, :edit, :show, :update]
-  before_action :authenticate_user!, except: [:index, :show]
-
-  # GET /stories
-  # GET /stories.json
-  def index
-    @stories = Story.includes(:user).all
-    authorize @stories
-  end
+  before_action :authenticate_user!, except: [:show]
 
   # GET /stories/1
   # GET /stories/1.json
@@ -64,7 +57,7 @@ class StoriesController < ApplicationController
     authorize @story
     @story.destroy
     respond_to do |format|
-      format.html { redirect_to stories_url, notice: "Story was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "Story was successfully destroyed." }
       format.json { head :no_content }
     end
   end
