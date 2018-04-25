@@ -1,0 +1,17 @@
+<% if @story.persisted? %>
+  <p class="font-weight-bold">Ready to publish?</p>
+  <%= simple_form_for(@story, url: meta_story_path(@story), method: :put, html: { 'data-remote': true }) do |form| %>
+    <%= form.input :title, placeholder: "Write a title", label: false %>
+    <div class="d-flex justify-content-between">
+      <%= form.submit "Save", class: "btn btn-outline-secondary" %>
+      <% if policy(@story).publish? %>
+        <button class="btn btn-outline-success">Publish</button>
+      <% else %>
+        <button class="btn btn-outline-secondary" disabled>Publish</button>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p class="my-3 text-center font-weight-bold">Write an awesome story to publish!</p>
+<% end %>
+<hr />

@@ -1,0 +1,24 @@
+.story-editor {
+  border: none;
+  background-color: #fafafa;
+  padding: 0 !important;
+
+  &:focus {
+    box-shadow: none !important;
+    background-color: #fafafa;
+  }
+
+  &-toolbar > .nav-link {
+    padding: 0.5rem 0.5rem;
+    font-size: 90%;
+  }
+}
+
+.story-editor-popover {
+  display: none;
+  padding: 0.75rem 0.5rem !important;
+}
+
+.popover-body > .story-editor-popover {
+  display: block;
+}

@@ -12,16 +12,16 @@ class StoryTest < ActiveSupport::TestCase
 
   test "invalid without title" do
     @story.title = nil
-    assert_not @story.valid?
+    assert_not @story.valid?(:with_meta)
   end
 
   test "invalid if title length is greater than 60 characters" do
     @story.title = "a" * 61
-    assert_not @story.valid?
+    assert_not @story.valid?(:with_meta)
   end
 
-  test "invalud without content" do
+  test "invalid without content" do
     @story.content = nil
-    assert_not @story.valid?
+    assert_not @story.valid?(:with_content)
   end
 end
