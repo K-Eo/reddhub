@@ -1,6 +1,9 @@
-<h5><%= story.title %></h5>
-<p>By <%= story.user.name %></p>
-<p>
-  <%= link_to "Edit", edit_story_path(story) %>
+<h5>
+  <%= link_to story.title, edit_story_path(story), class: 'text-dark' %>
+</h5>
+
+<p class="small text-secondary">
+  By <%= story.user.name %>
 </p>
+
 <hr />
