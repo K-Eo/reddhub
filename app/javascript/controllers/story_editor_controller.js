@@ -22,7 +22,7 @@ export default class extends Controller {
   }
 
   get id() {
-    return this.settingsTarget.getAttribute("data-id") || null
+    return this.settingsTarget.getAttribute('data-id') || null
   }
 
   get isNew() {
@@ -59,7 +59,7 @@ export default class extends Controller {
     })
   }
 
-  onChange(e) {
+  onChange() {
     this.onChangeDebounced()
     this.saveStatus = 'Not saved'
   }
