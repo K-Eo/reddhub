@@ -1,4 +1,17 @@
-<div class="col-12">
-  <h3>New Story</h3>
-  <%= render 'form', story: @story %>
+<div class="col-12 col-lg-10 mx-lg-auto col-xl-9" data-controller="story-editor">
+  <ul class="nav justify-content-end story-editor-toolbar">
+    <span class="nav-link disabled" data-target="story-editor.saveStatus">New Story</span>
+    <a class="nav-link text-secondary" href="#">Preview</a>
+    <a class="nav-link text-success" href="#">Publish</a>
+  </ul>
+
+  <div class="form-group">
+    <textarea
+      autofocus="true"
+      class="form-control story-editor"
+      placeholder="Write your story..."
+      data-action="input->story-editor#onChange"
+      data-target="story-editor.text"
+      ></textarea>
+  </div>
 </div>
