@@ -1,3 +1,16 @@
 <div class="col-12">
-  <%= render partial: 'story_small', collection: @stories, as: :story %>
+  <h1 class="mt-5 mb-4">Your stories</h1>
+
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Drafts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Public</a>
+    </li>
+  </ul>
+
+  <div class="mt-4">
+    <%= render partial: 'story_small', collection: @stories, as: :story %>
+  </div>
 </div>
