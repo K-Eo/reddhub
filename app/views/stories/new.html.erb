@@ -2,8 +2,15 @@
   <ul class="nav justify-content-end story-editor-toolbar">
     <span class="nav-link disabled" data-target="story-editor.saveStatus">New Story</span>
     <a class="nav-link text-secondary" href="#">Preview</a>
-    <a class="nav-link text-success" href="#">Publish</a>
+    <a
+      class="nav-link text-success dropdown-toggle"
+      data-action="story-editor#toggleSettings"
+      href="#">Publish</a>
   </ul>
+
+  <div id="story_settings" class="collapse" data-target="story-editor.settings">
+    <%= render 'meta_form' %>
+  </div>
 
   <div class="form-group">
     <textarea

@@ -2,22 +2,27 @@ import { Controller } from 'stimulus'
 import autosize from 'autosize'
 import debounce from 'lodash/debounce'
 
+const TIME_TO_SAVE = 4000
+
 export default class extends Controller {
-  static targets = ['text', 'saveStatus']
+  static targets = ['settings', 'saveStatus', 'text']
 
   initialize() {
     this.isSaving = false
-    this.id = null
     autosize(this.textTarget)
-    this.onChangeDebounced = debounce(this.save, 1000)
+    this.onChangeDebounced = debounce(this.save, TIME_TO_SAVE)
   }
 
   set saveStatus(status) {
     this.saveStatusTarget.innerHTML = status
   }
 
-  get isEmpty() {
-    return this.textTarget.value.length <= 0
+  get hasContent() {
+    return this.textTarget.value.length > 0
+  }
+
+  get id() {
+    return this.settingsTarget.getAttribute("data-id") || null
   }
 
   get isNew() {
@@ -29,37 +34,38 @@ export default class extends Controller {
   }
 
   save() {
-    if (this.isEmpty || this.isSaving) {
+    if (!this.hasContent || this.isSaving) {
       return
     }
 
     this.saveStatus = 'Saving...'
 
     const formData = new FormData()
-    formData.append('story[title]', 'My story')
     formData.append('story[content]', this.content)
 
     Rails.ajax({
       type: this.isNew ? 'POST' : 'PUT',
-      url: this.isNew ? '/stories.json' : `/stories/${this.id}.json`,
+      url: this.isNew ? '/stories' : `/stories/${this.id}/content`,
       data: formData,
-      success: e => {
-        if (e && e.id) {
-          this.id = e.id
-          this.saveStatus = 'Saved'
-        } else {
-          this.saveStatus = 'Failure'
-        }
-
+      dataType: 'script',
+      success: () => {
+        this.saveStatus = 'Saved'
         this.isSaving = false
       },
-      error: e => {
+      error: () => {
         this.saveStatus = 'Failure'
+        this.isSaving = false
       },
     })
   }
 
   onChange(e) {
     this.onChangeDebounced()
+    this.saveStatus = 'Not saved'
+  }
+
+  toggleSettings(e) {
+    e.preventDefault()
+    $(this.settingsTarget).collapse('toggle')
   }
 }

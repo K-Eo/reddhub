@@ -18,4 +18,8 @@ class StoryPolicy < ApplicationPolicy
   def destroy?
     update?
   end
+
+  def publish?
+    @record.title.present?
+  end
 end
