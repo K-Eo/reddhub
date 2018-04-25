@@ -1,6 +1,12 @@
 class StoriesController < ApplicationController
-  before_action :set_story, except: [:new, :create]
+  before_action :set_story, except: [:new, :create, :index]
   before_action :authenticate_user!, except: [:show]
+
+  # GET /stories
+  # GET /stories.json
+  def index
+    @stories = policy_scope(Story)
+  end
 
   # GET /stories/1
   # GET /stories/1.json

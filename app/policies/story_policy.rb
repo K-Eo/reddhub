@@ -22,4 +22,10 @@ class StoryPolicy < ApplicationPolicy
   def publish?
     @record.title.present?
   end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user).includes(:user)
+    end
+  end
 end

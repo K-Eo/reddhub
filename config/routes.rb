@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, path: "sudo"
-  resources :stories, except: [:index, :update] do
+  resources :stories, except: [:update] do
     put "content", on: :member
     put "meta", on: :member
   end
