@@ -38,6 +38,22 @@ class StoryTest < ActiveSupport::TestCase
       end
     end
 
+    test "sets published_at when changing to published state" do
+      @story.save
+      assert_changes -> { @story.published_at }, "Expected published_at to not be nil" do
+        @story.publish
+      end
+    end
+
+    test "sets published_at to nil when changing to draft state" do
+      @story.save
+      @story.publish
+      assert_changes -> { @story.published_at }, "Expected published_at to be nil" do
+        @story.unpublish
+      end
+      assert_not @story.published_at
+    end
+
     test "unpublish sets state to draft" do
       @story.save
       @story.publish

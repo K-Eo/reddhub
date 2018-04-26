@@ -7,14 +7,22 @@ class Story < ApplicationRecord
 
   state_machine :state, initial: :draft do
     event :publish do
-      transition :draft => :published
+      transition draft: :published
     end
 
     event :unpublish do
-      transition :published => :draft
+      transition published: :draft
     end
 
-    state :published
     state :draft
+    state :published
+
+    before_transition any => :published do |story|
+      story.published_at = Time.zone.now
+    end
+
+    before_transition published: :draft do |story|
+      story.published_at = nil
+    end
   end
 end
