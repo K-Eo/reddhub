@@ -2,6 +2,6 @@ class HomeController < ApplicationController
   layout "home"
 
   def index
-    @stories = Story.includes(:user).all
+    @stories = StoryPolicy::Home.new(current_user, Story).resolve
   end
 end
