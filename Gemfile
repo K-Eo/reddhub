@@ -42,6 +42,7 @@ gem "simple_form"
 gem "webpacker", "~> 3.4"
 gem "mini_magick"
 gem "google-cloud-storage", "~> 1.8", require: false
+gem "state_machines-activerecord"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
