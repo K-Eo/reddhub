@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = policy_scope(Story)
+    @stories = policy_scope(Story).page(params[:page])
   end
 
   # GET /stories/1
