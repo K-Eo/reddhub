@@ -16,27 +16,9 @@ class StoriesTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit root_url
     click_on "New Story"
-
-    fill_in "Title", with: @story.title
-    fill_in "Content", with: @story.content
-    click_on "Create Story"
-
-    assert_text "Story was successfully created"
-  end
-
-  test "updating a Story" do
-    sign_in_as(@user)
-    visit root_url
-
-    click_on "Story One"
-
-    click_on "Edit"
-
-    fill_in "Content", with: @story.content
-    fill_in "Title", with: @story.title
-    click_on "Update Story"
-
-    assert_text "Story was successfully updated"
+    find(".story-editor").set @story.content
+    assert_selector "span.disabled", text: "Not saved", visible: true
+    assert_selector "span.disabled", text: "Saved", visible: true, wait: 10
   end
 
   test "destroying a Story" do
