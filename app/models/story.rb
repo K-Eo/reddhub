@@ -25,4 +25,7 @@ class Story < ApplicationRecord
       story.published_at = nil
     end
   end
+
+  scope :drafts, -> { with_state(:draft)  }
+  scope :published, -> { with_state(:published)  }
 end
