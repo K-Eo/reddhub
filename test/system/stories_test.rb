@@ -41,33 +41,20 @@ class StoriesTest < ApplicationSystemTestCase
     assert_selector "span.disabled", text: "Saved", visible: true, wait: 10
   end
 
-  test "destroying a Story" do
-    sign_in_as(@user)
-    visit root_url
-
-    click_on "Story One"
-
-    page.accept_confirm do
-      click_on "Destroy"
-    end
-
-    assert_text "Story was successfully destroyed"
-  end
-
   test "can't edit other user story" do
-    sign_in_as(@user)
+    sign_in_as(users(:kat))
     visit root_url
 
-    click_on "Story Two"
+    click_on "Story Three"
 
     assert has_no_button?("Edit")
   end
 
   test "can't destroy other user story" do
-    sign_in_as(@user)
+    sign_in_as(users(:kat))
     visit root_url
 
-    click_on "Story Two"
+    click_on "Story Three"
 
     assert has_no_button?("Destroy")
   end
