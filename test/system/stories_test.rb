@@ -8,8 +8,17 @@ class StoriesTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     sign_in_as(@user)
-    visit root_url
-    assert_selector "h1", text: "Title of a longer featured blog post"
+    visit stories_url
+    assert_selector "h5", text: "Story One"
+    assert_no_selector "h5", text: "Story Three"
+  end
+
+  test "visiting the index with public scope" do
+    sign_in_as(@user)
+    visit stories_url
+    click_on "Public"
+    assert_no_selector "h5", text: "Story One"
+    assert_selector "h5", text: "Story Three"
   end
 
   test "creating a Story" do

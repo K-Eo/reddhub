@@ -11,3 +11,9 @@ two:
   content: Story Two Content
   state: draft
   user: kat
+
+three:
+  title: Story Three
+  content: Story Three Content
+  state: public
+  user: eo

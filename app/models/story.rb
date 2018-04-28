@@ -7,25 +7,25 @@ class Story < ApplicationRecord
 
   state_machine :state, initial: :draft do
     event :publish do
-      transition draft: :published
+      transition draft: :public
     end
 
     event :unpublish do
-      transition published: :draft
+      transition public: :draft
     end
 
     state :draft
-    state :published
+    state :public
 
-    before_transition any => :published do |story|
+    before_transition any => :public do |story|
       story.published_at = Time.zone.now
     end
 
-    before_transition published: :draft do |story|
+    before_transition public: :draft do |story|
       story.published_at = nil
     end
   end
 
   scope :drafts, -> { with_state(:draft)  }
-  scope :published, -> { with_state(:published)  }
+  scope :published, -> { with_state(:public)  }
 end
