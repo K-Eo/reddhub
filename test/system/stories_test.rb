@@ -25,7 +25,18 @@ class StoriesTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit root_url
     click_on "New Story"
+    assert_selector "span.disabled", text: "New", visible: true
     find(".story-editor").set @story.content
+    assert_selector "span.disabled", text: "Not saved", visible: true
+    assert_selector "span.disabled", text: "Saved", visible: true, wait: 10
+  end
+
+  test "updating a Story" do
+    sign_in_as(@user)
+    visit stories_url
+    click_on "Story One"
+    assert_selector "span.disabled", text: "Saved", visible: true
+    find(".story-editor").set "Foo bar"
     assert_selector "span.disabled", text: "Not saved", visible: true
     assert_selector "span.disabled", text: "Saved", visible: true, wait: 10
   end
