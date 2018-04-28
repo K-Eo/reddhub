@@ -6,6 +6,12 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @stories = policy_scope(Story).page(params[:page])
+
+    if params[:scope] == "public"
+      @stories = @stories.published
+    else
+      @stories = @stories.drafts
+    end
   end
 
   # GET /stories/1

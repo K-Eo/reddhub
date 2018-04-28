@@ -3,10 +3,13 @@
 
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" href="#">Drafts</a>
+      <%= link_to("Drafts", stories_path,
+                            class: active_when(params[:scope] != "public", "nav-link"))%>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link" href="#">Public</a>
+      <%= link_to("Public", stories_path(scope: "public"),
+                            class: active_when(params[:scope] == "public", "nav-link"))%>
     </li>
   </ul>
 

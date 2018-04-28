@@ -33,7 +33,7 @@ class StoryTest < ActiveSupport::TestCase
 
     test "publish sets state to published" do
       @story.save
-      assert_changes -> { @story.state }, from: "draft", to: "published" do
+      assert_changes -> { @story.state }, from: "draft", to: "public" do
         @story.publish
       end
     end
@@ -57,7 +57,7 @@ class StoryTest < ActiveSupport::TestCase
     test "unpublish sets state to draft" do
       @story.save
       @story.publish
-      assert_changes -> { @story.state }, from: "published", to: "draft" do
+      assert_changes -> { @story.state }, from: "public", to: "draft" do
         @story.unpublish
       end
     end
