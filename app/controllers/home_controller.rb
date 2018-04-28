@@ -2,6 +2,6 @@ class HomeController < ApplicationController
   layout "home"
 
   def index
-    @stories = StoryPolicy::Home.new(current_user, Story).resolve
+    @stories = Story.order(created_at: :desc).published.page(params[:page])
   end
 end

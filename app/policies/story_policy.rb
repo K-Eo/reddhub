@@ -28,10 +28,4 @@ class StoryPolicy < ApplicationPolicy
       scope.where(user: user).includes(:user)
     end
   end
-
-  class Home < Scope
-    def resolve
-      scope.includes(:user).all
-    end
-  end
 end
