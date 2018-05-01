@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-9 mx-auto">
   <h2>
     <%= @story.title %>
 
@@ -21,6 +21,6 @@
 
 
   <div>
-    <%= @story.content %>
+    <%= markdown @story.content %>
   </div>
 </div>
