@@ -34,7 +34,7 @@ class StoriesController < ApplicationController
     authorize @story
     respond_to do |format|
       if @story.update(story_params)
-        format.html { redirect_to @story, notice: 'Story was successfully updated.' }
+        format.html { redirect_to @story, notice: "Story was successfully updated." }
         format.json { render :show, status: :ok, location: @story }
         format.js
       else
