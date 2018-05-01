@@ -1,29 +1,37 @@
-<div class="my-4 col-12 col-lg-10 mx-lg-auto col-xl-9">
+<div class="my-4 col-12 col-lg-10 mx-lg-auto col-xl-9" data-controller="editor">
   <div class="card">
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a id="story_editor_write" href="#" class="active nav-link text-dark">Write</a>
+          <a href="#"
+             class="active nav-link text-dark"
+             data-target="editor.writeTab"
+             data-action="editor#write">Write</a>
         </li>
         <li class="nav-item">
-          <%= link_to "Preview", preview_stories_path, id: "story_editor_preview", class: "nav-link text-dark" %>
+          <%= link_to "Preview",
+                      preview_stories_path,
+                      class: "nav-link text-dark",
+                      data: { action: "editor#preview", target: "editor.previewTab" } %>
         </li>
       </ul>
     </div>
 
-    <div class="card-body p-2" id="editor_content">
+    <div class="card-body p-2" data-target="editor.writeCard">
       <%= form_for @story, remote: true do |f| %>
         <%= f.text_area :content,
-          class: "mb-2 form-control js-autosize md-editor",
-          autofocus: true,
-          rows: 4, placeholder: "Write your story..." %>
+                        class: "mb-2 form-control md-editor",
+                        data: { target: "editor.content" },
+                        autofocus: true,
+                        rows: 4,
+                        placeholder: "Write your story..." %>
 
         <%= f.submit class: "btn btn-success float-right" %>
       <% end %>
     </div>
 
-    <div class="card-body py-2 px-4 d-none" id="editor_preview">
-      Preview
+    <div class="card-body py-2 px-4 d-none" id="editor_preview" data-target="editor.previewCard">
+      Loading...
     </div>
   </div>
 </div>
