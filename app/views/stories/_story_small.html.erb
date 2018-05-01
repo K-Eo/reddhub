@@ -1,5 +1,5 @@
 <h5>
-  <%= link_to story.title, edit_story_path(story), class: 'text-dark' %>
+  <%= link_to(story.title || "Untitled ##{story.id}", edit_story_path(story), class: 'text-dark') %>
 </h5>
 
 <p class="small text-secondary">

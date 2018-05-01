@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, except: [:new, :create, :index]
+  before_action :set_story, except: [:new, :index]
   before_action :authenticate_user!, except: [:show]
 
   # GET /stories
@@ -22,32 +22,32 @@ class StoriesController < ApplicationController
 
   # GET /stories/new
   def new
-    @story = Story.new
+    @story = current_user.stories.create
     authorize @story
+    @story.save
+    redirect_to edit_story_path(@story)
+  end
+
+  # PATCH/PUT /stories/1
+  # PATCH/PUT /stories/1.json
+  def update
+    authorize @story
+    respond_to do |format|
+      if @story.update(story_params)
+        format.html { redirect_to @story, notice: "Story was successfully updated." }
+        format.json { render :show, status: :ok, location: @story }
+        format.js
+      else
+        format.html { render :edit }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
   end
 
   # GET /stories/1/edit
   def edit
     authorize @story
-  end
-
-  # POST /stories
-  # POST /stories.json
-  def create
-    @story = current_user.stories.create(story_params)
-    authorize @story
-
-    respond_to do |format|
-      if @story.save(context: :with_content)
-        format.html { redirect_to @story, notice: "Story was successfully created." }
-        format.json { render :show, status: :created, location: @story }
-        format.js
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-        format.js
-      end
-    end
   end
 
   # DELETE /stories/1
@@ -58,25 +58,6 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url, notice: "Story was successfully destroyed." }
       format.json { head :no_content }
-    end
-  end
-
-  def content
-    @story.content = story_params[:content]
-    respond_to do |format|
-      if @story.save(context: :with_content)
-        format.json { render :show, status: :ok, location: @story }
-      else
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def meta
-    @story.title = story_params[:title]
-    @story.save(context: :with_meta)
-    respond_to do |format|
-      format.js
     end
   end
 

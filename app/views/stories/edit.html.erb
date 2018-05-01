@@ -1,1 +1,25 @@
-<%= render 'form', story: @story %>
+<div class="my-4 col-12 col-lg-10 mx-lg-auto col-xl-9">
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Write</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="#">Preview</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-body p-2">
+      <%= form_for @story, remote: true do |f| %>
+        <%= f.text_area:content,
+          class: 'mb-2 form-control js-autosize md-editor',
+          autofocus: true,
+          rows: 4, placeholder: 'Write your story...' %>
+
+        <%= f.submit class: 'btn btn-success float-right' %>
+      <% end %>
+    </div>
+  </div>
+</div>
