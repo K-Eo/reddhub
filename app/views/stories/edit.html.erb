@@ -3,23 +3,27 @@
     <div class="card-header">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Write</a>
+          <a id="story_editor_write" href="#" class="active nav-link text-dark">Write</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="#">Preview</a>
+          <%= link_to "Preview", preview_stories_path, id: "story_editor_preview", class: "nav-link text-dark" %>
         </li>
       </ul>
     </div>
 
-    <div class="card-body p-2">
+    <div class="card-body p-2" id="editor_content">
       <%= form_for @story, remote: true do |f| %>
-        <%= f.text_area:content,
-          class: 'mb-2 form-control js-autosize md-editor',
+        <%= f.text_area :content,
+          class: "mb-2 form-control js-autosize md-editor",
           autofocus: true,
-          rows: 4, placeholder: 'Write your story...' %>
+          rows: 4, placeholder: "Write your story..." %>
 
-        <%= f.submit class: 'btn btn-success float-right' %>
+        <%= f.submit class: "btn btn-success float-right" %>
       <% end %>
+    </div>
+
+    <div class="card-body py-2 px-4 d-none" id="editor_preview">
+      Preview
     </div>
   </div>
 </div>

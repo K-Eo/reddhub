@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, path: "sudo"
   resources :stories, except: [:create] do
-    put "content", on: :member
-    put "meta", on: :member
+    post "preview", on: :collection
   end
   resource :avatars, only: [:update], controller: "user/avatars"
   root to: "home#index"

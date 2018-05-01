@@ -29,11 +29,11 @@ class PageLayoutHelperTest < ActionView::TestCase
 
   class PageClasses < PageLayoutHelperTest
     test "contains controller name as a class" do
-      assert_equal "test", page_classes
+      assert_equal "test ", page_classes
     end
 
     test "container additional class" do
-      assert_equal "foo test", page_classes("foo")
+      assert_equal "foo test ", page_classes("foo")
     end
   end
 end

@@ -46,3 +46,15 @@
   line-height: 1.4;
   max-height: calc(100vh - 250px);
 }
+
+blockquote {
+  border-left: 3px solid $gray-400;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  margin: 16px 0;
+  padding: 8px 24px;
+
+  p {
+    margin: 0;
+  }
+}
