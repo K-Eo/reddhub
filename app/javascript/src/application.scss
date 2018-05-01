@@ -41,3 +41,8 @@
 .messages {
   margin-top: -1px;
 }
+
+.md-editor {
+  line-height: 1.4;
+  max-height: calc(100vh - 250px);
+}

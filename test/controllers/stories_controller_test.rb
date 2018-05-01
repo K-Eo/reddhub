@@ -16,14 +16,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to new_user_session_path
     end
 
-    test "should create story" do
-      assert_no_difference("Story.count") do
-        post stories_url, params: { story: { content: @story.content, title: @story.title } }
-      end
-
-      assert_redirected_to new_user_session_path
-    end
-
     test "should show story" do
       get story_url(@story)
       assert_response :success
@@ -38,18 +30,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       assert_no_difference("Story.count") do
         delete story_url(@story)
       end
-
-      assert_redirected_to new_user_session_path
-    end
-
-    test "should redirect on update content" do
-      put content_story_path(@story)
-
-      assert_redirected_to new_user_session_path
-    end
-
-    test "should redirect on update meta" do
-      put meta_story_path(@story)
 
       assert_redirected_to new_user_session_path
     end
@@ -68,15 +48,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
 
     test "should get new" do
       get new_story_url
-      assert_response :success
-    end
-
-    test "should create story" do
-      assert_difference("Story.count") do
-        post stories_url, params: { story: { content: @story.content, title: @story.title } }
-      end
-
-      assert_redirected_to story_url(Story.last)
+      assert_redirected_to edit_story_url(Story.last)
     end
 
     test "should show story" do
@@ -95,23 +67,6 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to root_url
-    end
-
-    test "should update story content" do
-      put content_story_path(@story), params: { story: { content: "foo bar" } }, xhr: true
-      assert_response :success
-      @story.reload
-      assert_equal "foo bar", @story.content
-      assert_match /foo bar/, @response.body
-      assert_equal "application/json", @response.content_type
-    end
-
-    test "should update story meta" do
-      put meta_story_path(@story), params: { story: { title: "Foo bar" } }, xhr: true
-      assert_response :success
-      @story.reload
-      assert_equal "Foo bar", @story.title
-      assert_equal "text/javascript", @response.content_type
     end
   end
 end
