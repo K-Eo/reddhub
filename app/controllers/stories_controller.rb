@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, except: [:new, :index]
+  before_action :set_story, except: [:new, :index, :preview]
   before_action :authenticate_user!, except: [:show]
 
   # GET /stories
@@ -58,6 +58,12 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url, notice: "Story was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def preview
+    respond_to do |format|
+      format.js
     end
   end
 
