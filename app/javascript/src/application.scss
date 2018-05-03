@@ -44,7 +44,8 @@
 
 .md-editor {
   line-height: 1.4;
-  max-height: calc(100vh - 250px);
+  max-height: calc(100vh - 280px);
+  min-height: 200px;
 }
 
 blockquote {
