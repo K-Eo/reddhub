@@ -28,4 +28,12 @@ class Story < ApplicationRecord
 
   scope :drafts, -> { with_state(:draft)  }
   scope :published, -> { with_state(:public)  }
+
+  def public?
+    state == "public"
+  end
+
+  def draft?
+    state == "draft"
+  end
 end

@@ -26,6 +26,19 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   class StoryState < StoryTest
+    test "returns true if state is public" do
+      @story.save
+      @story.publish
+      assert @story.public?
+      assert_not @story.draft?
+    end
+
+    test "returns true if state is draft" do
+      @story.save
+      assert @story.draft?
+      assert_not @story.public?
+    end
+
     test "draft as initial state" do
       @story.save
       assert_equal "draft", @story.state

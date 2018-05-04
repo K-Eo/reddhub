@@ -38,6 +38,22 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       post preview_stories_url, params: { content: "Foo bar" }, xhr: true
       assert_response :unauthorized
     end
+
+    test "should redirect on publish" do
+      post publish_story_url(@story)
+      assert_redirected_to new_user_session_path
+
+      post publish_story_url(@story), xhr: true
+      assert_response :unauthorized
+    end
+
+    test "should redirect on unpublish" do
+      delete unpublish_story_url(@story)
+      assert_redirected_to new_user_session_path
+
+      delete unpublish_story_url(@story), xhr: true
+      assert_response :unauthorized
+    end
   end
 
   class SignIn < ActionDispatch::IntegrationTest
@@ -79,6 +95,20 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_equal "text/javascript", @response.content_type
       assert_match /Foo bar/, @response.body
+    end
+
+    test "should publish a story" do
+      post publish_story_url(@story), xhr: true
+
+      assert_response :success
+      assert_equal "text/javascript", @response.content_type
+    end
+
+    test "should unpublish a story" do
+      delete unpublish_story_url(@story), xhr: true
+
+      assert_response :success
+      assert_equal "text/javascript", @response.content_type
     end
   end
 end
