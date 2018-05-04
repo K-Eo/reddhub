@@ -34,13 +34,11 @@ class StoriesController < ApplicationController
     authorize @story
     respond_to do |format|
       if @story.update(story_params)
-        format.html { redirect_to @story, notice: "Story was successfully updated." }
+        format.html { redirect_to edit_story_path(@story), notice: "Story was successfully updated." }
         format.json { render :show, status: :ok, location: @story }
-        format.js
       else
         format.html { render :edit }
         format.json { render json: @story.errors, status: :unprocessable_entity }
-        format.js
       end
     end
   end
@@ -93,6 +91,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :content)
+      params.require(:story).permit(:title, :subtitle, :content)
     end
 end

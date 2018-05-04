@@ -1,8 +1,9 @@
 <div class="my-4 ml-auto col-8" data-controller="editor">
-  <%= form_for @story, remote: true do |f| %>
+  <%= form_for @story do |f| %>
     <div class="card">
       <div class="card-body p-2">
         <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+        <%= f.text_field :subtitle, class: "form-control mt-2", placeholder: "Subtitle" %>
       </div>
 
       <div class="card-header bg-transparent pt-0">

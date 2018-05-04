@@ -44,8 +44,14 @@
 
 .md-editor {
   line-height: 1.4;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100vh - 320px);
   min-height: 200px;
+}
+
+.edit_story {
+  .form-group {
+    margin: 0;
+  }
 }
 
 blockquote {
