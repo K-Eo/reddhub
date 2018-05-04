@@ -3,6 +3,8 @@
     <%= link_to story.title, story, class: 'text-dark' if policy(story).show? %>
   </h2>
   <p class="story-post-meta">January 1, 2014 by <a href="#"><%= story.user.name %></a></p>
-  <%= story.content %>
 
+  <% if story.subtitle.present? %>
+    <%= story.subtitle %>
+  <% end %>
 </div>
