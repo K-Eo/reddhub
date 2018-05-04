@@ -1,0 +1,7 @@
+<div id="publish_status">
+  <% if @story.public? %>
+    <%= link_to "Draft", unpublish_story_path(@story), class: "btn btn-danger btn-block", remote: true, method: :delete %>
+  <% else %>
+    <%= link_to "Publish", publish_story_path(@story), class: "btn btn-primary btn-block", remote: true, method: :post %>
+  <% end %>
+</div>

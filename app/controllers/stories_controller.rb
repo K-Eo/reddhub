@@ -67,6 +67,24 @@ class StoriesController < ApplicationController
     end
   end
 
+  def publish
+    @story.publish
+    respond_to do |format|
+      format.html { redirect_to @story, notice: "Story has been published." }
+      format.json { render :show, status: :ok, location: @story }
+      format.js
+    end
+  end
+
+  def unpublish
+    @story.unpublish
+    respond_to do |format|
+      format.html { redirect_to @story, notice: "Story has been unpublised." }
+      format.json { render :show, status: :ok, location: @story }
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_story
