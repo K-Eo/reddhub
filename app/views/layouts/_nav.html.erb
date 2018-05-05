@@ -49,6 +49,8 @@
 
               <div class="dropdown-divider"></div>
 
+              <%= link_to "My profile", user_path(current_user.username), class: "dropdown-item" %>
+
               <%= link_to('Stories', stories_path, class: 'dropdown-item') %>
 
               <div class="dropdown-divider"></div>
