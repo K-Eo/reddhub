@@ -60,19 +60,11 @@
       From the Firehose
     </h3>
 
-    <% if @stories.any? %>
-      <%= render @stories %>
-
-      <nav class="story-pagination d-flex justify-content-center">
-        <%= paginate @stories %>
-      </nav>
-    <% else %>
-      <div class="jumbotron bg-light">
-        <h2 class="text-center">
-          We have no stories to show at this moment
-        </h2>
-      </div>
-    <% end %>
+    <div class="jumbotron bg-light">
+      <h2 class="text-center">
+        We have no stories to show at this moment
+      </h2>
+    </div>
   </div>
 </div>
 

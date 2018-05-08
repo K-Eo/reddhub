@@ -2,7 +2,7 @@
 
 <div class="col-3">
   <div class="card">
-    <%= image_tag @user.avatar, class: "card-img-top" %>
+    <%= user_avatar @user, html: { class: "card-img-top" } %>
 
     <div class="card-body">
       <p class="font-weight-bold text-center"><%= @user.name %></p>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="col-6">
-  <div class="card">
+  <div class="card mb-3">
     <% if current_user.present? %>
       <div class="card-body">
         <%= form_for @pod do |f| %>
@@ -42,6 +42,8 @@
       <%= render @pods %>
     </ul>
   </div>
+
+  <%= paginate @pods %>
 </div>
 
 <div class="col-3">
