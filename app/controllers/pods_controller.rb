@@ -1,4 +1,6 @@
 class PodsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @pod = current_user.pods.new(pod_params)
 
