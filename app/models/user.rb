@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
+  has_many :pods, dependent: :destroy
   has_many :stories, dependent: :destroy
   has_one_attached :avatar
 

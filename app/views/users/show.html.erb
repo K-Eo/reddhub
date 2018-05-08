@@ -31,13 +31,15 @@
 
 <div class="col-6">
   <div class="card">
+    <% if current_user.present? %>
+      <div class="card-body">
+        <%= form_for @pod do |f| %>
+          <%= f.text_field :content, class: "form-control", placeholder: "Write a message...", aria: { label: "Write a message...", describedby: "Write a message..." } %>
+        <% end %>
+      </div>
+    <% end %>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex">
-        <%= user_avatar @user, resize: "256x256", html: { class: "rounded-circle mr-3 avatar-48" } %>
-        <div class="">
-          <h6><%= @user.name %></h6>
-        </div>
-      </li>
+      <%= render @pods %>
     </ul>
   </div>
 </div>
