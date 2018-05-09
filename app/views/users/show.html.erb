@@ -1,6 +1,6 @@
 <div class="col-12 mt-4"></div>
 
-<div class="col-3">
+<div class="col-12 col-sm-3">
   <div class="card">
     <%= user_avatar @user, html: { class: "card-img-top" } %>
 
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="col-6">
+<div class="col-12 col-sm-6">
   <div class="card mb-3">
     <% if current_user.present? %>
       <div class="card-body">
@@ -46,7 +46,7 @@
   <%= paginate @pods %>
 </div>
 
-<div class="col-3">
+<div class="col-12 col-sm-3">
   <div class="card">
     <div class="card-body">
       &copy; 2018 ReddHub
