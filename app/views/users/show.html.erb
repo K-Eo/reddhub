@@ -1,12 +1,10 @@
-<div class="col-12 mt-4"></div>
-
-<div class="col-12 col-sm-3">
-  <div class="card">
+<div class="col-12 col-lg-3 mb-4 mb-lg-0">
+  <div class="card d-flex">
     <%= user_avatar @user, html: { class: "card-img-top" } %>
 
     <div class="card-body">
       <p class="font-weight-bold text-center"><%= @user.name %></p>
-      <div class="d-flex text-center justify-content-around">
+      <div class="d-flex text-center justify-content-center">
         <div>
           <div class="text-secondary">
             Followers
@@ -15,6 +13,8 @@
             18
           </div>
         </div>
+
+        <div class="border-right mx-3"></div>
 
         <div>
           <div class="text-secondary">
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="col-12 col-sm-6">
+<div class="col-12 col-lg-6">
   <div class="card mb-3">
     <% if current_user.present? %>
       <div class="card-body">
@@ -46,14 +46,14 @@
   <%= paginate @pods %>
 </div>
 
-<div class="col-12 col-sm-3">
+<div class="col-12 col-lg-3 mb-4 mb-lg-0">
   <div class="card">
     <div class="card-body">
       &copy; 2018 ReddHub
-      <a href="#">About</a>
-      <a href="#">Help</a>
-      <a href="#">Terms</a>
-      <a href="#">Privacy</a>
+      <a href="#" class="mx-3">About</a>
+      <a href="#" class="mr-3">Help</a>
+      <a href="#" class="mr-3">Terms</a>
+      <a href="#" class="mr-3">Privacy</a>
     </div>
   </div>
 </div>
