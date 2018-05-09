@@ -3,4 +3,6 @@ class Pod < ApplicationRecord
 
   validates :content, presence: true,
                       length: { maximum: 256 }
+
+  scope :newest, -> { order(created_at: :desc) }
 end
