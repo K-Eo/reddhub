@@ -1,15 +1,23 @@
 module ApplicationHelper
-  def active_when(condition, additional_classes = nil)
+  def conditional_class(condition, truthy_class, additional_classes = nil)
     additional_classes ||= ""
 
     if condition
       additional_classes = additional_classes
         .split(" ")
-        .push("active")
+        .push(truthy_class)
         .join(" ")
     end
 
     additional_classes
+  end
+
+  def active_when(condition, additional_classes = nil)
+    conditional_class(condition, "active", additional_classes)
+  end
+
+  def invalid_when(condition, additional_classes = nil)
+    conditional_class(condition, "is-invalid", additional_classes)
   end
 
   def markdown(content)

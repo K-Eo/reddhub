@@ -1,43 +1,13 @@
-<div class="col-12 col-lg-3 mb-4 mb-lg-0">
-  <div class="card d-flex">
-    <%= user_avatar @user, html: { class: "card-img-top" } %>
-
-    <div class="card-body">
-      <p class="font-weight-bold text-center"><%= @user.name %></p>
-      <div class="d-flex text-center justify-content-center">
-        <div>
-          <div class="text-secondary">
-            Followers
-          </div>
-          <div class="font-weight-bold">
-            18
-          </div>
-        </div>
-
-        <div class="border-right mx-3"></div>
-
-        <div>
-          <div class="text-secondary">
-            Following
-          </div>
-          <div class="font-weight-bold">
-            4
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render partial: "users/card", locals: { user: @user } %>
 
 <div class="col-12 col-lg-6">
   <div class="card mb-3">
     <% if current_user.present? %>
-      <div class="card-body">
-        <%= form_for @pod do |f| %>
-          <%= f.text_field :content, class: "form-control", placeholder: "Write a message...", aria: { label: "Write a message...", describedby: "Write a message..." } %>
-        <% end %>
+      <div class="card-body" id="new-pod-wrapper">
+        <%= render "pods/form" %>
       </div>
     <% end %>
+
     <ul class="list-group list-group-flush">
       <%= render @pods %>
     </ul>
@@ -46,14 +16,4 @@
   <%= paginate @pods %>
 </div>
 
-<div class="col-12 col-lg-3 mb-4 mb-lg-0">
-  <div class="card">
-    <div class="card-body">
-      &copy; 2018 ReddHub
-      <a href="#" class="mx-3">About</a>
-      <a href="#" class="mr-3">Help</a>
-      <a href="#" class="mr-3">Terms</a>
-      <a href="#" class="mr-3">Privacy</a>
-    </div>
-  </div>
-</div>
+<%= render "shared/footer" %>

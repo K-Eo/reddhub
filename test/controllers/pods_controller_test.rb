@@ -15,6 +15,12 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_redirected_to new_user_session_path
     end
+
+    test "unauthorized on post create" do
+      post pods_path, params: { pod: { content: "Foo bar"  } }, xhr: true
+
+      assert_response :unauthorized
+    end
   end
 
   class SignIn < PodsControllerTest
@@ -29,6 +35,16 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to user_path(@user.username)
+    end
+
+    test "should create a pod xhr" do
+      assert_difference "Pod.count" do
+        post pods_path, params: { pod: { content: "Foo bar"  } }, xhr: true
+      end
+
+      assert_response :success
+      assert_equal "text/javascript", @response.content_type
+      assert_match /window\.location\.replace.*#{@user.username}/, @response.body
     end
   end
 end
