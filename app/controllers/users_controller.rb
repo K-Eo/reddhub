@@ -6,7 +6,7 @@ class UsersController < ApplicationController
       @user = User.find_by!(username: params[:username])
     end
 
-    @pods = Pod.includes(:user).newest.page(params[:page])
+    @pods = @user.pods.newest.page(params[:page])
     @pod = Pod.new
   end
 end
