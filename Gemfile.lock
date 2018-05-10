@@ -89,6 +89,8 @@ GEM
     digest-crc (0.4.1)
     erubi (1.7.1)
     execjs (2.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
@@ -318,6 +320,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  faker
   google-cloud-storage (~> 1.8)
   jbuilder (~> 2.5)
   kaminari
