@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     delete "unpublish", on: :member
   end
   resource :avatars, only: [:update], controller: "user/avatars"
-  resources :pods, only: [:create]
+
+  resources :pods, only: [:create] do
+    resource :like, only: [:create, :destroy], module: :pods
+  end
+
   get ":username", to: "users#show", as: :user
   root to: "home#index"
 end

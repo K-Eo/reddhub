@@ -13,6 +13,10 @@
     <p>
       <%= pod.content %>
     </p>
+
+    <div>
+      <%= render partial: "pods/likes", locals: { pod: pod } %>
+    </div>
   </div>
 </li>
 
