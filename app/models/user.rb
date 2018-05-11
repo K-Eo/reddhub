@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
+  has_many :likes
   has_many :pods, dependent: :destroy
   has_many :stories, dependent: :destroy
   has_one_attached :avatar
@@ -17,4 +18,8 @@ class User < ApplicationRecord
   validates :name, presence: true,
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{Ll}]+)(\s\p{Lu}[\p{Ll}]+)*\z/ }
+
+  def likes?(pod)
+    pod.likes.where(user: self).exists?
+  end
 end

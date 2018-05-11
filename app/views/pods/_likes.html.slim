@@ -1,0 +1,4 @@
+- if user_signed_in? and current_user.likes?(pod)
+  = link_to "Unlike", pod_like_path(pod), remote: true, method: :delete
+- else
+  = link_to "Like", pod_like_path(pod), remote: true, method: :post
