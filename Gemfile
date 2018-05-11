@@ -46,6 +46,7 @@ gem "state_machines-activerecord"
 gem "kaminari"
 gem "redcarpet"
 gem "slim"
+gem "font-awesome-sass", "~> 5.0.9"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
