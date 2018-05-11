@@ -1,0 +1,14 @@
+li class="list-group-item d-flex"
+  = user_avatar pod.user, resize: "256x256", html: { class: "rounded-circle mr-3 avatar-48" }
+  div class="w-100"
+    div class="d-flex justify-content-between"
+      h6 = pod.user.name
+
+      span class="small text-secondary"
+        = time_ago_in_words pod.created_at
+
+    p = pod.content
+
+    div id="pod_likes_#{pod.id}"
+      = render partial: "pods/likes", locals: { pod: pod }
+
