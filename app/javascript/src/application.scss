@@ -7,6 +7,7 @@
 @import 'home';
 @import 'footer';
 @import 'story';
+@import 'actions';
 
 .navbar-avatar {
   max-width: 30px;
@@ -64,4 +65,8 @@ blockquote {
   p {
     margin: 0;
   }
+}
+
+.text-pink {
+  color: $pink !important;
 }

@@ -9,6 +9,7 @@ li class="list-group-item d-flex"
 
     p = pod.content
 
-    div id="pod_likes_#{pod.id}"
-      = render partial: "pods/likes", locals: { pod: pod }
+    div class="actions-list"
+      div class="action" id="pod_likes_#{pod.id}"
+        = render partial: "pods/likes", locals: { pod: pod }
 

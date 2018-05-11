@@ -94,6 +94,8 @@ GEM
     faraday (0.15.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
+    font-awesome-sass (5.0.9)
+      sass (>= 3.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-api-client (0.19.8)
@@ -325,6 +327,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   faker
+  font-awesome-sass (~> 5.0.9)
   google-cloud-storage (~> 1.8)
   jbuilder (~> 2.5)
   kaminari
