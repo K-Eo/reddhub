@@ -1,1 +1,1 @@
-$('#<%= "pod_likes_#{@pod.id}" %>').html('<%= j render(partial: "pods/likes", locals: { pod: @pod }) %>')
+$('#<%= "pod_likes_#{@pod.id}" %>').replaceWith('<%= j render(partial: "pods/likes", locals: { pod: @pod }) %>')
