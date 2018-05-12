@@ -111,4 +111,20 @@ class UserTest < ActiveSupport::TestCase
     @user.name = "Eo"
     assert @user.valid?
   end
+
+  class Followers < UserTest
+    def setup
+      @kat = users(:kat)
+      @eo = users(:eo)
+    end
+
+    test "should follow an unfollow a user" do
+      assert_not @kat.following?(@eo)
+      @kat.follow(@eo)
+      assert @kat.following?(@eo)
+      assert @eo.followers.include?(@kat)
+      @kat.unfollow(@eo)
+      assert_not @kat.following?(@eo)
+    end
+  end
 end

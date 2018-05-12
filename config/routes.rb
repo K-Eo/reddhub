@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy], module: :pods
   end
 
-  get ":username", to: "users#show", as: :user
+  resources :users, path: "/", only: [:show], param: :username do
+    resource :relationship, only: [:create, :destroy], module: :users
+  end
+
   root to: "home#index"
 end

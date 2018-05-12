@@ -5,10 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
+  has_one_attached :avatar
   has_many :likes
   has_many :pods, dependent: :destroy
   has_many :stories, dependent: :destroy
-  has_one_attached :avatar
+
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
 
   validates :username, presence: true,
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
@@ -21,5 +32,17 @@ class User < ApplicationRecord
 
   def likes?(pod)
     pod.likes.where(user: self).exists?
+  end
+
+  def follow(user)
+    following << user
+  end
+
+  def unfollow(user)
+    following.delete(user)
+  end
+
+  def following?(user)
+    following.include?(user)
   end
 end
