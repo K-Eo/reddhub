@@ -10,16 +10,28 @@ bilbo = User.new(email: "bilbo@mail.com", password: "qwerasdf", password_confirm
 bilbo.skip_confirmation!
 bilbo.save!
 
-50.times do
-  bilbo.pods.create!(content: Faker::Hobbit.quote)
-end
-
 thorin = User.new(email: "thorin@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Thorin", name: "Thorin Oakenshield")
 thorin.skip_confirmation!
 thorin.save!
 
+marty = User.new(email: "marty@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Marty", name: "Marty Mcfly")
+marty.skip_confirmation!
+marty.save!
+
+emmett = User.new(email: "emmett@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "DocBrown", name: "Emmett Brown")
+emmett.skip_confirmation!
+emmett.save!
+
 50.times do
+  bilbo.pods.create!(content: Faker::Hobbit.quote)
   thorin.pods.create!(content: Faker::Hobbit.quote)
+  marty.pods.create!(content: Faker::BackToTheFuture.quote.slice(0..255))
+  emmett.pods.create!(content: Faker::BackToTheFuture.quote.slice(0..255))
 end
+
+marty.follow(emmett)
+marty.follow(thorin)
+emmett.follow(thorin)
+thorin.follow(emmett)
 
 puts "Seed OK"

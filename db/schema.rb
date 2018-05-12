@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_11_235241) do
+ActiveRecord::Schema.define(version: 2018_05_12_205516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 2018_05_11_235241) do
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
     t.index ["user_id"], name: "index_pods_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "follower_id"
+    t.bigint "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -99,5 +109,7 @@ ActiveRecord::Schema.define(version: 2018_05_11_235241) do
 
   add_foreign_key "likes", "users"
   add_foreign_key "pods", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "stories", "users"
 end
