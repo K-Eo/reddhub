@@ -1,5 +1,23 @@
 .actions-list {
   .action {
-    font-size: 18px;
+    color: $gray-600;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .icon {
+      font-size: 1.1rem;
+      vertical-align: -0.1rem;
+    }
+
+    .counter {
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .action-like.active {
+    color: $pink;
   }
 }
