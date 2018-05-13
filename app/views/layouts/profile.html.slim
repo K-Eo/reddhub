@@ -1,0 +1,22 @@
+doctype html
+html
+  = render "layouts/head"
+
+  body
+    div class=page_classes("content-wrapper")
+      = render "layouts/nav"
+      = render "layouts/messages"
+
+      div id="content-body" class="container pt-4"
+        div class="row"
+          = render partial: "users/card", locals: { user: @user }
+
+          div class="col-12 col-lg-6"
+            nav class="nav nav-pills nav-fill mb-4"
+              = link_to "Pods", user_path(@user.username), class: active_when(controller_name == "users", "nav-item nav-link")
+              = link_to "Following", user_following_path(@user.username), class: active_when(controller_name == "following", "nav-item nav-link")
+              = link_to "Followers", user_followers_path(@user.username), class: active_when(controller_name == "followers", "nav-item nav-link")
+
+            = yield
+
+          = render "shared/footer"

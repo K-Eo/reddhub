@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :users, path: "/", only: [:show], param: :username do
-    resource :relationship, only: [:create, :destroy], module: :users
+    scope module: :users do
+      resource :relationship, only: [:create, :destroy]
+      resource :followers, only: [:show]
+      resource :following, only: [:show], controller: "following"
+    end
   end
 
   root to: "home#index"

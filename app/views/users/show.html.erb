@@ -1,19 +1,13 @@
-<%= render partial: "users/card", locals: { user: @user } %>
+<div class="card mb-3">
+  <% if current_user.present? %>
+    <div class="card-body" id="new-pod-wrapper">
+      <%= render "pods/form" %>
+    </div>
+  <% end %>
 
-<div class="col-12 col-lg-6">
-  <div class="card mb-3">
-    <% if current_user.present? %>
-      <div class="card-body" id="new-pod-wrapper">
-        <%= render "pods/form" %>
-      </div>
-    <% end %>
-
-    <ul class="list-group list-group-flush">
-      <%= render @pods %>
-    </ul>
-  </div>
-
-  <%= paginate @pods %>
+  <ul class="list-group list-group-flush">
+    <%= render @pods %>
+  </ul>
 </div>
 
-<%= render "shared/footer" %>
+<%= paginate @pods %>

@@ -1,0 +1,9 @@
+div class="col-12 col-lg-6 mb-4"
+  div class="card d-flex"
+    div class="card-body"
+      = user_avatar user, html: { class: "rounded-circle w-50 border d-block mx-auto mb-3" }
+
+      p class="font-weight-bold text-center"
+        = user.name
+
+      = render partial: "users/followers", locals: { user: user }
