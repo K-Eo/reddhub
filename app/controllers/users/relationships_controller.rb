@@ -1,4 +1,4 @@
-class Users::RelationshipsController < ApplicationController
+class Users::RelationshipsController < UsersController
   before_action :authenticate_user!
   before_action :set_user
 
@@ -19,10 +19,4 @@ class Users::RelationshipsController < ApplicationController
       format.js
     end
   end
-
-  private
-
-    def set_user
-      @user = User.find_by!(username: params[:user_username])
-    end
 end
