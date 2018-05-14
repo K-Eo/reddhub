@@ -1,0 +1,13 @@
+.profile-nav {
+  font-weight: $font-weight-bold;
+
+  &-label {
+    display: block;
+    font-size: 0.815rem;
+  }
+
+  &-value {
+    display: block;
+    font-size: 1rem;
+  }
+}
