@@ -126,5 +126,26 @@ class UserTest < ActiveSupport::TestCase
       @kat.unfollow(@eo)
       assert_not @kat.following?(@eo)
     end
+
+    test "should update followers and following counter caches" do
+      assert_equal 0, @kat.following_count
+      assert_equal 0, @kat.followers_count
+      assert_equal 0, @eo.following_count
+      assert_equal 0, @eo.followers_count
+
+      @kat.follow(@eo)
+
+      assert_equal 1, @kat.reload.following_count
+      assert_equal 0, @kat.reload.followers_count
+      assert_equal 0, @eo.reload.following_count
+      assert_equal 1, @eo.reload.followers_count
+
+      @kat.unfollow(@eo)
+
+      assert_equal 0, @kat.reload.following_count
+      assert_equal 0, @kat.reload.followers_count
+      assert_equal 0, @eo.reload.following_count
+      assert_equal 0, @eo.reload.followers_count
+    end
   end
 end

@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def unfollow(user)
-    following.delete(user)
+    following.destroy(user)
   end
 
   def following?(user)
