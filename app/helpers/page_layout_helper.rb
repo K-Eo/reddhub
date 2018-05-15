@@ -19,6 +19,16 @@ module PageLayoutHelper
     end
   end
 
+  def body_classes(classes = nil)
+    @body_classes ||= ""
+
+    if classes.nil?
+      @body_classes
+    else
+      @body_classes = classes
+    end
+  end
+
   def page_classes(classes = nil)
     classes ||= ""
     classes.split(" ").push(controller_name, action_name).join(" ")

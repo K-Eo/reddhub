@@ -1,0 +1,28 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), defaults: { required: false }) do |f| %>
+  <%= f.input :name,
+    autofocus: true,
+    placeholder: "Your name",
+    autocomplete: "name" %>
+
+  <%= f.input :username,
+    autocomplete: "username",
+    placeholder: "Pick a username",
+    hint: 'This will be your username. Use only letters, numbers and underscore.' %>
+
+  <%= f.input :email,
+    autocomplete: "email",
+    placeholder: "you@example.com",
+    hint: "We'll never share your email address with anyone."%>
+
+  <%= f.input :password,
+    placeholder: "Create a password",
+    autocomplete: "off" %>
+
+  <%= f.input :password_confirmation, autocomplete: "off" %>
+
+  <div class="actions form-group mb-0">
+    <%= f.button :submit, "Sign up for ReddHub", class: "btn-success btn-block btn-lg" %>
+    <small class="form-text text-muted text-center">By clicking "Sign up for ReddHub", you agree to our terms of service and privacy statement.</small>
+  </div>
+<% end %>
+
