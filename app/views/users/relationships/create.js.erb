@@ -1,1 +1,2 @@
-$('#followers').replaceWith('<%= j render(partial: "users/followers", locals: { user: @user }) %>')
+$('<%= "#followers_#{@user.id}" %>').replaceWith('<%= j render(partial: "users/followers", locals: { user: @user.reload }) %>')
+$('<%= "#followers_#{current_user.id}" %>').replaceWith('<%= j render(partial: "users/followers", locals: { user: current_user.reload }) %>')
