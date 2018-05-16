@@ -1,21 +1,25 @@
 module PageLayoutHelper
-  def page_raw(option = nil)
-    @page_raw ||= false
-
-    if option.nil?
-      @page_raw
+  def page_layout(option = nil)
+    if option
+      @page_layout = option
     else
-      @page_raw = option
+      @page_layout
+    end
+  end
+
+  def profile_nav(option = nil)
+    if option
+      @profile_nav = option
+    else
+      @profile_nav
     end
   end
 
   def page_footer(option = nil)
-    @page_footer ||= false
-
-    if option.nil?
-      @page_footer
-    else
+    if option
       @page_footer = option
+    else
+      @page_footer
     end
   end
 

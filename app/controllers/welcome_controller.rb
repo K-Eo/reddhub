@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  layout "home"
+  layout "welcome"
   helper_method :resource_name, :resource, :resource_class, :devise_mapping
 
   def index

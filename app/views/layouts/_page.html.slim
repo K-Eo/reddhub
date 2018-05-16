@@ -1,0 +1,23 @@
+div class=page_classes("content-wrapper")
+  = render "layouts/nav"
+  = render "layouts/messages"
+
+  div id="content-body" class="container pt-4"
+    - if defined?(page_layout)
+      - if page_layout == :rowify
+        div class="row" = yield
+      - elsif page_layout == :profile
+        div class="row"
+          = render partial: "users/card", locals: { user: @user }
+          div class="col-12 col-lg-6"
+            - if defined?(profile_nav) && profile_nav
+              = render "layouts/profile_nav"
+            = yield
+          = render "shared/footer"
+      - else
+        = yield
+    - else
+      = yield
+
+  - if defined?(page_footer) && page_footer
+    = render "layouts/footer"
