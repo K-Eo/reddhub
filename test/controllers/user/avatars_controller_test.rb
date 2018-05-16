@@ -11,7 +11,7 @@ class User::AvatarsControllerTest < ActionDispatch::IntegrationTest
 
   class SignIn < ActionDispatch::IntegrationTest
     setup do
-      sign_in users(:eo)
+      sign_in users(:bilbo)
     end
 
     test "should update user avatar and redirect to edit view" do

@@ -2,7 +2,7 @@ require "test_helper"
 
 class StoryTest < ActiveSupport::TestCase
   def setup
-    @user = users(:eo)
+    @user = users(:bilbo)
     @story = Story.new(
       title: "",
       subtitle: "",

@@ -114,8 +114,8 @@ class UserTest < ActiveSupport::TestCase
 
   class Followers < UserTest
     def setup
-      @kat = users(:kat)
-      @eo = users(:eo)
+      @kat = users(:thorin)
+      @eo = users(:bilbo)
     end
 
     test "should follow an unfollow a user" do

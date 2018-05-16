@@ -2,8 +2,8 @@ require "test_helper"
 
 class Users::RelationshipsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @follower = users(:eo)
-    @following = users(:kat)
+    @follower = users(:bilbo)
+    @following = users(:thorin)
   end
 
   class LoggedIn < Users::RelationshipsControllerTest

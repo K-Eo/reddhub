@@ -58,7 +58,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
 
   class SignIn < ActionDispatch::IntegrationTest
     setup do
-      sign_in users(:eo)
+      sign_in users(:bilbo)
       @story = stories(:one)
     end
 

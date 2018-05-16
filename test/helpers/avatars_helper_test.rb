@@ -2,7 +2,7 @@ require "test_helper"
 
 class User::AvatarsHelperTest < ActionView::TestCase
   setup do
-    @user = users(:eo)
+    @user = users(:bilbo)
   end
 
   test "should return default avatar image" do

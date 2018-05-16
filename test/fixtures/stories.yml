@@ -4,16 +4,16 @@ one:
   title: Story One
   content: Story One Content
   state: draft
-  user: eo
+  user: bilbo
 
 two:
   title: Story Two
   content: Story Two Content
   state: draft
-  user: kat
+  user: thorin
 
 three:
   title: Story Three
   content: Story Three Content
   state: public
-  user: eo
+  user: bilbo

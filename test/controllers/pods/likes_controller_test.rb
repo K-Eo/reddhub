@@ -2,7 +2,7 @@ require "test_helper"
 
 class Pods::LikesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:eo)
+    @user = users(:bilbo)
     @pod = pods(:one)
   end
 

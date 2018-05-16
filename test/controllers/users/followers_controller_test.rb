@@ -2,7 +2,7 @@ require "test_helper"
 
 class Users::FollowersControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:eo)
+    @user = users(:bilbo)
   end
 
   test "should get show" do

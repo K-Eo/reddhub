@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class StoriesTest < ApplicationSystemTestCase
   setup do
-    @user = users(:eo)
+    @user = users(:bilbo)
     @story = stories(:one)
   end
 
@@ -39,7 +39,7 @@ class StoriesTest < ApplicationSystemTestCase
   end
 
   test "can't edit other user story" do
-    sign_in_as(users(:kat))
+    sign_in_as(users(:thorin))
     visit root_url
 
     click_on "Story Three"
@@ -48,7 +48,7 @@ class StoriesTest < ApplicationSystemTestCase
   end
 
   test "can't destroy other user story" do
-    sign_in_as(users(:kat))
+    sign_in_as(users(:thorin))
     visit root_url
 
     click_on "Story Three"
