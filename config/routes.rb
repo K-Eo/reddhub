@@ -19,5 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "home#index"
+  authenticated :user do
+    root "home#show"
+  end
+
+  root to: "welcome#index"
 end
