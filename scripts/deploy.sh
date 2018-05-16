@@ -1,6 +1,21 @@
 #!/bin/bash
 
-echo "Deploy to $APP_NAME app."
+echo Deploy.
+
+APP_NAME="reddhub-staging"
+
+if [ ! $CI_COMMIT_REF_NAME = "master" ]
+then
+  echo Not in master\($CI_COMMIT_REF_NAME\), skipping deployment.
+  exit 0
+fi
+
+if [[ $CI_COMMIT_TAG == v* ]]
+then
+  APP_NAME="reddhub"
+fi
+
+echo Deploy to $APP_NAME app.
 
 # Install private ssh key
 which ssh-agent
@@ -26,11 +41,11 @@ git fetch heroku
 
 # Check for migrations
 MIGRATION_CHANGES=$(git diff HEAD heroku/master --name-only -- db | wc -l)
-echo "$MIGRATION_CHANGES db changes."
+echo $MIGRATION_CHANGES db changes.
 
 # Check for workers
 PREV_WORKERS=$(heroku ps --app $APP_NAME | grep "^worker." | wc -l | tr -d ' ')
-echo "$PREV_WORKERS workers."
+echo $PREV_WORKERS workers.
 
 # Downtime during migrations
 if test $MIGRATION_CHANGES -gt 0; then
