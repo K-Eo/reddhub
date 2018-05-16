@@ -4,5 +4,7 @@ class HomeController < ApplicationController
 
   def show
     @user = current_user
+    @pods = current_user.feed.page(params[:page])
+    @pod = Pod.new
   end
 end

@@ -7,7 +7,7 @@ class AvatarsTest < ApplicationSystemTestCase
       str if File.exist?(str)
     end
 
-    @user = users(:eo)
+    @user = users(:bilbo)
   end
 
   test "visiting avatar" do

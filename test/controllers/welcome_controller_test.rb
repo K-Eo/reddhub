@@ -11,10 +11,10 @@ class WelcomeControllerTest < ActionDispatch::IntegrationTest
 
   class LoggedOut < WelcomeControllerTest
     test "should render user home on get index" do
-      sign_in users(:eo)
+      sign_in users(:bilbo)
       get root_path
       assert_response :success
-      assert_match /Eo/, @response.body
+      assert_match /Bilbo/, @response.body
       assert_no_match /Welcome to ReddHub/, @response.body
     end
   end

@@ -114,8 +114,8 @@ class UserTest < ActiveSupport::TestCase
 
   class Followers < UserTest
     def setup
-      @kat = users(:kat)
-      @eo = users(:eo)
+      @kat = users(:thorin)
+      @eo = users(:bilbo)
     end
 
     test "should follow an unfollow a user" do
@@ -146,6 +146,22 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 0, @kat.reload.followers_count
       assert_equal 0, @eo.reload.following_count
       assert_equal 0, @eo.reload.followers_count
+    end
+  end
+
+  class Feed < UserTest
+    test "feed should have the right pods" do
+      bilbo = users(:bilbo)
+      thorin = users(:thorin)
+      marty = users(:marty)
+
+      marty.pods.each do |pod|
+        assert bilbo.feed.include?(pod)
+      end
+
+      thorin.pods.each do |pod|
+        assert_not bilbo.feed.include?(pod)
+      end
     end
   end
 end

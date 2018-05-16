@@ -2,7 +2,7 @@ require "test_helper"
 
 class StoryPolicyTest < PolicyAssertions::Test
   setup do
-    @user = users(:eo)
+    @user = users(:bilbo)
     @record = stories(:one)
   end
 

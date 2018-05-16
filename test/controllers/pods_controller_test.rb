@@ -2,7 +2,7 @@ require "test_helper"
 
 class PodsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:eo)
+    @user = users(:bilbo)
   end
 
   class SignOut < PodsControllerTest

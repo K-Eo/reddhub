@@ -2,7 +2,7 @@ require "test_helper"
 
 class PodTest < ActiveSupport::TestCase
   def setup
-    @user = users(:eo)
+    @user = users(:bilbo)
     @pod = Pod.new(user: @user, content: "Foo bar")
   end
 
