@@ -8,18 +8,18 @@ module PageLayoutHelper
   end
 
   def profile_nav(option = nil)
-    if option
-      @profile_nav = option
-    else
+    if option.nil?
       @profile_nav
+    else
+      @profile_nav = option
     end
   end
 
   def page_footer(option = nil)
-    if option
-      @page_footer = option
-    else
+    if option.nil?
       @page_footer
+    else
+      @page_footer = option
     end
   end
 
