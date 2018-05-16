@@ -148,4 +148,20 @@ class UserTest < ActiveSupport::TestCase
       assert_equal 0, @eo.reload.followers_count
     end
   end
+
+  class Feed < UserTest
+    test "feed should have the right pods" do
+      bilbo = users(:bilbo)
+      thorin = users(:thorin)
+      marty = users(:marty)
+
+      marty.pods.each do |pod|
+        assert bilbo.feed.include?(pod)
+      end
+
+      thorin.pods.each do |pod|
+        assert_not bilbo.feed.include?(pod)
+      end
+    end
+  end
 end
