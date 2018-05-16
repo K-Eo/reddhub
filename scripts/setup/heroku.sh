@@ -28,7 +28,7 @@ fi
 echo Configure Heroku.
 
 sudo mkdir -p /usr/local/lib /usr/local/bin
-sudo tar -xzf $basepath/$package_name -C /usr/local/lib
+sudo tar -xzf $base_path/$package_name -C /usr/local/lib
 sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 
 echo Setting up Heroku DONE.
