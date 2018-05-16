@@ -45,4 +45,8 @@ class User < ApplicationRecord
   def following?(user)
     following.include?(user)
   end
+
+  def feed
+    Pod.includes(user: :avatar_attachment).where("user_id IN (?)", following_ids).order(created_at: :desc)
+  end
 end

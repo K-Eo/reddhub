@@ -1,1 +1,9 @@
-h1 Home
+div class="card mb-3"
+  - if current_user.present?
+    div class="card-body" id="new-pod-wrapper"
+      = render "pods/form"
+
+  ul class="list-group list-group-flush"
+    = render @pods
+
+= paginate @pods
