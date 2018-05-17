@@ -155,11 +155,17 @@ class UserTest < ActiveSupport::TestCase
       thorin = users(:thorin)
       marty = users(:marty)
 
-      marty.pods.each do |pod|
+      bilbo.follow(thorin)
+
+      thorin.pods.each do |pod|
         assert bilbo.feed.include?(pod)
       end
 
-      thorin.pods.each do |pod|
+      bilbo.pods.each do |pod|
+        assert bilbo.feed.include?(pod)
+      end
+
+      marty.pods.each do |pod|
         assert_not bilbo.feed.include?(pod)
       end
     end
