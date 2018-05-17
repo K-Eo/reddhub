@@ -1,0 +1,35 @@
+nav class="navbar navbar-expand-lg navbar-light navbar-default border-bottom"
+  div class="container"
+    = link_to "ReddHub", root_path, class: "navbar-brand"
+
+    button aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#main-nav" data-toggle="collapse" type="button"
+      span class="navbar-toggler-icon"
+
+    div class="collapse navbar-collapse" id="main-nav"
+      ul class="ml-auto navbar-nav"
+        - if user_signed_in?
+          li class="nav-item dropdown"
+            a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user-links" role="button"
+              = user_avatar current_user, resize: "30x30", html: { class: "navbar-avatar rounded-circle border"  }
+            div aria-labelledby="user-links" class="dropdown-menu dropdown-menu-right"
+              h6 class="dropdown-header user-dropdown text-dark"
+                span> class="font-weight-normal text-secondary" Signed in as
+                = current_user.username
+
+              div class="dropdown-divider"
+
+              = link_to "My profile", user_path(current_user.username), class: "dropdown-item"
+
+              div class="dropdown-divider"
+
+              = link_to "Settings", edit_user_registration_path, class: "dropdown-item"
+              = link_to "Help", root_path, class: "dropdown-item"
+
+              div class="dropdown-divider"
+
+              = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item"
+        - else
+          li class="nav-item"
+            = link_to "Sign In", new_user_session_path, class: "nav-link"
+          li class="nav-item"
+            = link_to "Sign Up", new_user_registration_path, class: "nav-link"
