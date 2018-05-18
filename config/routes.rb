@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, path: "sudo"
+  devise_for :users, path: "sudo", controllers: {
+    confirmations: "users/confirmations",
+    passwords: "users/passwords",
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    unlocks: "users/unlocks"
+  }
+
   resources :stories, except: [:create] do
     post "preview", on: :collection
     post "publish", on: :member
