@@ -11,3 +11,43 @@
   min-width: 48px;
   min-height: 48px;
 }
+
+.avatar-control {
+  .error {
+    color: $danger;
+    margin: 0;
+  }
+
+  .is-default {
+    .too-small,
+    .too-big,
+    .loading,
+    .failure {
+      display: none;
+    }
+  }
+
+  .is-big {
+    .too-big {
+      display: block;
+    }
+  }
+
+  .is-small {
+    .too-small {
+      display: block;
+    }
+  }
+
+  .is-loading {
+    .loading {
+      display: block;
+    }
+  }
+
+  .has-failure {
+    .failure {
+      display: block;
+    }
+  }
+}

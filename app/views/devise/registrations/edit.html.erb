@@ -4,53 +4,27 @@
   </h3>
 </div>
 
-<div class="text-center mr-auto col-12 col-lg-5 order-lg-2" data-controller="avatar">
+<div class="text-center mr-auto col-12 col-lg-5 order-lg-2">
   <%= render 'user_avatar' %>
-
-  <label class="btn btn-success">
-    Change
-    <input
-      accept="image/x-png,image/jpeg"
-      data-action="avatar#onPickImage"
-      data-target="avatar.trigger"
-      hidden
-      type="file"
-      data-failure="Oh no! something went wrong. Please, check your internet connection and try again."
-      data-overweight="Your file is too large. Are you sure is it an image?"
-      data-small-size="Your image is too small. We need an image with at least 256px by 256px."
-    />
-  </label>
-
-  <div
-    aria-hidden="true"
-    aria-labelledby="avatar_picker_modal"
-    class="modal fade"
-    role="dialog"
-    tabindex="-1"
-    data-target="avatar.modal"
-  >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div>
-            <img data-target="avatar.preview" src="" class="img-fluid" />
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            data-target="avatar.save"
-            data-disabled-with="Saving..."
-            data-action="avatar#onSave"
-            type="button"
-            class="btn btn-primary"
-          >
-            Save changes
-          </button>
-          <button data-target="avatar.cancel" data-action="avatar#onCancel" type="button" class="btn btn-secondary">Close</button>
-        </div>
+  <%= form_for(Avatar.new, url: me_avatar_path, data: { controller: "avatar" }) do |f| %>
+    <div class="avatar-control">
+      <label class="btn btn-success">
+        Change
+        <%= f.file_field :image, direct_upload: true, hidden: true, accept: "image/x-png,image/jpeg", data: { action: "avatar#onPickImage", target: "avatar.image" } %>
+      </label>
+      <div class="is-default" data-target="avatar.feedback">
+        <p class="error too-small">Too small.</p>
+        <p class="error too-big">Too big</p>
+        <p class="error failure">Network error</p>
+        <div class="loading"></div>
       </div>
     </div>
-  </div>
+
+    <%= f.submit "Save", class: "btn btn-success" %>
+    <% if current_user.original.attached? %>
+      <%= link_to "Resize", edit_me_avatar_path, class: "js-resize-avatar btn btn-outline-primary", data: { turbolinks: false } %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="col-12 my-4 mx-auto col-sm-10 col-md-7 my-md-4 col-lg-5 mt-lg-0 order-lg-1 ml-lg-auto">

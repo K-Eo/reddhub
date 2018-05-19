@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap/dist/js/bootstrap.bundle
+//= require croppie/croppie.js
