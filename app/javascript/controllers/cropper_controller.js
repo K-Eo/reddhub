@@ -19,7 +19,7 @@ export default class extends Controller {
   }
 
   save() {
-    this.cropper.result('blob').then(blob => {
+    $(this.imageTarget).croppie('result', 'blob').then(blob => {
       const actions = $('.js-action')
       actions.addClass('disabled')
       const formData = new FormData()
