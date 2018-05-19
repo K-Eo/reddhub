@@ -12,6 +12,9 @@ class Me::AvatarsController < ApplicationController
   end
 
   def edit
+    unless current_user.original.attached?
+      redirect_to edit_user_registration_path, notice: "Upload an avatar first"
+    end
   end
 
   def update

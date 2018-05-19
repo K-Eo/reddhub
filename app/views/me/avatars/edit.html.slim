@@ -6,7 +6,7 @@ div class="col-12 mx-auto col-lg-10 text-center" data-controller="cropper"
   div
     = image_tag current_user.original,
       class: "img-fluid",
-      data: { target: "cropper.image", filename: current_user.avatar.filename }
+      data: { target: "cropper.image", filename: current_user.original.filename }
 
   div class="btn-group mb-4 d-none d-md-block"
     = link_to "Cancel", edit_user_registration_path, class: "btn btn-secondary js-action"

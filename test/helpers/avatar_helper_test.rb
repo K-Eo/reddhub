@@ -36,4 +36,19 @@ class AvatarHelperTest < ActionView::TestCase
 
     assert_not_equal(original, resized)
   end
+
+  test "return gravatar url" do
+    assert_equal "https://www.gravatar.com/avatar/1da67f9c292299c7512d9f0dc2c13f04?s=256&d=mm", avatar_url(@user)
+  end
+
+  test "return avatar url" do
+    @user.avatar.attach(fixture_file_upload("files/avatar.png"))
+    assert_equal @user.avatar, avatar_url(@user)
+  end
+
+  test "return avatar variant" do
+    @user.avatar.attach(fixture_file_upload("files/avatar.png"))
+    assert avatar_url(@user, resize: "200x200")
+    assert_not_equal @user.avatar, avatar_url(@user, resize: "200x200")
+  end
 end
