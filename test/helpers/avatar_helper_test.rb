@@ -1,6 +1,6 @@
 require "test_helper"
 
-class User::AvatarsHelperTest < ActionView::TestCase
+class AvatarHelperTest < ActionView::TestCase
   setup do
     @user = users(:bilbo)
   end
