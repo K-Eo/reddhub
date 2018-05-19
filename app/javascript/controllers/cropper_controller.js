@@ -1,7 +1,5 @@
 import { Controller } from 'stimulus'
 
-const MAX_AVATAR_SIZE = 1024 * 1024 * 5
-
 export default class extends Controller {
   static targets = ['image']
 
@@ -19,24 +17,26 @@ export default class extends Controller {
   }
 
   save() {
-    $(this.imageTarget).croppie('result', 'blob').then(blob => {
-      const actions = $('.js-action')
-      actions.addClass('disabled')
-      const formData = new FormData()
-      const filename = this.imageTarget.getAttribute('data-filename')
+    $(this.imageTarget)
+      .croppie('result', 'blob')
+      .then(blob => {
+        const actions = $('.js-action')
+        actions.addClass('disabled')
+        const formData = new FormData()
+        const filename = this.imageTarget.getAttribute('data-filename')
 
-      formData.append('avatar[image]', blob, filename)
+        formData.append('avatar[image]', blob, filename)
 
-      Rails.ajax({
-        type: 'PUT',
-        url: '/me/avatar',
-        data: formData,
-        dataType: 'html',
-        error: () => {
-          actions.removeClass('disabled')
-          alert('Snaps! Please try again.')
-        },
+        Rails.ajax({
+          type: 'PUT',
+          url: '/me/avatar',
+          data: formData,
+          dataType: 'html',
+          error: () => {
+            actions.removeClass('disabled')
+            alert('Snaps! Please try again.')
+          },
+        })
       })
-    })
   }
 }

@@ -38,7 +38,7 @@ export default class extends Controller {
     })
 
     this.imageTarget.addEventListener('direct-upload:progress', e => {
-      const { id, progress } = event.detail
+      const { progress } = event.detail
       $(`#direct-upload-progress-${e.detail.id}`).css('width', `${progress}%`)
     })
 
