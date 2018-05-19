@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable
 
   has_one_attached :avatar
+  has_one_attached :original
+
   has_many :likes
   has_many :pods, dependent: :destroy
   has_many :stories, dependent: :destroy

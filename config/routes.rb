@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     post "publish", on: :member
     delete "unpublish", on: :member
   end
-  resource :avatars, only: [:update], controller: "user/avatars"
 
   resources :pods, only: [:create] do
     resource :like, only: [:create, :destroy], module: :pods
@@ -24,6 +23,10 @@ Rails.application.routes.draw do
       resource :followers, only: [:show]
       resource :following, only: [:show], controller: "following"
     end
+  end
+
+  namespace :me do
+    resource :avatar, only: [:create, :update, :edit]
   end
 
   authenticated :user do

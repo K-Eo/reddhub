@@ -1,98 +1,93 @@
 import { Controller } from 'stimulus'
-import Cropper from 'cropperjs'
 
-const MAX_AVATAR_SIZE = 1024 * 1024 * 10
+const MAX_AVATAR_SIZE = 1024 * 1024 * 5
 
 export default class extends Controller {
-  static targets = ['trigger', 'preview', 'modal', 'cancel', 'save']
+  static targets = ['image', 'feedback']
 
   initialize() {
-    $(this.modalTarget).on('hidden.bs.modal', () => this.onCloseModal())
-    $(this.modalTarget).on('shown.bs.modal', () => this.onOpenModal())
-  }
+    this.submit.addClass('d-none')
 
-  onOpenModal() {
-    this.cropper = new Cropper(this.previewTarget, {
-      aspectRatio: 1,
-      autoCropArea: 0.0001,
-      background: false,
-      cropBoxMovable: false,
-      cropBoxResizable: false,
-      dragMode: 'move',
-      guides: false,
-      minCropBoxHeight: 256,
-      minCropBoxWidth: 256,
-      toggleDragModeOnDblclick: false,
-      viewMode: 1,
+    this.imageTarget.addEventListener('direct-upload:initialize', e => {
+      const { id } = e.detail
+
+      $('.js-resize-avatar').addClass('disabled')
+
+      this.setFeedback('is-loading')
+
+      $('.loading').html(`
+        <div class="progress progress-bar-striped progress-bar-animated mb-2"
+          style="height: 4px;"
+          id="direct-upload-${id}"
+        >
+          <div class="progress-bar "
+            id="direct-upload-progress-${id}"
+            role="progressbar"
+            style="width: 0;"
+            aria-valuenow="0"
+            aria-valuemin="0"
+            aria-valuemax="100"></div>
+        </div>
+      `)
+    })
+
+    this.imageTarget.addEventListener('direct-upload:start', e => {
+      $(`#direct-upload-${e.detail.id}`)
+        .removeClass('progress-bar-striped')
+        .removeClass('progress-bar-animated')
+    })
+
+    this.imageTarget.addEventListener('direct-upload:progress', e => {
+      const { id, progress } = event.detail
+      $(`#direct-upload-progress-${e.detail.id}`).css('width', `${progress}%`)
+    })
+
+    this.imageTarget.addEventListener('direct-upload:error', e => {
+      e.preventDefault()
+      this.resetImage()
+      this.setFeedback('has-failure')
+    })
+
+    this.imageTarget.addEventListener('direct-upload:end', () => {
+      $('.loading').html('')
+      Rails.enableElement(document.querySelector('.new_avatar'))
+      $('.js-resize-avatar').removeClass('disabled')
     })
   }
 
-  onSave() {
-    const content = this.saveTarget.firstChild.data
-    const trigger = this.triggerTarget
-
-    const setDisabled = () => {
-      this.saveTarget.setAttribute('disabled', true)
-      this.cancelTarget.setAttribute('disabled', true)
-      const contentDisabled = this.saveTarget.getAttribute('data-disabled-with')
-      this.saveTarget.firstChild.data = contentDisabled
-    }
-
-    const removeDisabled = () => {
-      this.saveTarget.firstChild.data = content
-      this.saveTarget.removeAttribute('disabled')
-      this.cancelTarget.removeAttribute('disabled')
-    }
-
-    this.cropper.getCroppedCanvas().toBlob(blob => {
-      setDisabled()
-
-      const formData = new FormData()
-
-      formData.append('avatar', blob)
-
-      Rails.ajax({
-        type: 'PUT',
-        url: '/avatars',
-        data: formData,
-        success: () => {
-          this.onCancel()
-          removeDisabled()
-        },
-        error: () => {
-          removeDisabled()
-          alert(
-            trigger.getAttribute('data-failure') ||
-              'Check your internet connection and try again.'
-          )
-        },
-      })
-    })
+  get submit() {
+    return $('#new_avatar input[type=submit]')
   }
 
-  onCloseModal() {
-    this.cropper.destroy()
-    this.cropper = null
-    this.triggerTarget.value = ''
+  resetImage() {
+    $('form')[0].reset()
   }
 
-  onCancel() {
-    $(this.modalTarget).modal('hide')
+  setFeedback(klass) {
+    if (klass) {
+      this.resetFeedback().addClass(klass)
+    }
+  }
+
+  resetFeedback() {
+    return $(this.feedbackTarget)
+      .removeClass()
+      .addClass('is-default')
   }
 
   onPickImage() {
-    if (!this.triggerTarget.files && !this.triggerTarget.files[0]) {
+    this.resetFeedback()
+    if (!this.imageTarget.files && !this.imageTarget.files[0]) {
       return
     }
 
-    const currentFile = this.triggerTarget.files[0]
+    const currentFile = this.imageTarget.files[0]
     const reader = new FileReader()
     const size = currentFile.size
 
     if (size > MAX_AVATAR_SIZE) {
-      alert(
-        this.triggerTarget.getAttribute('data-overweight') || 'File too large'
-      )
+      this.setFeedback('is-big')
+      this.resetImage()
       return
     }
 
@@ -102,25 +97,16 @@ export default class extends Controller {
 
   onReadLoaded(e) {
     const image = new Image()
-    const trigger = this.triggerTarget
-    const preview = this.previewTarget
-    const modal = this.modalTarget
+    const that = this
 
     image.onload = function() {
-      if (this.width < 256 && this.height < 256) {
-        alert(
-          trigger.getAttribute('data-small-size') ||
-            'Image with 256x256px at least.'
-        )
+      if (this.width < 256 || this.height < 256) {
+        that.resetImage()
+        that.setFeedback('is-small')
         return
       }
 
-      preview.setAttribute('src', e.target.result)
-      $(modal).modal({
-        backdrop: 'static',
-        keyboard: false,
-        show: true,
-      })
+      that.submit.click()
     }
 
     image.src = e.target.result
