@@ -41,8 +41,8 @@ gem "policy-assertions"
 gem "simple_form"
 gem "webpacker", "~> 3.4"
 gem "mini_magick"
-gem "google-cloud-storage", "~> 1.8", require: false
 gem "state_machines-activerecord"
+gem "aws-sdk-s3", require: false
 gem "kaminari"
 gem "redcarpet"
 gem "slim"
