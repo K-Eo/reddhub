@@ -1,28 +1,28 @@
 div id="followers_#{user.id}"
   div class="d-flex text-center justify-content-center"
-    div
-      div class="text-secondary" Followers
-      div class="font-weight-bold" = user.followers_count
-
-    div class="border-right mx-3"
-
-    div
+    = link_to user_following_path(user.username), class: "text-dark"
       div class="text-secondary" Following
       div class="font-weight-bold" = user.following_count
 
+    div class="border-right mx-3"
+
+    = link_to user_followers_path(user.username), class: "text-dark"
+      div class="text-secondary" Followers
+      div class="font-weight-bold" = user.followers_count
+
   - if user_signed_in? && current_user != user
     - if current_user.following?(user)
-      = button_to "Unfollow",
-                  user_relationship_path(user.username),
-                  class: "btn btn-outline-danger btn-block mt-3",
-                  remote: true,
-                  method: :delete
+      = link_to "Unfollow",
+                user_relationship_path(user.username),
+                class: "btn btn-outline-danger btn-block mt-3",
+                remote: true,
+                method: :delete
     - else
-      = button_to "Follow",
-                  user_relationship_path(user.username),
-                  class: "btn btn-outline-primary btn-block mt-3",
-                  remote: true,
-                  method: :post
+      = link_to "Follow",
+                user_relationship_path(user.username),
+                class: "btn btn-outline-primary btn-block mt-3",
+                remote: true,
+                method: :post
 
 
 

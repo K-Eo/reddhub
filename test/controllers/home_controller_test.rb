@@ -58,5 +58,52 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       assert_select "h6", text: "Marty", count: 0
       assert_select "h6", text: "Emmett", count: 0
     end
+
+    test "seeing followers" do
+      @marty = users(:marty)
+      @marty.follow(@user)
+
+      get root_path
+
+      assert_response :ok
+      assert_select "a[href='/#{@user.username}/followers']", text: "Followers1"
+
+      get user_followers_path(@user.username)
+
+      assert_response :ok
+
+      assert_select "a.nav-item.active", text: "Followers1"
+
+      assert_select "div[id=user_card_#{@marty.id}]" do
+        assert_select "p", text: /Marty Mcfly/
+        assert_select "a", text: "Following1"
+        assert_select "a", text: "Followers0"
+        assert_select "a[href='/#{@marty.username}/relationship'][data-method=post]", text: "Follow"
+      end
+    end
+
+    test "seeing following" do
+      @marty = users(:marty)
+      @user.follow(@marty)
+      @user.reload
+
+      get root_path
+
+      assert_response :ok
+      assert_select "a[href='/#{@user.username}/following']", text: "Following1"
+
+      get user_following_path(@user.username)
+
+      assert_response :ok
+
+      assert_select "a.nav-item.active", text: "Following1"
+
+      assert_select "div[id=user_card_#{@marty.id}]" do
+        assert_select "p", text: /Marty Mcfly/
+        assert_select "a", text: "Following0"
+        assert_select "a", text: "Followers1"
+        assert_select "a[href='/#{@marty.username}/relationship'][data-method=delete]", text: "Unfollow"
+      end
+    end
   end
 end
