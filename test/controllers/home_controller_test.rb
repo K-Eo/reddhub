@@ -44,5 +44,19 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       assert_select "a.nav-item", text: "Following0"
       assert_select "a.nav-item", text: "Followers0"
     end
+
+    test "render pods" do
+      get root_path
+
+      assert_response :success
+
+      assert_select "a", text: "Bilbo Baggins", count: 2
+      assert_select "p", text: "First pod"
+      assert_select "p", text: "Second pod"
+
+      assert_select "h6", text: "Thorin", count: 0
+      assert_select "h6", text: "Marty", count: 0
+      assert_select "h6", text: "Emmett", count: 0
+    end
   end
 end
