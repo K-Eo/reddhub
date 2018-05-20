@@ -2,7 +2,7 @@ li class="list-group-item d-flex"
   = image_tag avatar_url(pod.user), class: "rounded-circle mr-3 avatar-48"
   div class="w-100"
     div class="d-flex justify-content-between"
-      h6 = pod.user.name
+      = link_to pod.user.name, user_path(pod.user.username), class: "h6 text-dark"
 
       span class="small text-secondary"
         = time_ago_in_words pod.created_at
