@@ -105,5 +105,29 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
         assert_select "a[href='/#{@marty.username}/relationship'][data-method=delete]", text: "Unfollow"
       end
     end
+
+    test "seeing user profile" do
+      @marty = users(:marty)
+      @user.follow(@marty)
+      @user.reload
+
+      get user_following_path(@user.username)
+
+      assert_response :ok
+      assert_select "a.nav-item.active", text: "Following1"
+
+      assert_select "div[id=user_card_#{@marty.id}]" do
+        assert_select "p", text: "Marty Mcfly"
+        assert_select "a[href='/#{@marty.username}']", text: "@#{@marty.username}"
+      end
+
+      get user_path(@marty.username)
+
+      assert_response :ok
+
+      assert_select "p", text: @marty.name
+      assert_select "a", text: "@#{@marty.username}"
+      assert_select "a", text: "Followers1"
+    end
   end
 end
