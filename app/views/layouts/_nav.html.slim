@@ -10,7 +10,7 @@ nav class="navbar navbar-expand-lg navbar-light navbar-default border-bottom"
         - if user_signed_in?
           li class="nav-item dropdown"
             a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user-links" role="button"
-              = user_avatar current_user, resize: "30x30", html: { class: "navbar-avatar rounded-circle border"  }
+              = image_tag avatar_url(current_user, resize: "30x30"), class: "navbar-avatar rounded-circle border"
             div aria-labelledby="user-links" class="dropdown-menu dropdown-menu-right"
               h6 class="dropdown-header user-dropdown text-dark"
                 span> class="font-weight-normal text-secondary" Signed in as
