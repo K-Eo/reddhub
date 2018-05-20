@@ -97,6 +97,7 @@ export default class extends Controller {
 
   onReadLoaded(e) {
     const image = new Image()
+    image.crossOrigin = 'anonymous'
     const that = this
 
     image.onload = function() {

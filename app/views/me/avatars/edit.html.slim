@@ -6,6 +6,7 @@ div class="col-12 mx-auto col-lg-10 text-center" data-controller="cropper"
   div
     = image_tag current_user.original,
       class: "img-fluid",
+      crossorigin: "anonymous",
       data: { target: "cropper.image", filename: current_user.original.filename }
 
   div class="btn-group mb-4 d-none d-md-block"
