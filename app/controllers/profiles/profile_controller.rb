@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Profiles::ProfileController < ApplicationController
   before_action :set_user
   layout "profile"
 

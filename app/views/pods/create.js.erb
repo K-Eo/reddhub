@@ -1,5 +1,5 @@
 <% if @pod.persisted? %>
-    window.location.replace("<%= user_path(current_user.username) %>")
+    window.location.replace("<%= user_profile_path(current_user.username) %>")
 <% else %>
     $("#new-pod-wrapper").html('<%= j render("pods/form") %>')
 <% end %>

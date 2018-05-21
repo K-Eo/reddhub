@@ -1,4 +1,4 @@
-class Users::FollowingController < UsersController
+class Profiles::FollowingController < UsersController
   before_action :set_user
   layout "profile"
 

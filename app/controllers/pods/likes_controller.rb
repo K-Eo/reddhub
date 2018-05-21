@@ -6,7 +6,7 @@ class Pods::LikesController < ApplicationController
     @pod.liked_by(current_user)
 
     respond_to do |format|
-      format.html { redirect_back(fallback_location: user_path(current_user.username)) }
+      format.html { redirect_back(fallback_location: user_profile_path(current_user.username)) }
       format.js
     end
   end
@@ -15,7 +15,7 @@ class Pods::LikesController < ApplicationController
     @pod.unliked_by(current_user)
 
     respond_to do |format|
-      format.html { redirect_back(fallback_location: user_path(current_user.username)) }
+      format.html { redirect_back(fallback_location: user_profile_path(current_user.username)) }
       format.js
     end
   end
