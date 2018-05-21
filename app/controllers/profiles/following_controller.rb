@@ -1,5 +1,5 @@
-class Profiles::FollowingController < UsersController
-  before_action :set_user
+class Profiles::FollowingController < ApplicationController
+  before_action :set_user_by_username
   layout "profile"
 
   def show

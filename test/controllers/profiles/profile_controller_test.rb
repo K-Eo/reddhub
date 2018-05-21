@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:bilbo)
   end
@@ -8,6 +8,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get user_profile_path(@user.username)
     assert_response :success
+
+    assert_select "p", @user.name
   end
 
   test "should redirect to 404 if user does not exist" do
