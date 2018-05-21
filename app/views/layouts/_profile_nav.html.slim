@@ -1,5 +1,5 @@
 nav class="nav nav-pills nav-fill mb-4 profile-nav"
-  = link_to user_profile_path(@user.username), class: active_when(controller_name == "users", "nav-item nav-link")
+  = link_to user_profile_path(@user.username), class: active_when(controller_name == "profile", "nav-item nav-link")
     span class="profile-nav-label" Pods
     span class="profile-nav-value" = @user.pods.size
 
