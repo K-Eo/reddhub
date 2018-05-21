@@ -34,7 +34,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
         post pods_path, params: { pod: { content: "Foo bar"  } }
       end
 
-      assert_redirected_to user_path(@user.username)
+      assert_redirected_to user_profile_path(@user.username)
     end
 
     test "should create a pod xhr" do

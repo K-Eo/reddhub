@@ -36,7 +36,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "a", text: "@Bilbo"
 
-      get user_path(@user.username)
+      get user_profile_path(@user.username)
 
       assert_response :success
 
@@ -121,7 +121,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
         assert_select "a[href='/#{@marty.username}']", text: "@#{@marty.username}"
       end
 
-      get user_path(@marty.username)
+      get user_profile_path(@marty.username)
 
       assert_response :ok
 

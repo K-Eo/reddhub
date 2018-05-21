@@ -55,7 +55,7 @@ class Pods::LikesControllerTest < ActionDispatch::IntegrationTest
         post pod_like_path(@pod)
       end
 
-      assert_redirected_to user_path(@user.username)
+      assert_redirected_to user_profile_path(@user.username)
     end
 
     test "creates like xhr" do
@@ -74,7 +74,7 @@ class Pods::LikesControllerTest < ActionDispatch::IntegrationTest
         delete pod_like_path(@pod)
       end
 
-      assert_redirected_to user_path(@user.username)
+      assert_redirected_to user_profile_path(@user.username)
     end
 
     test "destroys like xhr" do

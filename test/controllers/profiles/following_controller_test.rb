@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Users::FollowingControllerTest < ActionDispatch::IntegrationTest
+class Profiles::FollowingControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:bilbo)
   end

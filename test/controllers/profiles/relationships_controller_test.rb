@@ -1,12 +1,12 @@
 require "test_helper"
 
-class Users::RelationshipsControllerTest < ActionDispatch::IntegrationTest
+class Profiles::RelationshipsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @follower = users(:bilbo)
     @following = users(:thorin)
   end
 
-  class LoggedIn < Users::RelationshipsControllerTest
+  class LoggedIn < Profiles::RelationshipsControllerTest
     def setup
       super
     end
@@ -44,7 +44,7 @@ class Users::RelationshipsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  class LoggedOut < Users::RelationshipsControllerTest
+  class LoggedOut < Profiles::RelationshipsControllerTest
     def setup
       super
       sign_in @follower
@@ -55,7 +55,7 @@ class Users::RelationshipsControllerTest < ActionDispatch::IntegrationTest
         post user_relationship_path(@following.username)
       end
 
-      assert_redirected_to user_path(@following.username)
+      assert_redirected_to user_profile_path(@following.username)
     end
 
     test "should redirect to following on delete" do
@@ -65,7 +65,7 @@ class Users::RelationshipsControllerTest < ActionDispatch::IntegrationTest
         delete user_relationship_path(@following.username)
       end
 
-      assert_redirected_to user_path(@following.username)
+      assert_redirected_to user_profile_path(@following.username)
     end
 
     test "should return success on create" do

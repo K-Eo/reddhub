@@ -17,16 +17,15 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy], module: :pods
   end
 
-  resources :users, path: "/", only: [:show], param: :username do
-    scope module: :users do
-      resource :relationship, only: [:create, :destroy]
-      resource :followers, only: [:show]
-      resource :following, only: [:show], controller: "following"
-    end
-  end
-
   namespace :me do
     resource :avatar, only: [:create, :update, :edit]
+  end
+
+  scope ":username", as: :user, module: :profiles do
+    resource :followers, only: [:show]
+    resource :following, only: [:show], controller: :following
+    resource :relationship, only: [:create, :destroy]
+    root "profile#show", as: :profile
   end
 
   authenticated :user do
