@@ -10,7 +10,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       super
     end
 
-    test "redirects on post create" do
+    test "redirects to login on post create" do
       post pods_path, params: { pod: { content: "Foo bar"  } }
 
       assert_redirected_to new_user_session_path
@@ -29,22 +29,26 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       sign_in @user
     end
 
-    test "should create a pod" do
-      assert_difference "Pod.count" do
+    test "creating pod" do
+      get root_path
+
+      assert_response :ok
+
+      assert_select "form#new_pod" do
+        assert_select "input#pod_content"
+      end
+
+      assert_difference "@user.pods.count" do
         post pods_path, params: { pod: { content: "Foo bar"  } }
       end
 
-      assert_redirected_to user_profile_path(@user.username)
-    end
+      assert_redirected_to user_pod_path(@user.username, @user.pods.last)
 
-    test "should create a pod xhr" do
-      assert_difference "Pod.count" do
-        post pods_path, params: { pod: { content: "Foo bar"  } }, xhr: true
+      follow_redirect!
+
+      assert_select "div.card" do
+        assert_select "p", text: "Foo bar"
       end
-
-      assert_response :success
-      assert_equal "text/javascript", @response.content_type
-      assert_match /window\.location\.replace.*#{@user.username}/, @response.body
     end
   end
 end

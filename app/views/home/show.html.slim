@@ -1,6 +1,7 @@
 div class="card mb-3"
-  - if current_user.present?
-    div class="card-body" id="new-pod-wrapper"
+  div class="card-body d-flex bg-light"
+    = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
+    div class="w-100" id="new-pod-wrapper"
       = render "pods/form"
 
   ul class="list-group list-group-flush"
