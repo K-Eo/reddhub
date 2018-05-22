@@ -34,6 +34,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :ok
 
+      assert_select "li.pod", count: 2
       assert_select "form#new_pod" do
         assert_select "input#pod_content"
       end
@@ -42,13 +43,45 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
         post pods_path, params: { pod: { content: "Foo bar"  } }
       end
 
-      assert_redirected_to user_pod_path(@user.username, @user.pods.last)
+      assert_redirected_to root_path
 
       follow_redirect!
 
-      assert_select "div.card" do
+      assert_select "li.pod", count: 3
+      assert_select "li.pod" do
         assert_select "p", text: "Foo bar"
       end
+
+      assert_select "div.alert-notice", text: /Pod was successfully created/
+    end
+
+    test "creating pod with error" do
+      get root_path
+
+      assert_response :ok
+
+      assert_select "li.pod", count: 2
+      assert_select "form#new_pod" do
+        assert_select "input#pod_content"
+      end
+
+      assert_no_difference "@user.pods.count" do
+        post pods_path, params: { pod: { content: ""  } }
+      end
+
+      assert_response :success
+
+      assert_select "li.pod", count: 2
+      assert_select "div", text: /Content can't be blank/
+
+      assert_no_difference "@user.pods.count" do
+        post pods_path, params: { pod: { content: ("a" * 257) } }
+      end
+
+      assert_response :success
+
+      assert_select "li.pod", count: 2
+      assert_select "div", text: /Content is too long/
     end
   end
 end

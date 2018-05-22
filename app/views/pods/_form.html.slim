@@ -1,10 +1,6 @@
-- has_errors = @pod.errors[:content].any?
-
-= form_for @pod, remote: true do |f|
-  = f.text_field :content, class: invalid_when(has_errors, "form-control"), placeholder: "Write a message...", aria: { label: "Write a message...", describedby: "Write a message..." }
-
-  - if has_errors
-    div class="content-feedback mt-1"
-      - @pod.errors[:content].each do |error|
-        div class="text-danger"
-          = error.capitalize
+= simple_form_for(@pod) do |f|
+  = f.input :content,
+    wrapper_html: { class: "mb-0" },
+    placeholder: "Write a message...",
+    aria: { label: "Write a message...", describedby: "Write a message..." },
+    label: false
