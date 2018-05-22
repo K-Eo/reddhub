@@ -6,9 +6,14 @@ class PodsController < ApplicationController
 
     respond_to do |format|
       if @pod.save
-        format.html { redirect_to user_pod_path(current_user.username, @pod), notice: "Pod has been created." }
+        format.html { redirect_to root_path(current_user.username), notice: "Pod was successfully created." }
+        format.js
       else
-        format.html { redirect_to user_pod_path(current_user.username, @pod), danger: "Pod can't be created." }
+        format.html do
+          @user = current_user
+          @pods = current_user.feed.page(params[:page])
+          render template: "home/show", layout: "home"
+        end
         format.js
       end
     end
