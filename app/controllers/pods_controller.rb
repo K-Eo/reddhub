@@ -6,10 +6,9 @@ class PodsController < ApplicationController
 
     respond_to do |format|
       if @pod.save
-        format.html { redirect_to user_profile_path(current_user.username), notice: "Pod has been created." }
-        format.js
+        format.html { redirect_to user_pod_path(current_user.username, @pod), notice: "Pod has been created." }
       else
-        format.html { redirect_to user_profile_path(current_user.username), danger: "Pod can't be created." }
+        format.html { redirect_to user_pod_path(current_user.username, @pod), danger: "Pod can't be created." }
         format.js
       end
     end
