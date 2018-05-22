@@ -1,0 +1,20 @@
+- avatar = avatar_url @user
+
+div class="card mb-4"
+  div class="card-body"
+    div class="card-title d-flex"
+      = image_tag avatar, class: "rounded-circle mr-3 avatar-48"
+      div class="w-100 d-flex justify-content-between"
+        = link_to user_profile_path(@user.username)
+          p class="h6 text-dark mb-1" = @user.name
+          p class="mb-0 text-secondary" = "@#{@user.username}"
+        span class="small text-secondary"
+          = time_ago_in_words @pod.created_at
+
+    p class="card-text my-3" = @pod.content
+
+    hr
+
+    div class="actions-list"
+      = render partial: "pods/likes", locals: { pod: @pod }
+

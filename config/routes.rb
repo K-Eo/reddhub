@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resource :followers, only: [:show]
     resource :following, only: [:show], controller: :following
     resource :relationship, only: [:create, :destroy]
+    resources :pods, only: [:show]
     root "profile#show", as: :profile
   end
 
