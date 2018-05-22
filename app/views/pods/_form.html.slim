@@ -1,4 +1,4 @@
-= simple_form_for(@pod) do |f|
+= simple_form_for(@pod, remote: true) do |f|
   = f.input :content,
     wrapper_html: { class: "mb-0" },
     placeholder: "Write a message...",

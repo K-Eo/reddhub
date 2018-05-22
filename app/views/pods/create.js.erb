@@ -1,5 +1,6 @@
 <% if @pod.persisted? %>
-    window.location.replace("<%= user_profile_path(current_user.username) %>")
+    Turbolinks.clearCache()
+    Turbolinks.visit("<%= root_path %>")
 <% else %>
     $("#new-pod-wrapper").html('<%= j render("pods/form") %>')
 <% end %>
