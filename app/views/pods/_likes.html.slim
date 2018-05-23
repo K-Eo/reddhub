@@ -3,12 +3,12 @@
 - icon_type = liked ? "fas" : "far"
 
 = link_to pod_like_path(pod),
-  class: active_when(liked, "action action-like"),
+  class: active_when(liked, "link-action like-action"),
   id: "pod_likes_#{pod.id}",
   method: method,
   remote: true
 
-  = icon icon_type, "heart", class: "icon"
+  = icon icon_type, "heart", class: "action-icon"
 
   - if pod.likes.size > 0
-    span class="counter" = pod.likes.size
+    span class="action-count" = pod.likes.size

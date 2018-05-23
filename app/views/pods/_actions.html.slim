@@ -1,0 +1,10 @@
+div class="pod-actions"
+  div class="pod-action"
+    = render partial: "pods/likes", locals: { pod: pod }
+
+  div class="pod-action"
+    = link_to user_pod_path(pod.user.username, pod, anchor: "pod_comments_#{pod.id}"),
+              class: "link-action comment-action"
+      = icon "far", "comment", class: "action-icon"
+      - if pod.comments.size > 0
+        span class="action-count" = pod.comments.size

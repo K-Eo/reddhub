@@ -25,7 +25,7 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "p", text: @pod.content
 
-      assert_select "a.action-like"
+      assert_select "a.like-action"
     end
   end
 end

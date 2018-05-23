@@ -5,7 +5,7 @@ export default class extends Controller {
 
   visit(e) {
     const url = this.sourceTarget.getAttribute('data-url')
-    const canVisit = $(e.target).closest('.js-action').length === 0
+    const canVisit = $(e.target).closest('.pod-action').length === 0
 
     if (url && canVisit) {
       Turbolinks.visit(url)

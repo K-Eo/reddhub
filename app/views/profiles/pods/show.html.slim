@@ -15,8 +15,7 @@ div class="card mb-4"
     p class="card-text" = @pod.content
 
   div class="card-body"
-    div class="actions-list"
-      = render partial: "pods/likes", locals: { pod: @pod }
+    = render partial: "pods/actions", locals: { pod: @pod }
 
   - if user_signed_in?
     div class="card-footer d-flex"
