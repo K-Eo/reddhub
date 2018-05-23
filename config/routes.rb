@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :pods, only: [:create] do
     resource :like, only: [:create, :destroy], module: :pods
+    resources :comments, only: [:create], module: :pods
   end
 
   namespace :me do

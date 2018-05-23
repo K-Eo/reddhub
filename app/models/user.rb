@@ -52,7 +52,7 @@ class User < ApplicationRecord
   def feed
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
 
-    Pod.includes(user: :avatar_attachment)
+    Pod.includes(user: [{ avatar_attachment: :blob }])
        .where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
        .order(created_at: :desc)
   end

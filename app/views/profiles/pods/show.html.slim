@@ -1,20 +1,44 @@
 - avatar = avatar_url @user
+- comments = @pod.comments.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
 
 div class="card mb-4"
-  div class="card-body"
+  div class="card-body pb-0"
     div class="card-title d-flex"
       = image_tag avatar, class: "rounded-circle mr-3 avatar-48"
       div class="w-100 d-flex justify-content-between"
         = link_to user_profile_path(@user.username)
           p class="h6 text-dark mb-1" = @user.name
-          p class="mb-0 text-secondary" = "@#{@user.username}"
+          p class="text-secondary" = "@#{@user.username}"
         span class="small text-secondary"
           = time_ago_in_words @pod.created_at
 
-    p class="card-text my-3" = @pod.content
+    p class="card-text" = @pod.content
 
-    hr
-
+  div class="card-body"
     div class="actions-list"
       = render partial: "pods/likes", locals: { pod: @pod }
 
+  - if user_signed_in?
+    div class="card-footer d-flex"
+      = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
+      div class="w-100"
+        = simple_form_for([@pod, @comment || Comment.new]) do |f|
+          = f.input :body, label: false, placeholder: "Write a reply", input_html: { rows: 2 }
+          = f.submit class: "btn btn-success btn-sm float-right"
+
+  ul class="list-group list-group-flush" id="pod_comments_#{@pod.id}"
+    - comments.each do |comment|
+      li class="list-group-item d-flex comment" id="comment_#{comment.id}"
+        = image_tag avatar_url(comment.user), class: "rounded-circle mr-3 avatar-48"
+        div class="w-100"
+          div class="d-flex justify-content-between"
+            = link_to user_profile_path(comment.user.username), class: "mb-1"
+              span> class="h6 text-dark" = comment.user.name
+              span class="text-secondary" = "@#{comment.user.username}"
+
+            span class="small text-secondary"
+              = time_ago_in_words comment.created_at
+
+          p class="mb-0" = comment.body
+
+= paginate comments

@@ -1,6 +1,7 @@
 class Pod < ApplicationRecord
   belongs_to :user, counter_cache: true
   has_many :likes, as: :likeable
+  has_many :comments, as: :commentable
 
   validates :content, presence: true,
                       length: { maximum: 256 }
