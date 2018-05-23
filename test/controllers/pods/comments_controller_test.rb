@@ -137,5 +137,39 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
         assert_select "li.active", text: "2"
       end
     end
+
+    test "incrementing comments counter" do
+      get user_profile_path(@user.username)
+
+      assert_response :ok
+
+      assert_select "li#pod_#{@pod.id}" do
+        assert_select "a.action-comment[href*='#pod_comments_#{@pod.id}']", text: ""
+      end
+
+      get user_pod_path(@user.username, @pod)
+
+      assert_response :ok
+
+      assert_select "div.actions-list" do
+        assert_select "a.action-comment", text: ""
+      end
+
+      post pod_comments_path(@pod), params: { comment: { body: "My Comment" } }
+
+      follow_redirect!
+
+      assert_select "div.actions-list" do
+        assert_select "a.action-comment", text: "1"
+      end
+
+      get user_profile_path(@user.username)
+
+      assert_response :ok
+
+      assert_select "li#pod_#{@pod.id}" do
+        assert_select "a.action-comment", text: "1"
+      end
+    end
   end
 end
