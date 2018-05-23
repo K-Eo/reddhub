@@ -15,13 +15,7 @@ div class="card mb-4"
     p class="card-text" = @pod.content
 
   div class="card-body"
-    div class="actions-list"
-      = render partial: "pods/likes", locals: { pod: @pod }
-      = link_to user_pod_path(@pod.user.username, @pod, anchor: "pod_comments_#{@pod.id}"),
-                class: "action action-comment"
-        = icon "far", "comment"
-        - if @pod.comments.size > 0
-          span class="counter" = @pod.comments.size
+    = render partial: "pods/actions", locals: { pod: @pod }
 
   - if user_signed_in?
     div class="card-footer d-flex"

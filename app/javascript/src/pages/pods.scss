@@ -1,3 +1,48 @@
 .pod {
   cursor: pointer;
 }
+
+.pod-actions {
+  font-size: 0;
+  height: 18px;
+  line-height: 1;
+
+  .pod-action {
+    display: inline-block;
+    min-width: 80px;
+
+    .like-action:hover,
+    .like-action.active {
+      color: $pink;
+    }
+
+    .comment-action:hover,
+    .comment-action.active {
+      color: $primary;
+    }
+
+    .link-action {
+      color: $gray-600;
+      font-size: 16px;
+      line-height: 1;
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      .action-icon {
+        font-size: 16px;
+        line-height: 16px;
+        vertical-align: middle;
+      }
+
+      .action-count {
+        font-size: 14px;
+        margin-left: 6px;
+        font-weight: bold;
+        line-height: 1;
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}
