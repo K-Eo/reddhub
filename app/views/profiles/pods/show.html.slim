@@ -1,5 +1,5 @@
 - avatar = avatar_url @user
-- comments = @pod.comments.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
+- comments = @pod.comments.newest.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
 
 div class="card mb-4"
   div class="card-body pb-0"

@@ -2,12 +2,14 @@
   cursor: pointer;
 }
 
-.pod-actions {
+.pod-actions,
+.comment-actions {
   font-size: 0;
   height: 18px;
   line-height: 1;
 
-  .pod-action {
+  .pod-action,
+  .comment-action {
     display: inline-block;
     min-width: 80px;
 

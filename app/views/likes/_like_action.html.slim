@@ -1,0 +1,15 @@
+- liked = user_signed_in? && current_user.likes?(likeable)
+- method = liked ? :delete : :post
+- icon_type = liked ? "fas" : "far"
+
+= link_to [likeable, :like],
+  class: active_when(liked, "link-action like-action"),
+  id: "#{likeable.class.name.downcase}_likes_#{likeable.id}",
+  method: method,
+  remote: true
+
+  = icon icon_type, "heart", class: "action-icon"
+
+  - if likeable.likes.size > 0
+    span class="action-count" = likeable.likes.size
+

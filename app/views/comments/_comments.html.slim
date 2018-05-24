@@ -10,4 +10,6 @@
         span class="small text-secondary"
           = time_ago_in_words comment.created_at
 
-      p class="mb-0" = comment.body
+      p = comment.body
+
+      = render partial: "comments/actions", locals: { comment: comment }
