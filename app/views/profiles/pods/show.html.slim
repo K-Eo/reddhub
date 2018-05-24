@@ -18,26 +18,9 @@ div class="card mb-4"
     = render partial: "pods/actions", locals: { pod: @pod }
 
   - if user_signed_in?
-    div class="card-footer d-flex"
-      = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
-      div class="w-100"
-        = simple_form_for([@pod, @comment || Comment.new]) do |f|
-          = f.input :body, label: false, placeholder: "Write a reply", input_html: { rows: 2 }
-          = f.submit class: "btn btn-success btn-sm float-right"
+    = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }
 
   ul class="list-group list-group-flush" id="pod_comments_#{@pod.id}"
-    - comments.each do |comment|
-      li class="list-group-item d-flex comment" id="comment_#{comment.id}"
-        = image_tag avatar_url(comment.user), class: "rounded-circle mr-3 avatar-48"
-        div class="w-100"
-          div class="d-flex justify-content-between"
-            = link_to user_profile_path(comment.user.username), class: "mb-1"
-              span> class="h6 text-dark" = comment.user.name
-              span class="text-secondary" = "@#{comment.user.username}"
-
-            span class="small text-secondary"
-              = time_ago_in_words comment.created_at
-
-          p class="mb-0" = comment.body
+    = render partial: "comments/comments", locals: { comments: comments }
 
 = paginate comments
