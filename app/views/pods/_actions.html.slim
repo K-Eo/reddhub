@@ -1,6 +1,6 @@
 div class="pod-actions"
   div class="pod-action"
-    = render partial: "pods/likes", locals: { pod: pod }
+    = render partial: "pods/likes", locals: { likeable: pod }
 
   div class="pod-action"
     = link_to user_pod_path(pod.user.username, pod, anchor: "pod_comments_#{pod.id}"),

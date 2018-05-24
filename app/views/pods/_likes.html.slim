@@ -1,14 +1,14 @@
-- liked = user_signed_in? && current_user.likes?(pod)
+- liked = user_signed_in? && current_user.likes?(likeable)
 - method = liked ? :delete : :post
 - icon_type = liked ? "fas" : "far"
 
-= link_to pod_like_path(pod),
+= link_to [likeable, :like],
   class: active_when(liked, "link-action like-action"),
-  id: "pod_likes_#{pod.id}",
+  id: "#{likeable.class.name.downcase}_likes_#{likeable.id}",
   method: method,
   remote: true
 
   = icon icon_type, "heart", class: "action-icon"
 
-  - if pod.likes.size > 0
-    span class="action-count" = pod.likes.size
+  - if likeable.likes.size > 0
+    span class="action-count" = likeable.likes.size
