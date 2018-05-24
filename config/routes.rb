@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create], module: :pods
   end
 
+  resources :comments, only: [] do
+    resource :like, only: [:create, :destroy], module: :comments
+  end
+
   namespace :me do
     resource :avatar, only: [:create, :update, :edit]
   end
