@@ -1,4 +1,9 @@
 en:
+  footer:
+    about: "About"
+    help: "Help"
+    terms: "Terms"
+    privacy: "Privacy"
   common:
     following: "Following"
     followers: "Followers"

@@ -1,4 +1,9 @@
 es-MX:
+  footer:
+    about: "Acerca"
+    help: "Ayuda"
+    terms: "Términos"
+    privacy: "Privacidad"
   common:
     following: "Siguiendo"
     followers: "Seguidores"
