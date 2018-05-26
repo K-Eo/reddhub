@@ -6,6 +6,10 @@ en:
       about: "About"
       help: "Help"
   layouts:
+    profile_nav:
+      pods: "Pods"
+      following: "Following"
+      followers: "Followers"
     nav:
       sign_in: "Sign In"
       sign_up: "Sign Up"
