@@ -1,12 +1,12 @@
 nav class="nav nav-pills nav-fill mb-4 profile-nav"
   = link_to user_profile_path(@user.username), class: active_when(controller_name == "profile", "nav-item nav-link")
-    span class="profile-nav-label" = t(".pods")
+    span class="profile-nav-label" = t("common.pods")
     span class="profile-nav-value" = @user.pods.size
 
   = link_to user_following_path(@user.username), class: active_when(controller_name == "following", "nav-item nav-link")
-    span class="profile-nav-label" = t(".following")
+    span class="profile-nav-label" = t("common.following")
     span class="profile-nav-value" = @user.following_count
 
   = link_to user_followers_path(@user.username), class: active_when(controller_name == "followers", "nav-item nav-link")
-    span class="profile-nav-label" = t('.followers')
+    span class="profile-nav-label" = t("common.followers")
     span class="profile-nav-value" = @user.followers_count

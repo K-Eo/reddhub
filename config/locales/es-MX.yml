@@ -1,4 +1,10 @@
 es-MX:
+  common:
+    following: "Siguiendo"
+    followers: "Seguidores"
+    unfollow: "Dejar de seguir"
+    follow: "Seguir"
+    pods: "Pods"
   me:
     avatars:
       edit:
@@ -11,10 +17,6 @@ es-MX:
       about: "Acerca"
       help: "Ayuda"
   layouts:
-    profile_nav:
-      pods: "Pods"
-      following: "Siguiendo"
-      followers: "Seguidores"
     nav:
       sign_in: "Iniciar sesión"
       sign_up: "Crear cuenta"
