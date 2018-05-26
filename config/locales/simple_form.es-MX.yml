@@ -23,6 +23,8 @@ es-MX:
         edit:
           password: "Crea una nueva contraseña"
           password_confirmation: "Confirma la nueva contraseña"
+      pod:
+        content: "Escribe un mensaje..."
     hints:
       user:
         name: "Puedes user solo tu nombre (Tom) o agregar tus apellidos también (Tom Snow)."
