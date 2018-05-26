@@ -1,0 +1,31 @@
+es-MX:
+  simple_form:
+    "yes": 'Si'
+    "no": 'No'
+    required:
+      text: 'requerido'
+      mark: '*'
+    error_notification:
+      default_message: "Por favor revisa los probles que se muestran abajo:"
+    labels:
+      user:
+        name: "Nombre"
+        edit:
+          password: "Nueva contraseña"
+          password_confirmation: "Confirmar nueva contraseña"
+    placeholders:
+      user:
+        name: "Tu nombre"
+        username: "Elige un nombre de usuario"
+        email: "mi@correo.com"
+        password: "Crea una contraseña"
+        password_confirmation: "Confirma la contraseña"
+        edit:
+          password: "Crea una nueva contraseña"
+          password_confirmation: "Confirma la nueva contraseña"
+    hints:
+      user:
+        name: "Puedes user solo tu nombre (Tom) o agregar tus apellidos también (Tom Snow)."
+        username: "Este será tu nombre de usuario. Usa solo letras, números y _."
+        email: "Nunca compartiremos tu correo electrónico con nadie."
+        password: "Recuerda usar letras, números y símbolos."

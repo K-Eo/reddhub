@@ -1,0 +1,44 @@
+es-MX:
+  welcome:
+    index:
+      title: "Bienvenido a ReddHub"
+      description: "Crea y comparte tus historias con otras personas increíbles. Explora el contenido de tu interés."
+      about: "Acerca"
+      help: "Ayuda"
+  layouts:
+    nav:
+      sign_in: "Iniciar sesión"
+      sign_up: "Crear cuenta"
+  devise:
+    confirmations:
+      new:
+        title: "Instrucciones de confirmación" 
+        submit: "Reenviar instrucciones de confirmación" 
+    passwords:
+      new:
+        title: "Olvidé mi contraseña" 
+        submit: "Enviar instrucciones para recuperar"
+      edit:
+        title: "Cambiar contraseña"
+        submit: "Cambiar contraseña"
+    sessions:
+      new:
+        title: "Iniciar sesión"
+        submit: "Iniciar sesión"
+    unlocks:
+      new:
+        title: "Desbloquear mi cuenta"
+        submit: "Reenviar instrucciones de desbloqueo"
+    registrations:
+      new:
+        title: "Crear cuenta"
+      form:
+        submit: "Crear cuenta en ReddHub"
+        tos: "Al hacer clic en \"Crear cuenta en ReddHub\", aceptas nuestros términos de servicio y privacidad."
+    shared:
+      links:
+        sign_in: "Iniciar sesión"
+        sign_up: "Crear cuenta"
+        forgot_password: "Olvidé mi contraseña"
+        confirm_instructions: "No recibí instrucciones de confirmación"
+        unlock_instructions: "No recibí instrucciones de desbloqueo"

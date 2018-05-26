@@ -1,4 +1,4 @@
-= render "devise/shared/form", title: "Resend confirmation instructions" do
+= render "devise/shared/form", title: t(".title") do
   = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
     = f.input :email,
       autofocus: true,
@@ -6,4 +6,4 @@
       value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
 
     div class="actions"
-      = invisible_recaptcha_tags text: "Resend confirmation instructions", class: "btn btn-success btn-block"
+      = invisible_recaptcha_tags text: t("devise.confirmations.new.submit"), class: "btn btn-success btn-block"

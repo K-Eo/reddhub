@@ -1,14 +1,10 @@
-= render "devise/shared/form", title: "Change your password" do
+= render "devise/shared/form", title: t(".title") do
   = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = f.hidden_field :reset_password_token
 
-    = f.input :password,
-      autofocus: true,
-      autocomplete: "off",
-      label: "New password",
-      hint: "#{@minimum_password_length} characters minimum."
+    = f.input :password, autofocus: true, autocomplete: "off"
 
-    = f.input :password_confirmation, label: "Confirm new password", autocomplete: "off"
+    = f.input :password_confirmation, autocomplete: "off"
 
     div class="actions"
-      = f.submit "Change my password", class: "btn btn-success btn-block"
+      = f.submit t("devise.passwords.edit.submit"), class: "btn btn-success btn-block"

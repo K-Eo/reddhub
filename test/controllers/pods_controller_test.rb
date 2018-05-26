@@ -72,7 +72,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
 
       assert_select "li.pod", count: 2
-      assert_select "div", text: /Content can't be blank/
+      assert_select "div", text: /can't be blank/
 
       assert_no_difference "@user.pods.count" do
         post pods_path, params: { pod: { content: ("a" * 257) } }
@@ -81,7 +81,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
 
       assert_select "li.pod", count: 2
-      assert_select "div", text: /Content is too long/
+      assert_select "div", text: /is too long/
     end
   end
 end

@@ -1,33 +1,44 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  welcome:
+    index:
+      title: "Welcome to ReddHub"
+      description: "Create and share your stories with other amazing people. Explore the content that interest you."
+      about: "About"
+      help: "Help"
+  layouts:
+    nav:
+      sign_in: "Sign In"
+      sign_up: "Sign Up"
+  devise:
+    confirmations:
+      new:
+        title: "Resend confirmation instructions"
+        submit: "Resend confirmation instructions"
+    passwords:
+      new:
+        title: "Forgot your password?"
+        submit: "Send me reset password instructions"
+      edit:
+        title: "Change your password"
+        submit: "Change password"
+    sessions:
+      new:
+        title: "Sign In"
+        submit: "Sign In"
+    registrations:
+      new:
+        title: "Sign Up"
+      form:
+        submit: "Sign up for ReddHub"
+        tos: "By clicking \"Sign up for ReddHub\", you agree to our terms of service and privacy statement."
+    unlocks:
+      new:
+        title: "Resend unlock instructions"
+        submit: "Resend unlock instructions"
+    shared:
+      links:
+        sign_in: "Sign In"
+        sign_up: "Sign Up"
+        forgot_password: "Forgot your password?"
+        confirm_instructions: "Didn't receive confirmation instructions?"
+        unlock_instructions: "Didn't receive unlock instructions?"
