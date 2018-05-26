@@ -2,12 +2,19 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
+  before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render_404
+  end
+
+  def set_locale
+    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+    logger.debug "* Locale set to '#{I18n.locale}'"
   end
 
   private

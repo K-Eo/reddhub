@@ -87,7 +87,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "form#new_comment" do
         assert_select "textarea#comment_body", text: ""
-        assert_select "div", text: "Body can't be blank"
+        assert_select "div", text: "can't be blank"
         assert_select "input[type=submit][value='Create Comment']"
       end
 

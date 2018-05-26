@@ -1,4 +1,4 @@
-= render "devise/shared/form", title: "Log in" do
+= render "devise/shared/form", title: t(".title") do
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     = f.input :email, autofocus: true, autocomplete: "email"
 
@@ -10,4 +10,4 @@
         = f.label :remember_me
 
     div class="actions"
-      = invisible_recaptcha_tags text: "Log in", class: "btn btn-success btn-block"
+      = invisible_recaptcha_tags text: t("devise.sessions.new.submit"), class: "btn btn-success btn-block"
