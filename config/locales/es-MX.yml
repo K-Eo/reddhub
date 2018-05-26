@@ -9,6 +9,11 @@ es-MX:
     nav:
       sign_in: "Iniciar sesión"
       sign_up: "Crear cuenta"
+      menu:
+        signed_in_as: "Registrado como"
+        settings: "Opciones"
+        help: "Ayuda"
+        sign_out: "Cerrar sesión"
   devise:
     confirmations:
       new:

@@ -9,6 +9,11 @@ en:
     nav:
       sign_in: "Sign In"
       sign_up: "Sign Up"
+      menu:
+        signed_in_as: "Signed in as"
+        settings: "Settings"
+        help: "Help"
+        sign_out: "Sign out"
   devise:
     confirmations:
       new:
