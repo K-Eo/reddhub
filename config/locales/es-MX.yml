@@ -1,4 +1,9 @@
 es-MX:
+  me:
+    avatars:
+      edit:
+        cancel: "Cancelar"
+        save: "Guardar"
   welcome:
     index:
       title: "Bienvenido a ReddHub"

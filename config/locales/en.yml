@@ -1,4 +1,9 @@
 en:
+  me:
+    avatars:
+      edit:
+        cancel: "Cancel"
+        save: "Save"
   welcome:
     index:
       title: "Welcome to ReddHub"
