@@ -1,4 +1,7 @@
 es-MX:
+  comments:
+    form:
+      reply: "Responder"
   footer:
     about: "Acerca"
     help: "Ayuda"

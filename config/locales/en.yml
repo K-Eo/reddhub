@@ -1,4 +1,7 @@
 en:
+  comments:
+    form:
+      reply: "Reply"
   footer:
     about: "About"
     help: "Help"

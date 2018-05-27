@@ -25,6 +25,8 @@ es-MX:
           password_confirmation: "Confirma la nueva contraseña"
       pod:
         content: "Escribe un mensaje..."
+      comment:
+        body: "Escribe una respuesta"
     hints:
       user:
         name: "Puedes user solo tu nombre (Tom) o agregar tus apellidos también (Tom Snow)."
