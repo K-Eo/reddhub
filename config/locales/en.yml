@@ -1,4 +1,8 @@
 en:
+  helpers:
+    submit:
+      user:
+        update: "Save"
   comments:
     form:
       reply: "Reply"
@@ -50,6 +54,18 @@ en:
         title: "Sign In"
         submit: "Sign In"
     registrations:
+      edit:
+        unhappy: "Unhappy?"
+        title: "Edit my account"
+        cancel_account: "Cancel my account"
+        avatar:
+          change: "Change"
+          errors:
+            small: "Is too small."
+            big: "To large."
+            failure: "Snaps! Something went wrong. Try again."
+          save: "Save"
+          resize: "Resize"
       new:
         title: "Sign Up"
       form:

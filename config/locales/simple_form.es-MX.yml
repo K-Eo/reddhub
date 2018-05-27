@@ -32,4 +32,7 @@ es-MX:
         name: "Puedes user solo tu nombre (Tom) o agregar tus apellidos también (Tom Snow)."
         username: "Este será tu nombre de usuario. Usa solo letras, números y _."
         email: "Nunca compartiremos tu correo electrónico con nadie."
+        edit:
+          email: "Dejar en blanco si no lo quieres cambiar."
         password: "Recuerda usar letras, números y símbolos."
+        current_password: "Necesitamos tu contraseña actual para confirmar los cambios."

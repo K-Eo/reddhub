@@ -1,6 +1,6 @@
 <div class="col-12">
   <h3 class="text-center mb-4 mt-4 mb-xl-5 font-weight-light">
-    Edit my account
+    <%= t(".title") %>
   </h3>
 </div>
 
@@ -9,20 +9,20 @@
   <%= form_for(Avatar.new, url: me_avatar_path, data: { controller: "avatar" }) do |f| %>
     <div class="avatar-control">
       <label class="btn btn-success">
-        Change
+        <%= t(".avatar.change") %>
         <%= f.file_field :image, direct_upload: true, hidden: true, accept: "image/x-png,image/jpeg", data: { action: "avatar#onPickImage", target: "avatar.image" } %>
       </label>
       <div class="is-default" data-target="avatar.feedback">
-        <p class="error too-small">Too small.</p>
-        <p class="error too-big">Too big</p>
-        <p class="error failure">Network error</p>
+        <p class="error too-small"><%= t(".avatar.errors.small") %></p>
+        <p class="error too-big"><%= t(".avatar.errors.big") %></p>
+        <p class="error failure"><%= t(".avatar.errors.failure") %></p>
         <div class="loading"></div>
       </div>
     </div>
 
-    <%= f.submit "Save", class: "btn btn-success" %>
+    <%= f.submit t(".avatar.save"), class: "btn btn-success" %>
     <% if current_user.original.attached? %>
-      <%= link_to "Resize", edit_me_avatar_path, class: "js-resize-avatar btn btn-outline-primary", data: { turbolinks: false } %>
+      <%= link_to t(".avatar.resize"), edit_me_avatar_path, class: "js-resize-avatar btn btn-outline-primary", data: { turbolinks: false } %>
     <% end %>
   <% end %>
 </div>
@@ -33,9 +33,7 @@
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, defaults: { required: false }) do |f| %>
         <%= f.input :name, autocomplete: "name" %>
 
-        <%= f.input :username,
-                    autocomplete: "username",
-                    hint: 'Use only letters, numbers and underscore.' %>
+        <%= f.input :username, autocomplete: "username" %>
 
         <%= f.input :email, autocomplete: "email" %>
 
@@ -43,27 +41,23 @@
           <div class="mb-3 text-primary">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.input :password,
-                    autocomplete: "off",
-                    hint: "#{@minimum_password_length} characters minimum. Leave blank if you don't want to change it." %>
+        <%= f.input :password, autocomplete: "off" %>
 
         <%= f.input :password_confirmation, autocomplete: "off" %>
 
-
-        <%= f.input :current_password,
-                    autocomplete: "off",
-                    hint: 'We need your current password to confirm your changes.' %>
+        <%= f.input :current_password, autocomplete: "off"  %>
 
         <div class="actions">
-          <%= f.submit "Update", class: 'btn btn-success' %>
+          <%= f.submit class: 'btn btn-success' %>
         </div>
       <% end %>
     </div>
 
     <div class="card-footer">
-      <h5>Unhappy?</h5>
+      <h5><%= t(".unhappy") %></h5>
 
-      <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
+
+      <p><%= button_to t(".cancel_account"), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
     </div>
   </div>
 </div>
