@@ -23,9 +23,16 @@ en:
         edit:
           password: "Create a new password"
           password_confirmation: "Confirm your new password"
+      pod:
+        content: "Write a message..."
+      comment:
+        body: "Write a reply"
     hints:
       user:
         name: "You can enter your first name (Tom) or full name (Tom Snow)."
         username: "This will be your username. Use only letters, numbers and underscore."
         email: "We'll never share your email address with anyone."
+        edit:
+          email: "Leave blank if you don't want to change it."
         password: "Remember to user numbers, letters and symbols."
+        current_password: "We need your current password to confirm your changes."

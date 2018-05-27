@@ -1,4 +1,27 @@
 es-MX:
+  helpers:
+    submit:
+      user:
+        update: "Guardar"
+  comments:
+    form:
+      reply: "Responder"
+  footer:
+    about: "Acerca"
+    help: "Ayuda"
+    terms: "Términos"
+    privacy: "Privacidad"
+  common:
+    following: "Siguiendo"
+    followers: "Seguidores"
+    unfollow: "Dejar de seguir"
+    follow: "Seguir"
+    pods: "Pods"
+  me:
+    avatars:
+      edit:
+        cancel: "Cancelar"
+        save: "Guardar"
   welcome:
     index:
       title: "Bienvenido a ReddHub"
@@ -9,6 +32,11 @@ es-MX:
     nav:
       sign_in: "Iniciar sesión"
       sign_up: "Crear cuenta"
+      menu:
+        signed_in_as: "Registrado como"
+        settings: "Opciones"
+        help: "Ayuda"
+        sign_out: "Cerrar sesión"
   devise:
     confirmations:
       new:
@@ -30,6 +58,18 @@ es-MX:
         title: "Desbloquear mi cuenta"
         submit: "Reenviar instrucciones de desbloqueo"
     registrations:
+      edit:
+        unhappy: "¿No estás contento?"
+        title: "Editar mi cuenta"
+        cancel_account: "Cancelar mi cuenta"
+        avatar:
+          change: "Cambiar"
+          errors:
+            small: "Es muy pequeña."
+            big: "Es muy pesada."
+            failure: "¡Rayos! Algo salío mal. Vuelve a intentar."
+          save: "Guardar"
+          resize: "Editar"
       new:
         title: "Crear cuenta"
       form:

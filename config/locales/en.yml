@@ -1,4 +1,27 @@
 en:
+  helpers:
+    submit:
+      user:
+        update: "Save"
+  comments:
+    form:
+      reply: "Reply"
+  footer:
+    about: "About"
+    help: "Help"
+    terms: "Terms"
+    privacy: "Privacy"
+  common:
+    following: "Following"
+    followers: "Followers"
+    unfollow: "Unfollow"
+    follow: "Follow"
+    pods: "Pods"
+  me:
+    avatars:
+      edit:
+        cancel: "Cancel"
+        save: "Save"
   welcome:
     index:
       title: "Welcome to ReddHub"
@@ -9,6 +32,11 @@ en:
     nav:
       sign_in: "Sign In"
       sign_up: "Sign Up"
+      menu:
+        signed_in_as: "Signed in as"
+        settings: "Settings"
+        help: "Help"
+        sign_out: "Sign out"
   devise:
     confirmations:
       new:
@@ -26,6 +54,18 @@ en:
         title: "Sign In"
         submit: "Sign In"
     registrations:
+      edit:
+        unhappy: "Unhappy?"
+        title: "Edit my account"
+        cancel_account: "Cancel my account"
+        avatar:
+          change: "Change"
+          errors:
+            small: "Is too small."
+            big: "To large."
+            failure: "Snaps! Something went wrong. Try again."
+          save: "Save"
+          resize: "Resize"
       new:
         title: "Sign Up"
       form:

@@ -31,7 +31,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "form#new_comment" do
         assert_select "textarea#comment_body", text: ""
-        assert_select "input[type=submit][value='Create Comment']"
+        assert_select "input[type=submit][value='Reply']"
       end
 
       assert_select "ul#pod_comments_#{@pod.id}" do
@@ -48,7 +48,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "form#new_comment" do
         assert_select "textarea#comment_body", text: ""
-        assert_select "input[type=submit][value='Create Comment']"
+        assert_select "input[type=submit][value='Reply']"
       end
 
       comment = @pod.comments.last
@@ -72,7 +72,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "form#new_comment" do
         assert_select "textarea#comment_body", text: ""
-        assert_select "input[type=submit][value='Create Comment']"
+        assert_select "input[type=submit][value='Reply']"
       end
 
       assert_select "ul#pod_comments_#{@pod.id}" do
@@ -88,7 +88,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_select "form#new_comment" do
         assert_select "textarea#comment_body", text: ""
         assert_select "div", text: "can't be blank"
-        assert_select "input[type=submit][value='Create Comment']"
+        assert_select "input[type=submit][value='Reply']"
       end
 
       assert_select "ul#pod_comments_#{@pod.id}" do
@@ -116,7 +116,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :ok
 
       assert_select "ul#pod_comments_#{@pod.id}" do
-        assert_select "li.comment", count: 25
+        assert_select "li.comment", count: 20
       end
 
       assert_select "ul.pagination" do
@@ -129,7 +129,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :ok
 
       assert_select "ul#pod_comments_#{@pod.id}" do
-        assert_select "li.comment", count: 1
+        assert_select "li.comment", count: 6
       end
 
       assert_select "ul.pagination" do

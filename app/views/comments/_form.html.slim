@@ -2,5 +2,5 @@ div class="card-footer d-flex"
   = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
   div class="w-100"
     = simple_form_for([commentable, comment]) do |f|
-      = f.input :body, label: false, placeholder: "Write a reply", input_html: { rows: 2 }
-      = f.submit class: "btn btn-success btn-sm float-right"
+      = f.input :body, label: false, input_html: { rows: 2 }
+      = f.submit t(".reply"), class: "btn btn-success btn-sm float-right"
