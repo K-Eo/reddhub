@@ -2,61 +2,37 @@
   cursor: pointer;
 }
 
-.pod-actions,
-.comment-actions {
+.actions {
   font-size: 0;
   line-height: 1;
 
-  .pod-action,
-  .comment-action {
+  .action {
     display: inline-block;
     min-width: 90px;
 
-    button i {
-      width: 18px;
-      height: 18px;
-      vertical-align: middle;
-      font-size: 1.1rem;
-      margin: -0.2rem 0;
+    .btn-action {
       color: $gray-600;
-    }
-
-    a.btn .emoji {
-      width: 18px;
-      height: 18px;
-    }
-
-    .like-action:hover,
-    .like-action.active {
-      color: $pink;
-    }
-
-    .comment-action:hover,
-    .comment-action.active {
-      color: $primary;
-    }
-
-    .link-action {
-      color: $gray-600;
-      font-size: 16px;
-      line-height: 1;
+      border: none;
+      background: transparent;
 
       &:hover {
-        text-decoration: none;
+        background: $gray-200;
       }
 
-      .action-icon {
-        font-size: 16px;
-        line-height: 16px;
+      img.action-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      i.action-icon {
+        font-size: 18px;
+        line-height: 18px;
         vertical-align: middle;
       }
 
       .action-count {
-        font-size: 14px;
-        margin-left: 6px;
-        font-weight: bold;
-        line-height: 1;
-        vertical-align: text-bottom;
+        font-size: 0.85rem;
+        margin-left: 8px;
       }
     }
   }

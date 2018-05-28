@@ -1,5 +1,5 @@
 = link_to user_pod_path(pod.user.username, pod, anchor: "pod_comments_#{pod.id}"),
-          class: "link-action comment-action"
+          class: "btn btn-light btn-action js-action"
   = icon "far", "comment", class: "action-icon"
   - if pod.comments.size > 0
     span class="action-count" = pod.comments.size

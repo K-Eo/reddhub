@@ -26,7 +26,7 @@ const emojis = [
 ]
 
 export default class extends Controller {
-  static targets = ['picker', 'toggler', 'wrapper']
+  static targets = ['picker', 'toggler']
 
   initialize() {
     this.isToggled = false
@@ -37,14 +37,14 @@ export default class extends Controller {
   }
 
   reactions() {
-    const type = this.wrapperTarget.getAttribute('data-type')
-    const id = this.wrapperTarget.getAttribute('data-id')
+    const type = this.togglerTarget.getAttribute('data-type')
+    const id = this.togglerTarget.getAttribute('data-id')
 
     return emojis
       .map(({ name, src, alt }) => {
         const encodedName = encodeURIComponent(name)
 
-        return `<a class="btn btn-light border-0" rel="nofollow" data-method="post" href="/${type}/${id}/reaction?name=${encodedName}">
+        return `<a class="btn btn-light border-0 js-action" rel="nofollow" data-method="post" href="/${type}/${id}/reaction?name=${encodedName}">
           <img draggable="false" title="${name}" alt="${alt}" src="${src}" class="emoji" style="width: 18px; height: 18px;">
         </a>`
       })
@@ -59,8 +59,13 @@ export default class extends Controller {
       this.picker.addClass('d-none')
       this.isToggled = false
     } else {
-      this.popper = new Popper(this.wrapperTarget, this.pickerTarget, {
+      this.popper = new Popper(this.togglerTarget, this.pickerTarget, {
         placement: 'top',
+        modifiers: {
+          offset: {
+            offset: '0, 8',
+          },
+        },
       })
 
       this.picker.removeClass('d-none')
