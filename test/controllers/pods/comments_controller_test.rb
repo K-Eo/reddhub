@@ -144,23 +144,23 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :ok
 
       assert_select "li#pod_#{@pod.id}" do
-        assert_select "a.comment-action[href*='#pod_comments_#{@pod.id}']", text: ""
+        assert_select "a.btn-action[href*='#pod_comments_#{@pod.id}']", text: ""
       end
 
       get user_pod_path(@user.username, @pod)
 
       assert_response :ok
 
-      assert_select "div.pod-actions" do
-        assert_select "a.comment-action", text: ""
+      assert_select "div.actions" do
+        assert_select "a.btn-action", text: ""
       end
 
       post pod_comments_path(@pod), params: { comment: { body: "My Comment" } }
 
       follow_redirect!
 
-      assert_select "div.pod-actions" do
-        assert_select "a.comment-action", text: "1"
+      assert_select "div.actions" do
+        assert_select "a.btn-action", text: "1"
       end
 
       get user_profile_path(@user.username)
@@ -168,7 +168,7 @@ class Pods::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :ok
 
       assert_select "li#pod_#{@pod.id}" do
-        assert_select "a.comment-action", text: "1"
+        assert_select "a.btn-action", text: "1"
       end
     end
   end
