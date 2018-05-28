@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :original
 
-  has_many :likes
+  has_many :reactions, dependent: :destroy
   has_many :pods, dependent: :destroy
   has_many :stories, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -32,6 +32,12 @@ class User < ApplicationRecord
   validates :name, presence: true,
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{Ll}]+)(\s\p{Lu}[\p{Ll}]+)*\z/ }
+
+  def reactions_for(ids, type)
+    reactions
+      .select("name", "reactable_id", "user_id")
+      .where("reactable_type = ? AND reactable_id IN (?)", type, ids)
+  end
 
   def likes?(pod)
     pod.likes.where(user: self).exists?

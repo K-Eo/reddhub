@@ -1,4 +1,4 @@
-  - vote = reacted?(@votes, reactable.id, current_user.id)
+  - vote = reacted?(@votes, reactable, current_user)
   - if vote.present?
     = link_to [reactable, :reaction], method: :delete, class: "btn btn-light", id: "reaction_#{reactable.id}"
       = Twemoji.parse(":#{vote.name}:").html_safe

@@ -1,6 +1,4 @@
 class Pod < ApplicationRecord
-  include Likeable
-
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable
   has_many :reactions, as: :reactable
