@@ -5,13 +5,26 @@
 .pod-actions,
 .comment-actions {
   font-size: 0;
-  height: 18px;
   line-height: 1;
 
   .pod-action,
   .comment-action {
     display: inline-block;
-    min-width: 80px;
+    min-width: 90px;
+
+    button i {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      font-size: 1.1rem;
+      margin: -0.2rem 0;
+      color: $gray-600;
+    }
+
+    a.btn .emoji {
+      width: 18px;
+      height: 18px;
+    }
 
     .like-action:hover,
     .like-action.active {

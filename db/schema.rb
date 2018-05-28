@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_24_091859) do
+ActiveRecord::Schema.define(version: 2018_05_27_052455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,17 @@ ActiveRecord::Schema.define(version: 2018_05_24_091859) do
     t.integer "likes_count", default: 0, null: false
     t.integer "comments_count", default: 0, null: false
     t.index ["user_id"], name: "index_pods_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.string "reactable_type"
+    t.bigint "reactable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reactable_type", "reactable_id"], name: "index_reactions_on_reactable_type_and_reactable_id"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -126,6 +137,7 @@ ActiveRecord::Schema.define(version: 2018_05_24_091859) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "pods", "users"
+  add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "stories", "users"

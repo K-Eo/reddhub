@@ -1,0 +1,9 @@
+  - vote = reacted?(@votes, reactable.id, current_user.id)
+  - if vote.present?
+    = link_to [reactable, :reaction], method: :delete, class: "btn btn-light", id: "reaction_#{reactable.id}"
+      = Twemoji.parse(":#{vote.name}:").html_safe
+  - else
+    div data-controller="reactions" data-target="reactions.wrapper" data-id=reactable.id data-type=reactable.class.name.downcase.pluralize
+      button type="button" class="btn btn-light" data-action="reactions#toggle" data-target="reactions.toggler"
+        = icon "far", "smile"
+      div data-target="reactions.picker" class="d-none btn-group border border-white rounded shadow"
