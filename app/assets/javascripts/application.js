@@ -14,5 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
-//= require bootstrap/dist/js/bootstrap.bundle
+//= require popper.js/dist/umd/popper
+//= require bootstrap/dist/js/bootstrap
 //= require croppie/croppie.js

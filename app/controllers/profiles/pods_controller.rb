@@ -4,5 +4,6 @@ class Profiles::PodsController < ApplicationController
 
   def show
     @pod = @user.pods.find(params[:id])
+    @votes = current_user.nil? ? [] : current_user.reactions_for([@pod.id], "Pod")
   end
 end

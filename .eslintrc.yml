@@ -5,6 +5,7 @@ env:
 globals:
   Rails: true
   Turbolinks: true
+  Popper: true
 extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 7
