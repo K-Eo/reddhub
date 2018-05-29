@@ -76,7 +76,8 @@ class UserTest < ActiveSupport::TestCase
       email: "second@mail.com",
       password: "password",
       password_confirmation: "password",
-      username: "FOOBAR"
+      username: "FOOBAR",
+      name: "Foo Bar"
     )
 
     assert_not second.valid?

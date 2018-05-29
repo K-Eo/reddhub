@@ -47,4 +47,16 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
       assert_select "img[title=':rage:']"
     end
   end
+
+  test "seeing profile with username as any case" do
+    get user_profile_path("bilbo")
+
+    assert_response :ok
+    assert_select "p", text: @user.name
+
+    get user_profile_path("BILBO")
+
+    assert_response :ok
+    assert_select "p", text: @user.name
+  end
 end
