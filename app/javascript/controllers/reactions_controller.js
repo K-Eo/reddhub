@@ -29,11 +29,24 @@ export default class extends Controller {
   static targets = ['picker', 'toggler']
 
   initialize() {
-    this.isToggled = false
+    this.mouseListener = e => {
+      if (
+        !this.picker.is(e.target) &&
+        this.picker.has(e.target).length === 0 &&
+        !this.toggler.is(e.target) &&
+        this.toggler.has(e.target).length === 0
+      ) {
+        this.hide()
+      }
+    }
   }
 
   get picker() {
     return $(this.pickerTarget)
+  }
+
+  get toggler() {
+    return $(this.togglerTarget)
   }
 
   reactions() {
@@ -51,26 +64,31 @@ export default class extends Controller {
       .join('')
   }
 
-  toggle() {
-    if (this.isToggled) {
-      this.popper.destroy()
-      this.popper = null
-      this.picker.html('')
-      this.picker.addClass('d-none')
-      this.isToggled = false
-    } else {
-      this.popper = new Popper(this.togglerTarget, this.pickerTarget, {
-        placement: 'top',
-        modifiers: {
-          offset: {
-            offset: '0, 8',
-          },
-        },
-      })
-
-      this.picker.removeClass('d-none')
-      this.picker.html(this.reactions())
-      this.isToggled = true
+  show() {
+    if (this.popper) {
+      this.hide()
+      return
     }
+
+    this.popper = new Popper(this.togglerTarget, this.pickerTarget, {
+      placement: 'top',
+      modifiers: {
+        offset: {
+          offset: '0, 8',
+        },
+      },
+    })
+
+    this.picker.removeClass('d-none')
+    this.picker.html(this.reactions())
+    document.addEventListener('mouseup', this.mouseListener)
+  }
+
+  hide() {
+    this.popper.destroy()
+    this.popper = null
+    this.picker.html('')
+    this.picker.addClass('d-none')
+    document.removeEventListener('mouseup', this.mouseListener)
   }
 }
