@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { maximum: 96 },
-                   format: { with: /\A(\p{Lu}[\p{Ll}]+)(\s\p{Lu}[\p{Ll}]+)*\z/ }
+                   format: { with: /\A(\p{Lu}[\p{L}]*)(\s\p{Lu}[\p{L}]*)*\z/ }
 
   def reactions_for(ids, type)
     reactions

@@ -10,11 +10,11 @@ bilbo = User.new(email: "bilbo@mail.com", password: "qwerasdf", password_confirm
 bilbo.skip_confirmation!
 bilbo.save!
 
-thorin = User.new(email: "thorin@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Thorin", name: "Thorin Oakenshield")
+thorin = User.new(email: "thorin@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Thorin", name: "Thorin II Oakenshield")
 thorin.skip_confirmation!
 thorin.save!
 
-marty = User.new(email: "marty@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Marty", name: "Marty Mcfly")
+marty = User.new(email: "marty@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "Marty", name: "Marty McFly")
 marty.skip_confirmation!
 marty.save!
 
