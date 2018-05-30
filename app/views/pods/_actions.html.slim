@@ -1,7 +1,0 @@
-div class="actions"
-  div class="action"
-    = render partial: "reactions/action",
-             locals: { reactable: pod, reaction: @reactions[pod.id] }
-
-  div class="action"
-    = render partial: "comments/comment_action", locals: { pod: pod }
