@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  RESERVED = ["reddhub", "redd", "hub"].freeze
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -27,7 +28,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
                        length: { minimum: 4, maximum: 32 },
-                       uniqueness: { case_sensitive: false }
+                       uniqueness: { case_sensitive: false },
+                       exclusion: { in: User::RESERVED }
 
   validates :name, presence: true,
                    length: { maximum: 96 },

@@ -44,6 +44,13 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "invalid if username is reserved" do
+    ["reddhub", "redd", "hub"].each do |i|
+      @user.username = i
+      assert_not @user.valid?
+    end
+  end
+
   test "invalid if username already exists" do
     @user.save
     second = User.new(
