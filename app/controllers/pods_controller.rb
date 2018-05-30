@@ -12,6 +12,7 @@ class PodsController < ApplicationController
         format.html do
           @user = current_user
           @pods = current_user.feed.page(params[:page])
+          @votes = current_user.reactions_for(@pods.map(&:id), "Pod")
           render template: "home/show", layout: "home"
         end
         format.js

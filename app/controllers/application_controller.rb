@@ -11,10 +11,8 @@ class ApplicationController < ActionController::Base
     render_404
   end
 
-  def set_locale
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
-    logger.debug "* Locale set to '#{I18n.locale}'"
+  def current_user
+    super || guest_user
   end
 
   private
@@ -33,6 +31,16 @@ class ApplicationController < ActionController::Base
         format.js { render json: "", status: :not_found, content_type: "application/json" }
         format.any { head :not_found }
       end
+    end
+
+    def set_locale
+      logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+      I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+      logger.debug "* Locale set to '#{I18n.locale}'"
+    end
+
+    def guest_user
+      @guest ||= Guest.new
     end
 
   protected
@@ -54,7 +62,7 @@ class ApplicationController < ActionController::Base
     def set_user_by_username
       username = params[:username]
 
-      if current_user.present? && username == current_user.username
+      if !current_user.guest? && username == current_user.username
         @user = current_user
       else
         @user = User.find_by!(username: username)

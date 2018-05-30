@@ -17,7 +17,7 @@ div class="card mb-4"
   div class="card-body"
     = render partial: "pods/actions", locals: { pod: @pod }
 
-  - if user_signed_in?
+  - unless current_user.guest?
     = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }
 
   ul class="list-group list-group-flush" id="pod_comments_#{@pod.id}"

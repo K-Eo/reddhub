@@ -7,25 +7,4 @@ nav class="navbar navbar-expand-lg navbar-light navbar-default border-bottom"
 
     div class="collapse navbar-collapse" id="main-nav"
       ul class="ml-auto navbar-nav"
-        - if user_signed_in?
-          li class="nav-item dropdown"
-            a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user-links" role="button"
-              = image_tag avatar_url(current_user, resize: "30x30"), class: "navbar-avatar rounded-circle border"
-            div aria-labelledby="user-links" class="dropdown-menu dropdown-menu-right"
-              h6 class="dropdown-header user-dropdown text-dark"
-                span> class="font-weight-normal text-secondary" = t(".menu.signed_in_as")
-                = current_user.username
-
-              div class="dropdown-divider"
-
-              = link_to t(".menu.settings"), edit_user_registration_path, class: "dropdown-item"
-              = link_to t(".menu.help"), root_path, class: "dropdown-item"
-
-              div class="dropdown-divider"
-
-              = link_to t(".menu.sign_out"), destroy_user_session_path, method: :delete, class: "dropdown-item"
-        - else
-          li class="nav-item"
-            = link_to t(".sign_in"), new_user_session_path, class: "nav-link"
-          li class="nav-item"
-            = link_to t(".sign_up"), new_user_registration_path, class: "nav-link"
+        = render "layouts/navs/#{current_user.class.name.downcase}"
