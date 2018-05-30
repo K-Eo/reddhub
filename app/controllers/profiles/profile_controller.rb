@@ -4,7 +4,6 @@ class Profiles::ProfileController < ApplicationController
 
   def show
     @pods = @user.pods.newest.page(params[:page])
-    @votes = current_user.guest? ? [] : current_user.reactions_for(@pods.map(&:id), "Pod")
-    @pod = Pod.new
+    @reactions = current_user.reactions_for(@pods, "Pod")
   end
 end

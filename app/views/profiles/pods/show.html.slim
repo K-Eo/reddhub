@@ -15,7 +15,13 @@ div class="card mb-4"
     p class="card-text" = @pod.content
 
   div class="card-body"
-    = render partial: "pods/actions", locals: { pod: @pod }
+    div class="actions"
+      div class="action"
+        = render partial: "reactions/action",
+                 locals: { reactable: @pod, reaction: current_user.reaction(@pod) }
+      div class="action"
+        = render partial: "comments/action",
+                 locals: { pod: @pod }
 
   - unless current_user.guest?
     = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }

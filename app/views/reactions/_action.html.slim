@@ -1,7 +1,6 @@
-  - vote = reacted?(@votes, reactable, current_user)
-  - if vote.present?
+  - if current_user.reacted?(reaction)
     = link_to [reactable, :reaction], method: :delete, class: "btn btn-light btn-action js-action", id: "reaction_#{reactable.id}"
-      = Twemoji.parse(":#{vote.name}:", class_name: "action-icon").html_safe
+      = Twemoji.parse(":#{reaction.name}:", class_name: "action-icon").html_safe
   - else
     button [type="button"
       class="btn btn-light btn-action js-action"

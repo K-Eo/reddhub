@@ -41,6 +41,16 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "form#new_comment", count: 0
     end
+
+    test "hidden reaction" do
+      @pod.reactions.create(user: @user, name: "+1")
+
+      get user_pod_path(@user.username, @pod)
+
+      assert_response :ok
+
+      assert_select "button[data-controller=reactions][data-id='#{@pod.id}']"
+    end
   end
 
   class LoggedIn < Profiles::PodsControllerTest
@@ -55,6 +65,18 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
       assert_response :ok
 
       assert_select "form#new_comment"
+    end
+
+    test "seeing reaction" do
+      @pod.reactions.create(user: @user, name: "+1")
+
+      get user_pod_path(@user.username, @pod)
+
+      assert_response :ok
+
+      assert_select "a#reaction_#{@pod.id}[data-method=delete][href='/pods/#{@pod.id}/reaction']" do
+        assert_select "img[title=':+1:']"
+      end
     end
   end
 end

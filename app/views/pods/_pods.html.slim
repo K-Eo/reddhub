@@ -1,0 +1,4 @@
+ul class="list-group list-group-flush"
+  - pods.each do |pod|
+    = render partial: "pods/pod",
+             locals: { pod: pod, reaction: reactions[pod.id] }
