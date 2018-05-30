@@ -14,4 +14,10 @@ li [class="list-group-item list-group-item-action d-flex pod"
 
     p = pod.content
 
-    = render partial: "pods/actions", locals: { pod: pod }
+    div class="actions"
+      div class="action"
+        = render partial: "reactions/action",
+                 locals: { reactable: pod, reaction: reaction }
+      div class="action"
+        = render partial: "comments/action",
+                 locals: { pod: pod }

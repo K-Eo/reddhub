@@ -35,14 +35,31 @@ class User < ApplicationRecord
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{L}]*)(\s\p{Lu}[\p{L}]*)*\z/ }
 
-  def reactions_for(ids, type)
-    reactions
-      .select("name", "reactable_id", "user_id")
-      .where("reactable_type = ? AND reactable_id IN (?)", type, ids)
+  def reactions_for(reactables, type)
+    if guest?
+      Hash.new
+    else
+      reactions
+        .select("name", "reactable_id", "user_id")
+        .where("reactable_type = ? AND reactable_id IN (?)", type, reactables.map(&:id))
+        .index_by(&:reactable_id)
+    end
   end
 
-  def likes?(pod)
-    pod.likes.where(user: self).exists?
+  def reaction(reactable)
+    if guest?
+      nil
+    else
+      reactions.where(reactable: reactable).first
+    end
+  end
+
+  def reacted?(reaction)
+    if reaction.nil? || guest? || reaction.user_id != id
+      false
+    else
+      true
+    end
   end
 
   def follow(user)

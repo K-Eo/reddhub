@@ -4,7 +4,6 @@ div class="card mb-3"
     div class="w-100" id="new-pod-wrapper"
       = render "pods/form"
 
-  ul class="list-group list-group-flush"
-    = render @pods
+  = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
 
 = paginate @pods
