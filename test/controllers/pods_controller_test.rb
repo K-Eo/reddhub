@@ -55,6 +55,27 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       assert_select "div.alert-notice", text: /Pod was successfully created/
     end
 
+    test "seeing reactions if pod has errors" do
+      @user.pods.first.reactions.create(user: @user, name: "rage")
+      @user.pods.last.reactions.create(user: @user, name: "+1")
+      get root_path
+
+      assert_response :ok
+      assert_select "li.pod", count: 2
+      assert_select "img[title=':rage:']"
+      assert_select "img[title=':+1:']"
+
+      assert_no_difference "@user.pods.count" do
+        post pods_path, params: { pod: { content: "" } }
+      end
+
+      assert_response :ok
+      assert_select "div", text: /can't be blank/
+      assert_select "li.pod", count: 2
+      assert_select "img[title=':rage:']"
+      assert_select "img[title=':+1:']"
+    end
+
     test "creating pod with error" do
       get root_path
 

@@ -10,7 +10,7 @@ div id="followers_#{user.id}"
       div class="text-secondary" = t("common.followers")
       div class="font-weight-bold" = user.followers_count
 
-  - if user_signed_in? && current_user != user
+  - if !current_user.guest? && current_user != user
     - if current_user.following?(user)
       = link_to t("common.unfollow"),
                 user_relationship_path(user.username),

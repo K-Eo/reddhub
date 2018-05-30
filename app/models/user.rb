@@ -55,6 +55,10 @@ class User < ApplicationRecord
     following.include?(user)
   end
 
+  def guest?
+    false
+  end
+
   def feed
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
 
