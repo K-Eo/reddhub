@@ -29,10 +29,11 @@ es-MX:
       about: "Acerca"
       help: "Ayuda"
   layouts:
-    nav:
-      sign_in: "Iniciar sesión"
-      sign_up: "Crear cuenta"
-      menu:
+    navs:
+      guest:
+        sign_in: "Iniciar sesión"
+        sign_up: "Crear cuenta"
+      user:
         signed_in_as: "Registrado como"
         settings: "Opciones"
         help: "Ayuda"

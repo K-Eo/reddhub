@@ -29,10 +29,11 @@ en:
       about: "About"
       help: "Help"
   layouts:
-    nav:
-      sign_in: "Sign In"
-      sign_up: "Sign Up"
-      menu:
+    navs:
+      guest:
+        sign_in: "Sign In"
+        sign_up: "Sign Up"
+      user:
         signed_in_as: "Signed in as"
         settings: "Settings"
         help: "Help"
