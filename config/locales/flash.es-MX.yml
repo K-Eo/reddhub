@@ -1,0 +1,10 @@
+es-MX:
+  me:
+    avatars:
+      create:
+        alert: "¡Upss! Algo salío mal. Vuelve a intentar."
+        notice: "Tu avatar fue guardado. Ahora lo puedes recortar abajo."
+      edit:
+        alert: "Primero sube un avatar."
+      update:
+        notice: "Avatar guardado."
