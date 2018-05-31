@@ -53,9 +53,9 @@ es-MX:
         instruction: 'Se puede confirmar el correo electrónico de la cuenta a través de este enlace:'
         subject: Instrucciones de confirmación
       email_changed:
-        greeting: 
-        message: 
-        subject: 
+        greeting: "¡Hola %{recipient}! "
+        message: Estamos contactando contigo para notificarte que tu email ha sido cambiado a %{email}.
+        subject: Email cambiado
       password_change:
         greeting: "¡Hola, %{recipient}!"
         message: Le estamos contactando para notificarle que su contraseña ha cambiado
