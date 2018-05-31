@@ -1,1 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+plus_one:
+  name: "+1"
+  user: thorin
+  reactable: with_reactions (Comment)
+
+rage:
+  name: "rage"
+  user: thorin
+  reactable: with_reactions (Pod)
+
+seven_plus_one:
+  name: "+1"
+  user: bilbo
+  reactable: seven (Pod)
+
+nine_rage:
+  name: "rage"
+  user: bilbo
+  reactable: nine (Pod)

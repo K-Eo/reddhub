@@ -4,17 +4,13 @@ one:
   user: bilbo
   content: "First pod"
 
-two:
+with_reactions:
   user: bilbo
   content: "Second pod"
 
-three:
+pod_with_comments:
   user: thorin
-  content: "Three pod"
-
-four:
-  user: thorin
-  content: "Four pod"
+  content: "My first pod"
 
 five:
   user: marty
@@ -31,3 +27,7 @@ seven:
 eight:
   user: doc
   content: "Eight pod"
+
+nine:
+  user: doc
+  content: "Nine pod"

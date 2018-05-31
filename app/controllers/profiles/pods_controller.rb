@@ -4,5 +4,7 @@ class Profiles::PodsController < ApplicationController
 
   def show
     @pod = @user.pods.find(params[:id])
+    @comments = @pod.comments.newest.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
+    @reactions = current_user.reactions_for(@comments, "Comment")
   end
 end
