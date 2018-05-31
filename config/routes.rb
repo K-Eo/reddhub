@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [] do
+    resource :reaction, only: [:create, :destroy], module: :comments
   end
 
   namespace :me do

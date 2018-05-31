@@ -68,13 +68,13 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "seeing reaction" do
-      @pod.reactions.create(user: @user, name: "+1")
+      @reaction = @pod.reactions.create(user: @user, name: "+1")
 
       get user_pod_path(@user.username, @pod)
 
       assert_response :ok
 
-      assert_select "a#reaction_#{@pod.id}[data-method=delete][href='/pods/#{@pod.id}/reaction']" do
+      assert_select "a#reaction_#{@reaction.id}[data-method=delete][href='/pods/#{@pod.id}/reaction']" do
         assert_select "img[title=':+1:']"
       end
     end

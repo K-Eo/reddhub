@@ -90,14 +90,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "reactions_for returns reactions" do
     user = users(:bilbo)
-    pod1 = pods(:one)
-    pod2 = pods(:two)
-    pod3 = Pod.create!(user: user, content: "My pod")
+    pod1 = pods(:seven)
+    pod2 = pods(:eight)
+    pod3 = pods(:nine)
 
-    pod1.reactions.create!(user: user, name: "+1")
-    pod3.reactions.create!(user: user, name: "rage")
-
-    reactions = user.reactions_for(user.pods.all, "Pod")
+    reactions = user.reactions_for(users(:doc).pods.all, "Pod")
     assert reactions.is_a?(Hash)
 
     reaction = reactions[pod1.id]
@@ -164,6 +161,60 @@ class UserTest < ActiveSupport::TestCase
     reaction = Reaction.create!(user: users(:thorin), reactable: pods(:one), name: "+1")
 
     assert_not @user.reacted?(reaction)
+  end
+
+  test "normalizes reaction" do
+    user = users(:bilbo)
+    pod = pods(:one)
+
+    assert_difference "pod.reactions.count" do
+      @reaction = user.react(pod, "foo")
+    end
+
+    assert_equal user, @reaction.user
+    assert_equal "+1", @reaction.name
+  end
+
+  test "creating reaction on pod" do
+    user = users(:bilbo)
+    pod = pods(:one)
+
+    assert_difference "pod.reactions.count" do
+      @reaction = user.react(pod, "+1")
+    end
+
+    assert_equal user, @reaction.user
+    assert_equal "+1", @reaction.name
+  end
+
+  test "destroying reaction on pod" do
+    user = users(:thorin)
+    pod = pods(:with_reactions)
+
+    assert_difference "pod.reactions.count", -1 do
+      user.unreact(pod)
+    end
+  end
+
+  test "creating reaction on comment" do
+    user = users(:bilbo)
+    comment = comments(:welcome)
+
+    assert_difference "comment.reactions.count" do
+      @reaction = user.react(comment, "+1")
+    end
+
+    assert_equal user, @reaction.user
+    assert_equal "+1", @reaction.name
+  end
+
+  test "destroying reaction on comment" do
+    user = users(:thorin)
+    comment = comments(:with_reactions)
+
+    assert_difference "comment.reactions.count", -1 do
+      user.unreact(comment)
+    end
   end
 
   class Followers < UserTest

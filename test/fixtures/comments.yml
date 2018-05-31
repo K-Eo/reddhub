@@ -1,1 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+welcome:
+  body: "Welcome to ReddHub"
+  user: bilbo
+  commentable: pod_with_comments (Pod)
+
+with_reactions:
+  body: "Welcome!"
+  user: marty
+  commentable: pod_with_comments (Pod)
+

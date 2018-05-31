@@ -9,6 +9,8 @@ class CommentsController < ApplicationController
     else
       @user = @commentable.user
       @pod = @commentable
+      @comments = @pod.comments.newest.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
+      @reactions = current_user.reactions_for(@comments, "Comment")
       render template: "profiles/pods/show", layout: "home"
     end
   end

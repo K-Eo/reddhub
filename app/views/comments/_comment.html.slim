@@ -1,0 +1,18 @@
+li class="list-group-item d-flex comment" id="comment_#{comment.id}"
+  = image_tag avatar_url(comment.user), class: "rounded-circle mr-3 avatar-48"
+  div class="w-100"
+    div class="d-flex justify-content-between"
+      = link_to user_profile_path(comment.user.username), class: "mb-1"
+        span> class="h6 text-dark" = comment.user.name
+        span class="text-secondary" = "@#{comment.user.username}"
+
+      span class="small text-secondary"
+        = time_ago_in_words comment.created_at
+
+    p = comment.body
+
+    div class="actions"
+      div class="action"
+        = render partial: "reactions/action",
+                 locals: { reactable: comment, reaction: reaction }
+

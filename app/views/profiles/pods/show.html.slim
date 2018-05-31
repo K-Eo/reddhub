@@ -1,10 +1,7 @@
-- avatar = avatar_url @user
-- comments = @pod.comments.newest.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
-
 div class="card mb-4"
   div class="card-body pb-0"
     div class="card-title d-flex"
-      = image_tag avatar, class: "rounded-circle mr-3 avatar-48"
+      = image_tag avatar_url(@user), class: "rounded-circle mr-3 avatar-48"
       div class="w-100 d-flex justify-content-between"
         = link_to user_profile_path(@user.username)
           p class="h6 text-dark mb-1" = @user.name
@@ -26,7 +23,6 @@ div class="card mb-4"
   - unless current_user.guest?
     = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }
 
-  ul class="list-group list-group-flush" id="pod_comments_#{@pod.id}"
-    = render partial: "comments/comments", locals: { comments: comments }
+  = render partial: "comments/comments", locals: { comments: @comments, reactions: @reactions }
 
-= paginate comments
+= paginate @comments

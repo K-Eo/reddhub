@@ -40,7 +40,7 @@ class User < ApplicationRecord
       Hash.new
     else
       reactions
-        .select("name", "reactable_id", "user_id")
+        .select("id", "name", "reactable_id", "user_id")
         .where("reactable_type = ? AND reactable_id IN (?)", type, reactables.map(&:id))
         .index_by(&:reactable_id)
     end
@@ -60,6 +60,20 @@ class User < ApplicationRecord
     else
       true
     end
+  end
+
+  def react(reactable, name)
+    reactable
+      .reactions
+      .where(user: self, name: sanitize_emoji_name(name))
+      .first_or_create
+  end
+
+  def unreact(reactable)
+    reactable
+      .reactions
+      .where(user: self)
+      .destroy_all
   end
 
   def follow(user)
@@ -85,4 +99,14 @@ class User < ApplicationRecord
        .where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
        .order(created_at: :desc)
   end
+
+  private
+
+    def sanitize_emoji_name(name)
+      if name.nil? || !Reaction::NAMES.include?(name)
+        Reaction::DEFAULT_NAME
+      else
+        name
+      end
+    end
 end
