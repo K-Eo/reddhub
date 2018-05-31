@@ -14,13 +14,11 @@ Rails.application.routes.draw do
   end
 
   resources :pods, only: [:create] do
-    resource :like, only: [:create, :destroy], module: :pods
     resources :comments, only: [:create], module: :pods
     resource :reaction, only: [:create, :destroy], module: :pods
   end
 
   resources :comments, only: [] do
-    resource :like, only: [:create, :destroy], module: :comments
   end
 
   namespace :me do
