@@ -163,18 +163,6 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.reacted?(reaction)
   end
 
-  test "normalizes reaction" do
-    user = users(:bilbo)
-    pod = pods(:one)
-
-    assert_difference "pod.reactions.count" do
-      @reaction = user.react(pod, "foo")
-    end
-
-    assert_equal user, @reaction.user
-    assert_equal "+1", @reaction.name
-  end
-
   test "creating reaction on pod" do
     user = users(:bilbo)
     pod = pods(:one)
@@ -215,6 +203,30 @@ class UserTest < ActiveSupport::TestCase
     assert_difference "comment.reactions.count", -1 do
       user.unreact(comment)
     end
+  end
+
+  test "normalizes reaction" do
+    user = users(:bilbo)
+    pod = pods(:one)
+
+    assert_difference "pod.reactions.count" do
+      @reaction = user.react(pod, "foo")
+    end
+
+    assert_equal user, @reaction.user
+    assert_equal "+1", @reaction.name
+  end
+
+  test "creates default reaction if name is nil" do
+    user = users(:bilbo)
+    pod = pods(:one)
+
+    assert_difference "pod.reactions.count" do
+      @reaction = user.react(pod, nil)
+    end
+
+    assert_equal user, @reaction.user
+    assert_equal "+1", @reaction.name
   end
 
   class Followers < UserTest
