@@ -2,10 +2,14 @@ en:
   me:
     avatars:
       create:
-        alert:  "Snaps! Something went wrong, try again."
+        alert: "Snaps! Something went wrong, try again."
         notice: "You have successfully uploaded your avatar. Now you can cropped below."
       edit:
         alert: "Upload an avatar first."
       update:
-        alert:  "Snaps! Something went wrong, try again."
+        alert: "Snaps! Something went wrong, try again."
         notice: "Avatar has been saved."
+  pods:
+    comments:
+      create:
+        notice: "Your comment was successfully created."

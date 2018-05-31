@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new comment_params
     @comment.user = current_user
     if @comment.save
-      redirect_to user_pod_path(@commentable.user.username, @commentable), notice: "Your comment was successfully created."
+      redirect_to user_pod_path(@commentable.user.username, @commentable), notice: t(".notice")
     else
       @user = @commentable.user
       @pod = @commentable

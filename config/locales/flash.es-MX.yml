@@ -8,3 +8,7 @@ es-MX:
         alert: "Primero sube un avatar."
       update:
         notice: "Avatar guardado."
+  pods:
+    comments:
+      create:
+        notice: "Tu comentario ha sido creado."
