@@ -5,21 +5,24 @@ class Me::AvatarsController < ApplicationController
     @avatar = Avatar.new(avatar_params)
 
     if @avatar.attach(current_user)
-      redirect_to edit_me_avatar_path
+      redirect_to edit_me_avatar_path, notice: t(".notice")
     else
-      redirect_to edit_user_registration_path, alert: "Snaps! Something went wrong, try again."
+      redirect_to edit_user_registration_path, alert: t(".alert")
     end
   end
 
   def edit
     unless current_user.original.attached?
-      redirect_to edit_user_registration_path, notice: "Upload an avatar first"
+      redirect_to edit_user_registration_path, alert: t(".alert")
     end
   end
 
   def update
-    current_user.avatar.attach(avatar_params[:image])
-    redirect_to edit_user_registration_path, notice: "Avatar saved"
+    if current_user.avatar.attach(avatar_params[:image])
+      redirect_to edit_user_registration_path, notice: t(".notice")
+    else
+      redirect_to edit_user_registration_path, alert: t(".alert")
+    end
   end
 
   private
