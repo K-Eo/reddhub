@@ -12,7 +12,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "button[data-controller=reactions][data-id='#{pod.id}']", text: ""
+      assert_select "div[data-controller=reactions][data-id='#{pod.id}']", text: ""
     end
 
     assert_difference "pod.reactions.count" do
@@ -56,7 +56,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "button[data-controller=reactions][data-id='#{pod.id}']"
+      assert_select "div[data-controller=reactions][data-id='#{pod.id}']"
     end
   end
 
@@ -70,7 +70,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "button[data-controller=reactions][data-id='#{pod.id}']", text: ""
+      assert_select "div[data-controller=reactions][data-id='#{pod.id}']", text: ""
     end
 
     assert_no_difference "pod.reactions.count" do
@@ -90,7 +90,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "button[data-controller=reactions][data-id='#{pod.id}']", text: ""
+      assert_select "div[data-controller=reactions][data-id='#{pod.id}']", text: ""
     end
 
     assert_no_difference "pod.reactions.count" do

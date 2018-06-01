@@ -26,7 +26,7 @@ const emojis = [
 ]
 
 export default class extends Controller {
-  static targets = ['picker', 'toggler']
+  static targets = ['picker', 'toggler', 'wrapper']
 
   initialize() {
     this.mouseListener = e => {
@@ -50,8 +50,8 @@ export default class extends Controller {
   }
 
   reactions() {
-    const type = this.togglerTarget.getAttribute('data-type')
-    const id = this.togglerTarget.getAttribute('data-id')
+    const type = this.wrapperTarget.getAttribute('data-type')
+    const id = this.wrapperTarget.getAttribute('data-id')
 
     return emojis
       .map(({ name, src, alt }) => {
@@ -79,8 +79,8 @@ export default class extends Controller {
       },
     })
 
-    this.picker.removeClass('d-none')
     this.picker.html(this.reactions())
+    this.picker.removeClass('d-none')
     document.addEventListener('mouseup', this.mouseListener)
   }
 
