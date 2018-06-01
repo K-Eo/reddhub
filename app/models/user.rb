@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_one_attached :original
+  has_one_attached :cover
 
   has_many :reactions, dependent: :destroy
   has_many :pods, dependent: :destroy

@@ -55,6 +55,8 @@ en:
         title: "Sign In"
         submit: "Sign In"
     registrations:
+      cover:
+        submit: "Change cover"
       edit:
         unhappy: "Unhappy?"
         title: "Edit my account"

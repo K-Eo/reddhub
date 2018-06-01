@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   namespace :me do
     resource :avatar, only: [:create, :update, :edit]
+    resource :cover, only: [:create]
   end
 
   scope ":username", as: :user, module: :profiles do
