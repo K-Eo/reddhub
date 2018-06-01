@@ -1,13 +1,13 @@
 require "test_helper"
 
 class Profiles::FollowingControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    @user = users(:bilbo)
-  end
+  test "seeing following" do
+    get user_following_path("marty")
+    assert_response :ok
 
-  test "should get show" do
-    get user_following_path(@user.username)
-    assert_response :success
+    assert_select "div.user", count: 2
+    assert_select "p", text: users(:doc).name
+    assert_select "p", text: users(:thorin).name
   end
 
   test "seeing empty state" do

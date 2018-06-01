@@ -1,13 +1,13 @@
 require "test_helper"
 
 class Profiles::FollowersControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    @user = users(:bilbo)
-  end
+  test "seeing followers" do
+    get user_followers_path("thorin")
+    assert_response :ok
 
-  test "should get show" do
-    get user_followers_path(@user.username)
-    assert_response :success
+    assert_select "div.user", count: 2
+    assert_select "p", text: users(:marty).name
+    assert_select "p", text: users(:doc).name
   end
 
   test "seeing emtpy state" do

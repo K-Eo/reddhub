@@ -5,7 +5,7 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
     @user = users(:bilbo)
   end
 
-  test "should get show" do
+  test "seeing pods" do
     get user_profile_path(@user.username)
     assert_response :success
 
