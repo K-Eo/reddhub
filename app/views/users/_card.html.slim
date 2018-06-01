@@ -12,3 +12,4 @@ div class="col-12 col-lg-3 mb-4 mb-lg-0" id="user_#{user.id}"
         = link_to "@#{user.username}", user_profile_path(user.username), class: "text-secondary"
 
       = render partial: "profiles/followers", locals: { user: user }
+
