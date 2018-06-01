@@ -1,6 +1,6 @@
 - if @followers.any?
   div class="row"
-    = render @followers
+    = render partial: "users/summary", collection: @followers, as: :user
 
     div class="col-12"
       = paginate @followers
