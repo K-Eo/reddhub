@@ -16,11 +16,6 @@ en:
       show:
         title: "OH, MY FOLLOWERS"
         subtitle: "Invite your friends to join"
-    relationships:
-      create:
-        notice: "You are following @%{username} now"
-      destroy:
-        notice: "You have stopped following @%{username}"
   helpers:
     submit:
       user:
