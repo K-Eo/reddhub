@@ -6,10 +6,20 @@
 
 .card-avatar {
   border-radius: 100%;
-  border: 3px solid white;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  height: 100px;
-  margin-bottom: 8px;
-  margin-top: -70px;
-  width: 100px;
+  border: 1px solid $border-color;
+  height: 48px;
+  margin-right: 1rem;
+  width: 48px;
+}
+
+@include media-breakpoint-up(md) {
+  .card-avatar {
+    border: 3px solid white;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    margin-bottom: 8px;
+    margin-right: 0;
+    margin-top: -70px;
+    width: 100px;
+  }
 }
