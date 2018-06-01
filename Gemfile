@@ -67,6 +67,8 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "bullet"
   gem "faker"
+  gem "guard"
+  gem "guard-minitest"
 end
 
 group :test do
