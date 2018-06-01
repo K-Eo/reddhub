@@ -4,6 +4,10 @@ div class="card mb-3"
     div class="w-100" id="new-pod-wrapper"
       = render "pods/form"
 
-  = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
+  - if @pods.any?
+    = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
 
-= paginate @pods
+- if @pods.any?
+  = paginate @pods
+- else
+  = create_empty_state(t(".title"), t(".subtitle"), "home")

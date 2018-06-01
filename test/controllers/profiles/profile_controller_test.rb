@@ -5,7 +5,7 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
     @user = users(:bilbo)
   end
 
-  test "should get show" do
+  test "seeing pods" do
     get user_profile_path(@user.username)
     assert_response :success
 
@@ -58,5 +58,16 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
     assert_select "p", text: @user.name
+  end
+
+  test "seeing empty state when user has no pods" do
+    get user_profile_path("cassian")
+
+    assert_response :ok
+
+    assert_select "li.pod", count: 0
+
+    assert_select "h3", text: /ZERO PODS/
+    assert_select "p", text: /No pods to show at this time/
   end
 end

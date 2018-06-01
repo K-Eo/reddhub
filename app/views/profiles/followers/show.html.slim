@@ -1,5 +1,8 @@
-div class="row"
-  = render @followers
+- if @followers.any?
+  div class="row"
+    = render @followers
 
-  div class="col-12"
-    = paginate @followers
+    div class="col-12"
+      = paginate @followers
+- else
+  = create_empty_state(t(".title"), t(".subtitle"), "users")

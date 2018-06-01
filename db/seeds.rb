@@ -22,6 +22,10 @@ emmett = User.new(email: "emmett@mail.com", password: "qwerasdf", password_confi
 emmett.skip_confirmation!
 emmett.save!
 
+cassian = User.new(email: "cassian@mail.com", password: "qwerasdf", password_confirmation: "qwerasdf", username: "cassian", name: "Cassian Jeron Andor")
+cassian.skip_confirmation!
+cassian.save!
+
 50.times do
   bilbo.pods.create!(content: Faker::Hobbit.quote)
   thorin.pods.create!(content: Faker::Hobbit.quote)
