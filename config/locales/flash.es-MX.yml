@@ -1,4 +1,13 @@
 es-MX:
+  profiles:
+    relationships:
+      create:
+        notice: "Ahora estás siguiendo a @%{username}."
+        already: "Ya estás siguiendo a @%{username}."
+        same: "¿Quieres seguirte a ti mismo?"
+        missing: "@%{username} no existe. No lo puedes seguir."
+      destroy:
+        notice: "Dejaste de seguir a @%{username}."
   me:
     avatars:
       create:

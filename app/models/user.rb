@@ -78,6 +78,8 @@ class User < ApplicationRecord
   end
 
   def follow(user)
+    raise NotDifferentUsers if user == self
+
     following << user
   end
 
@@ -99,6 +101,9 @@ class User < ApplicationRecord
     Pod.includes(user: [{ avatar_attachment: :blob }])
        .where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
        .order(created_at: :desc)
+  end
+
+  class NotDifferentUsers < StandardError
   end
 
   private

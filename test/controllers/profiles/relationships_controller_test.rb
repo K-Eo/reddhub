@@ -83,6 +83,63 @@ class Profiles::RelationshipsControllerTest < ActionDispatch::IntegrationTest
     assert_select "div", text: /You are following @#{followed.username} now/
   end
 
+  test "renders message if already following" do
+    follower = users(:marty)
+    followed = users(:thorin)
+    sign_in(follower)
+
+    assert_no_difference ["Relationship.count", "follower.following.count", "followed.followers.count"] do
+      post user_relationship_path(followed.username)
+    end
+
+    assert_redirected_to user_profile_path(followed.username)
+
+    follow_redirect!
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow"
+    end
+
+    assert_select "div", text: /You are already following @#{followed.username}/
+  end
+
+  test "renders message if following himself" do
+    follower = users(:marty)
+    followed = users(:marty)
+    sign_in(follower)
+
+    assert_no_difference ["Relationship.count", "follower.following.count", "followed.followers.count"] do
+      post user_relationship_path(followed.username)
+    end
+
+    assert_redirected_to user_profile_path(followed.username)
+
+    follow_redirect!
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow", count: 0
+    end
+
+    assert_select "div", text: /Trying to follow yourself\?/
+  end
+
+  test "user does not exist" do
+    follower = users(:marty)
+    sign_in(follower)
+
+    assert_no_difference ["Relationship.count", "follower.following.count"] do
+      post user_relationship_path("foo")
+    end
+
+    assert_redirected_to user_profile_path(follower.username)
+
+    follow_redirect!
+
+    assert_select "div", text: /@foo does not exist. You can't follow him/
+  end
+
   test "unfollowing user" do
     follower = users(:marty)
     followed = users(:thorin)

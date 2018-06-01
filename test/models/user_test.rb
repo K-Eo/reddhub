@@ -15,6 +15,10 @@ class UserTest < ActiveSupport::TestCase
     assert @user.valid?
   end
 
+  test "is not guest" do
+    assert_not users(:bilbo).guest?
+  end
+
   test "invalid without username" do
     @user.username = nil
     assert_not @user.valid?
@@ -229,62 +233,98 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "+1", @reaction.name
   end
 
-  class Followers < UserTest
-    def setup
-      @kat = users(:thorin)
-      @eo = users(:bilbo)
+  test "following user" do
+    follower = users(:cassian)
+    followed = users(:doc)
+
+    assert_not follower.following?(followed)
+    assert_not follower.following.include?(followed)
+    assert_not followed.followers.include?(follower)
+
+    assert_difference ["follower.following.count", "followed.followers.count", "Relationship.count"] do
+      follower.follow(followed)
     end
 
-    test "should follow an unfollow a user" do
-      assert_not @kat.following?(@eo)
-      @kat.follow(@eo)
-      assert @kat.following?(@eo)
-      assert @eo.followers.include?(@kat)
-      @kat.unfollow(@eo)
-      assert_not @kat.following?(@eo)
+    assert follower.following?(followed)
+    assert follower.following.include?(followed)
+    assert followed.followers.include?(follower)
+  end
+
+  test "unfollowing user" do
+    follower = users(:marty)
+    followed = users(:doc)
+
+    assert follower.following?(followed)
+    assert follower.following.include?(followed)
+    assert followed.followers.include?(follower)
+
+    assert_difference ["follower.following.count", "followed.followers.count", "Relationship.count"], -1 do
+      follower.unfollow(followed)
     end
 
-    test "should update followers and following counter caches" do
-      assert_equal 0, @kat.following_count
-      assert_equal 0, @kat.followers_count
-      assert_equal 0, @eo.following_count
-      assert_equal 0, @eo.followers_count
+    assert_not follower.following?(followed)
+    assert_not follower.following.include?(followed)
+    assert_not followed.followers.include?(followed)
+  end
 
-      @kat.follow(@eo)
+  test "raises if already following" do
+    follower = users(:marty)
+    followed = users(:doc)
 
-      assert_equal 1, @kat.reload.following_count
-      assert_equal 0, @kat.reload.followers_count
-      assert_equal 0, @eo.reload.following_count
-      assert_equal 1, @eo.reload.followers_count
-
-      @kat.unfollow(@eo)
-
-      assert_equal 0, @kat.reload.following_count
-      assert_equal 0, @kat.reload.followers_count
-      assert_equal 0, @eo.reload.following_count
-      assert_equal 0, @eo.reload.followers_count
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      follower.follow(followed)
     end
   end
 
-  class Feed < UserTest
-    test "feed should have the right pods" do
-      bilbo = users(:bilbo)
-      thorin = users(:thorin)
-      marty = users(:marty)
+  test "can follow himself" do
+    follower = users(:marty)
+    followed = users(:marty)
 
-      bilbo.follow(thorin)
+    assert_raises(User::NotDifferentUsers) do
+      follower.follow(followed)
+    end
+  end
 
-      thorin.pods.each do |pod|
-        assert bilbo.feed.include?(pod)
-      end
+  test "should update followers and following counter caches" do
+    @kat = users(:thorin)
+    @eo = users(:bilbo)
+    assert_equal 0, @kat.following_count
+    assert_equal 0, @kat.followers_count
+    assert_equal 0, @eo.following_count
+    assert_equal 0, @eo.followers_count
 
-      bilbo.pods.each do |pod|
-        assert bilbo.feed.include?(pod)
-      end
+    @kat.follow(@eo)
 
-      marty.pods.each do |pod|
-        assert_not bilbo.feed.include?(pod)
-      end
+    assert_equal 1, @kat.reload.following_count
+    assert_equal 0, @kat.reload.followers_count
+    assert_equal 0, @eo.reload.following_count
+    assert_equal 1, @eo.reload.followers_count
+
+    @kat.unfollow(@eo)
+
+    assert_equal 0, @kat.reload.following_count
+    assert_equal 0, @kat.reload.followers_count
+    assert_equal 0, @eo.reload.following_count
+    assert_equal 0, @eo.reload.followers_count
+  end
+
+  test "feed should have the right pods" do
+    bilbo = users(:bilbo)
+    thorin = users(:thorin)
+    marty = users(:marty)
+
+    bilbo.follow(thorin)
+
+    thorin.pods.each do |pod|
+      assert bilbo.feed.include?(pod)
+    end
+
+    bilbo.pods.each do |pod|
+      assert bilbo.feed.include?(pod)
+    end
+
+    marty.pods.each do |pod|
+      assert_not bilbo.feed.include?(pod)
     end
   end
 end

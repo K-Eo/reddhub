@@ -1,4 +1,13 @@
 en:
+  profiles:
+    relationships:
+      create:
+        notice: "You are following @%{username} now."
+        already: "You are already following @%{username}."
+        same: "Trying to follow yourself?"
+        missing: "@%{username} does not exist. You can't follow him."
+      destroy:
+        notice: "You have stopped following @%{username}."
   me:
     avatars:
       create:
