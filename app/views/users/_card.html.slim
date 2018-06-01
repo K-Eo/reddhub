@@ -1,4 +1,4 @@
-div class="col-12 col-lg-3 mb-4 mb-lg-0"
+div class="col-12 col-lg-3 mb-4 mb-lg-0" id="user_#{user.id}"
   div class="card d-flex"
     - if user.cover.attached?
       = image_tag user.cover, class: "card-img-top cover"
@@ -11,4 +11,5 @@ div class="col-12 col-lg-3 mb-4 mb-lg-0"
       p
         = link_to "@#{user.username}", user_profile_path(user.username), class: "text-secondary"
 
-      = render partial: "profiles/followers", locals: { user: user }
+      = render partial: "shared/followers", locals: { user: user }
+

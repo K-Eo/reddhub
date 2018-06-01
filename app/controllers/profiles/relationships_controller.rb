@@ -4,19 +4,11 @@ class Profiles::RelationshipsController < ApplicationController
 
   def create
     current_user.follow(@user)
-
-    respond_to do |format|
-      format.html { redirect_to(user_profile_path(@user.username)) }
-      format.js
-    end
+    redirect_to(user_profile_path(@user.username), notice: t(".notice", username: @user.username))
   end
 
   def destroy
     current_user.unfollow(@user)
-
-    respond_to do |format|
-      format.html { redirect_to(user_profile_path(@user.username)) }
-      format.js
-    end
+    redirect_to(user_profile_path(@user.username), notice: t(".notice", username: @user.username))
   end
 end

@@ -8,4 +8,5 @@ div class="col-12 col-lg-6 mb-4 user" id="user_card_#{user.id}"
       p class="text-center"
         = link_to "@#{user.username}", user_profile_path(user.username), class: "text-secondary"
 
-      = render partial: "profiles/followers", locals: { user: user }
+      = render partial: "shared/followers", locals: { user: user }
+
