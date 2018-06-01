@@ -14,14 +14,12 @@ div id="followers_#{user.id}"
     - if current_user.following?(user)
       = link_to t("common.unfollow"),
                 user_relationship_path(user.username),
-                class: "btn btn-outline-danger btn-block mt-3",
-                remote: true,
+                class: "btn btn-outline-primary btn-sm btn-block mt-3",
                 method: :delete
     - else
       = link_to t("common.follow"),
                 user_relationship_path(user.username),
-                class: "btn btn-outline-primary btn-block mt-3",
-                remote: true,
+                class: "btn btn-outline-secondary btn-block btn-sm mt-3",
                 method: :post
 
 

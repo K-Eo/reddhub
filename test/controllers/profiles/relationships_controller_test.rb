@@ -1,91 +1,147 @@
 require "test_helper"
 
 class Profiles::RelationshipsControllerTest < ActionDispatch::IntegrationTest
-  def setup
-    @follower = users(:bilbo)
-    @following = users(:thorin)
+  test "redirects to login on create" do
+    followed = users(:thorin)
+
+    assert_no_difference ["Relationship.count", "followed.followers.count"] do
+      post user_relationship_path(followed.username)
+    end
+
+    assert_redirected_to new_user_session_path
   end
 
-  class LoggedIn < Profiles::RelationshipsControllerTest
-    def setup
-      super
+  test "redirects to login on destroy" do
+    followed = users(:bilbo)
+
+    assert_no_difference ["Relationship.count", "followed.followers.count"] do
+      delete user_relationship_path(followed.username)
     end
 
-    test "should redirect on create" do
-      assert_no_difference "Relationship.count" do
-        post user_relationship_path(@following.username)
-      end
-
-      assert_redirected_to new_user_session_path
-    end
-
-    test "should redirect on destroy" do
-      assert_no_difference "Relationship.count" do
-        delete user_relationship_path(@following.username)
-      end
-
-      assert_redirected_to new_user_session_path
-    end
-
-    test "should return unauthorized on create" do
-      assert_no_difference "Relationship.count" do
-        post user_relationship_path(@following.username), xhr: true
-      end
-
-      assert_response :unauthorized
-    end
-
-    test "should return unauthorized on destroy" do
-      assert_no_difference "Relationship.count" do
-        delete user_relationship_path(@following.username), xhr: true
-      end
-
-      assert_response :unauthorized
-    end
+    assert_redirected_to new_user_session_path
   end
 
-  class LoggedOut < Profiles::RelationshipsControllerTest
-    def setup
-      super
-      sign_in @follower
+  test "following user" do
+    follower = users(:bilbo)
+    followed = users(:thorin)
+    sign_in(follower)
+
+    get user_profile_path(followed.username)
+
+    assert_response :ok
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=post]", text: "Follow"
     end
 
-    test "should redirect to following on create" do
-      assert_difference "Relationship.count" do
-        post user_relationship_path(@following.username)
-      end
-
-      assert_redirected_to user_profile_path(@following.username)
+    assert_difference ["Relationship.count", "follower.following.count", "followed.followers.count"] do
+      post user_relationship_path(followed.username)
     end
 
-    test "should redirect to following on delete" do
-      @follower.follow(@following)
+    assert_redirected_to user_profile_path(followed.username)
 
-      assert_difference "Relationship.count", -1 do
-        delete user_relationship_path(@following.username)
-      end
+    follow_redirect!
 
-      assert_redirected_to user_profile_path(@following.username)
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow"
     end
 
-    test "should return success on create" do
-      assert_difference "Relationship.count" do
-        post user_relationship_path(@following.username), xhr: true
-      end
+    assert_select "div", text: /You are following @#{followed.username} now/
+  end
 
-      assert_response :success
-      assert_equal "text/javascript", @response.content_type
+  test "following user from following list" do
+    follower = users(:bilbo)
+    profile = users(:marty)
+    followed = users(:thorin)
+
+    sign_in(follower)
+
+    get user_following_path(profile.username)
+
+    assert_response :ok
+
+    assert_select "div#user_card_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=post]", text: "Follow"
     end
 
-    test "should return success on delete" do
-      @follower.follow(@following)
-
-      assert_difference "Relationship.count", -1 do
-        delete user_relationship_path(@following.username), xhr: true
-      end
-
-      assert_response :success
-      assert_equal "text/javascript", @response.content_type
+    assert_difference ["Relationship.count", "follower.following.count", "followed.followers.count"] do
+      post user_relationship_path(followed.username)
     end
+
+    assert_redirected_to user_profile_path(followed.username)
+
+    follow_redirect!
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow"
+    end
+
+    assert_select "div", text: /You are following @#{followed.username} now/
+  end
+
+  test "unfollowing user" do
+    follower = users(:marty)
+    followed = users(:thorin)
+    sign_in(follower)
+
+    get user_profile_path(followed.username)
+
+    assert_response :ok
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow"
+    end
+
+    assert_difference ["Relationship.count", "follower.following.count", "followed.followers.count"], -1 do
+      delete user_relationship_path(followed.username)
+    end
+
+    assert_redirected_to user_profile_path(followed.username)
+
+    follow_redirect!
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=post]", text: "Follow"
+    end
+
+    assert_select "div", text: /You have stopped following @#{followed.username}/
+  end
+
+  test "unfollowing user from following list" do
+    follower = users(:marty)
+    profile = users(:doc)
+    followed = users(:thorin)
+
+    sign_in(follower)
+
+    get user_following_path(profile.username)
+
+    assert_response :ok
+
+    assert_select "div#user_card_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=delete]", text: "Unfollow"
+    end
+
+    assert_difference ["Relationship.count", "follower.following.count", "followed.followers.count"], -1 do
+      delete user_relationship_path(followed.username)
+    end
+
+    assert_redirected_to user_profile_path(followed.username)
+
+    follow_redirect!
+
+    assert_select "div#user_#{followed.id}" do
+      assert_select "p", text: followed.name
+      assert_select "a[data-method=post]", text: "Follow"
+    end
+
+    assert_select "div", text: /You have stopped following @#{followed.username}/
   end
 end
