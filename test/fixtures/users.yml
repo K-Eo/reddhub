@@ -35,3 +35,11 @@ doc:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   username: DocBrown
   name: Emmett Brown
+
+cassian:
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  email: cassian@mail.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  username: cassian
+  name: Andor Cassian

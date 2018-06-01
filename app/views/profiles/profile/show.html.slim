@@ -1,4 +1,6 @@
-div class="card mb-3"
-  = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
-
-= paginate @pods
+  - if @pods.any?
+    div class="card mb-3"
+      = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
+    = paginate @pods
+  - else
+    = create_empty_state(t(".title"), t(".subtitle"), "cubes")

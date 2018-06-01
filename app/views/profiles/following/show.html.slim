@@ -1,5 +1,8 @@
-div class="row"
-  = render @following
+- if @following.any?
+  div class="row"
+    = render @following
 
-  div class="col-12"
-    = paginate @following
+    div class="col-12"
+      = paginate @following
+- else
+  = create_empty_state(t(".title"), t(".subtitle"), "smile", "far")

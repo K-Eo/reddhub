@@ -1,4 +1,17 @@
 en:
+  profiles:
+    profile:
+      show:
+        title: "ZERO PODS"
+        subtitle: "No pods to show at this time"
+    following:
+      show:
+        title: "Where are they?"
+        subtitle: "You can find interesting people to follow"
+    followers:
+      show:
+        title: "OH, MY FOLLOWERS"
+        subtitle: "Invite your friends to join"
   helpers:
     submit:
       user:

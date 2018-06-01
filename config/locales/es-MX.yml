@@ -1,4 +1,17 @@
 es-MX:
+  profiles:
+    profile:
+      show:
+        title: "ZERO PODS"
+        subtitle: "No hay pods que mostrar"
+    following:
+      show:
+        title: "¿DÓNDE ESTÁN?"
+        subtitle: "Puedes encontrar personas interesantes para seguir"
+    followers:
+      show:
+        title: "OH, MIS SEGUIDORES"
+        subtitle: "Invita a tus amigos a unirse"
   helpers:
     submit:
       user:
