@@ -1,4 +1,8 @@
 en:
+  home:
+    show:
+      title: "EMPTY HOME"
+      subtitle: "Pods from people you follow and your own pods will be shown here"
   profiles:
     profile:
       show:

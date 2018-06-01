@@ -1,4 +1,8 @@
 es-MX:
+  home:
+    show:
+      title: "HOME VACÍO"
+      subtitle: "Tus pods y el de los usuarios que sigues se mostrarán aquí"
   profiles:
     profile:
       show:
