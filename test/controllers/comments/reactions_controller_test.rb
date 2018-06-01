@@ -13,7 +13,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "button[data-controller=reactions]"
+      assert_select "div[data-controller=reactions]"
     end
 
     assert_difference "@comment.reactions.count" do
@@ -59,7 +59,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "button[data-controller=reactions]"
+      assert_select "div[data-controller=reactions]"
     end
   end
 
