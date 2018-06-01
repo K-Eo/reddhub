@@ -1,15 +1,18 @@
 div class="col-12 col-lg-3 mb-4 mb-lg-0" id="user_#{user.id}"
-  div class="card d-flex"
+  div class="card"
     - if user.cover.attached?
-      = image_tag user.cover, class: "card-img-top cover"
+      = image_tag user.cover, class: "d-none d-md-block card-img-top cover"
     - else
-      div class="card-img-top cover"
-    div class="card-body text-center"
+      div class="d-none d-md-block card-img-top cover"
+    div class="card-body text-center d-flex d-md-block"
       = image_tag avatar_url(user), class: "card-avatar"
-      p class="font-weight-bold mb-0"
-        = user.name
-      p
-        = link_to "@#{user.username}", user_profile_path(user.username), class: "text-secondary"
 
-      = render partial: "shared/followers", locals: { user: user }
+      div
+        div class="d-flex d-md-block mb-1 mb-md-2"
+          p class="font-weight-bold mb-0 mr-1 mr-md-0"
+            = user.name
+          p class="mb-0"
+            = link_to "@#{user.username}", user_profile_path(user.username), class: "text-secondary"
+
+        = render partial: "shared/followers", locals: { user: user }
 
