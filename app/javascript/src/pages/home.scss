@@ -1,0 +1,15 @@
+.cover {
+  background: $gray-600;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-avatar {
+  border-radius: 100%;
+  border: 3px solid white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  height: 100px;
+  margin-bottom: 8px;
+  margin-top: -70px;
+  width: 100px;
+}

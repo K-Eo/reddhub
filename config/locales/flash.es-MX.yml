@@ -8,6 +8,11 @@ es-MX:
         alert: "Primero sube un avatar."
       update:
         notice: "Avatar guardado."
+    covers:
+      create:
+        notice: "Tu portada fue guardado."
+        alert: "¡Ratas! Algo salío mal. Vuelve a intentar."
+        missing: "Selecciona una imagen para usar como portada."
   pods:
     comments:
       create:

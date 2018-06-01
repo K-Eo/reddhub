@@ -9,6 +9,11 @@ en:
       update:
         alert: "Snaps! Something went wrong, try again."
         notice: "Avatar has been saved."
+    covers:
+      create:
+        notice: "You have successfully uploaded your cover."
+        alert: "Snaps! Something went wrong. Try again."
+        missing: "Select an image to be used as a cover."
   pods:
     comments:
       create:
