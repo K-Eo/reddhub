@@ -11,8 +11,11 @@ div class="row mt-lg-5"
   div class="col-12 my-3 my-md-4 my-lg-5"
     p class="text-light text-center mb-0" &copy; 2018 ReddHub
     ul class="list-inline text-center"
-      li class="list-inline-item" = link_to t(".about"), root_path, class: "text-light"
-      li class="list-inline-item" = link_to t(".help"), root_path, class: "text-light"
+
+      li class="list-inline-item"
+        = link_to t("footer.terms"), terms_path, class: "text-light"
+      li class="list-inline-item"
+        = link_to t("footer.privacy"), privacy_path, class: "text-light"
 
 
 

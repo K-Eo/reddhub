@@ -24,10 +24,9 @@ es-MX:
     form:
       reply: "Responder"
   footer:
-    about: "Acerca"
-    help: "Ayuda"
     terms: "Términos"
     privacy: "Privacidad"
+    disclaimer: "Disclaimer"
   common:
     following: "Siguiendo"
     followers: "Seguidores"
@@ -43,8 +42,8 @@ es-MX:
     index:
       title: "Bienvenido a ReddHub"
       description: "Crea y comparte tus historias con otras personas increíbles. Explora el contenido de tu interés."
-      about: "Acerca"
-      help: "Ayuda"
+      terms: "Términos"
+      privacy: "Privacidad"
   layouts:
     navs:
       guest:

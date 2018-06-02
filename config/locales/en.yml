@@ -24,10 +24,9 @@ en:
     form:
       reply: "Reply"
   footer:
-    about: "About"
-    help: "Help"
     terms: "Terms"
     privacy: "Privacy"
+    disclaimer: "Disclaimer"
   common:
     following: "Following"
     followers: "Followers"
@@ -43,8 +42,8 @@ en:
     index:
       title: "Welcome to ReddHub"
       description: "Create and share your stories with other amazing people. Explore the content that interest you."
-      about: "About"
-      help: "Help"
+      terms: "Terms"
+      privacy: "Privacy"
   layouts:
     navs:
       guest:
