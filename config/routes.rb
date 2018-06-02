@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "terms", to: "pages#terms"
+  get "privacy", to: "pages#privacy"
+  get "disclaimer", to: "pages#disclaimer"
+
   devise_for :users, path: "sudo", controllers: {
     confirmations: "users/confirmations",
     passwords: "users/passwords",
