@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  RESERVED = ["reddhub", "redd", "hub"].freeze
+  RESERVED = ["reddhub", "redd", "hub", "hubs", "terms", "privacy", "disclaimer", "pod", "pods"].freeze
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

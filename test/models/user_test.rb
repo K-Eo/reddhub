@@ -49,7 +49,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "invalid if username is reserved" do
-    ["reddhub", "redd", "hub"].each do |i|
+    ["reddhub", "redd", "hub", "hubs", "terms", "privacy", "disclaimer", "pod", "pods"].each do |i|
       @user.username = i
       assert_not @user.valid?
     end
