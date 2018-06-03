@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  RESERVED = ["reddhub", "redd", "hub", "hubs", "terms", "privacy", "disclaimer", "pod", "pods"].freeze
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,8 +28,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
                        length: { minimum: 4, maximum: 32 },
-                       uniqueness: { case_sensitive: false },
-                       exclusion: { in: User::RESERVED }
+                       uniqueness: { case_sensitive: false }
+  validate :username_exclusion
 
   validates :name, presence: true,
                    length: { maximum: 96 },
@@ -38,6 +37,12 @@ class User < ApplicationRecord
 
   scope :username_finder, -> (query) do
     where("username LIKE ?", "%#{sanitize_sql_like(query)}%")
+  end
+
+  def username_exclusion
+    if username.present? && Reddhub::Username::RESERVED.include?(username.downcase)
+      errors.add(:username, :exclusion)
+    end
   end
 
   def reactions_for(reactables, type)
