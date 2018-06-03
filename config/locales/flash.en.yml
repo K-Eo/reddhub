@@ -24,6 +24,9 @@ en:
         alert: "Snaps! Something went wrong. Try again."
         missing: "Select an image to be used as a cover."
   pods:
+    create:
+      notice: "Pod was successfully created."
+      alert: "Pod can't be created."
     comments:
       create:
         notice: "Your comment was successfully created."
