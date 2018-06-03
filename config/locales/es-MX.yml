@@ -1,4 +1,7 @@
 es-MX:
+  pods:
+    form:
+      submit: "Crear Pod"
   finders:
     users:
       index:

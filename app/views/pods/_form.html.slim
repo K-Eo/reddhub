@@ -1,5 +1,5 @@
-= simple_form_for(@pod, remote: true) do |f|
+= simple_form_for(@pod) do |f|
   = f.input :content,
     input_html: { rows: 3 },
     label: false
-  = f.submit "Create Pod", class: "btn btn-success float-right"
+  = f.submit t(".submit"), class: "btn btn-success float-right"

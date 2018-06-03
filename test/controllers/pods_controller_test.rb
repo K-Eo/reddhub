@@ -32,8 +32,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_equal @user, Pod.last.user
-
-    assert_select "div.alert-notice", text: /Pod was successfully created/
+    assert_select "div", text: /Pod was successfully created/
   end
 
   test "creating pod with error" do
@@ -60,6 +59,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "li.pod", count: 2
     assert_select "div", text: /is too long/
+    assert_select "div", text: /Pod can't be created/
   end
 
   test "seeing reactions if pod has errors" do

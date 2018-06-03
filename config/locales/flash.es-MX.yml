@@ -23,6 +23,9 @@ es-MX:
         alert: "¡Ratas! Algo salío mal. Vuelve a intentar."
         missing: "Selecciona una imagen para usar como portada."
   pods:
+    create:
+      notice: "El pod ha sido creado."
+      alert: "El pod no se ha podido crear."
     comments:
       create:
         notice: "Tu comentario ha sido creado."

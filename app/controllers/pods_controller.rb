@@ -5,11 +5,12 @@ class PodsController < ApplicationController
     @pod = current_user.pods.new(pod_params)
 
     if @pod.save
-      redirect_to root_path(current_user.username), notice: "Pod was successfully created."
+      redirect_to root_path(current_user.username), notice: t(".notice")
     else
       @user = current_user
       @pods = current_user.feed.page(params[:page])
       @reactions = current_user.reactions_for(@pods, "Pod")
+      flash.now[:alert] = t(".alert")
       render template: "home/show", layout: "home"
     end
   end
