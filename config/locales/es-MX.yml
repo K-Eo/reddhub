@@ -1,4 +1,14 @@
 es-MX:
+  finders:
+    users:
+      index:
+        title: "Buscador de usuarios"
+        empty:
+          title: "ENCUENTRA PERSONAS"
+          subtitle: "Puedes buscar personas por su nombre de usuario"
+        no_results:
+          title: "NO HAY RESULTADOS"
+          subtitle: "No podemos encontrar a alguien con ese nombre de usuario"
   home:
     show:
       title: "HOME VACÍO"
@@ -45,6 +55,9 @@ es-MX:
       terms: "Términos"
       privacy: "Privacidad"
   layouts:
+    finder:
+      q:
+        placeholder: "Buscar usuarios"
     navs:
       guest:
         sign_in: "Iniciar sesión"
