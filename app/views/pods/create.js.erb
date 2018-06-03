@@ -1,6 +1,0 @@
-<% if @pod.persisted? %>
-    Turbolinks.clearCache()
-    Turbolinks.visit("<%= root_path %>")
-<% else %>
-    $("#new-pod-wrapper").html('<%= j render("pods/form") %>')
-<% end %>
