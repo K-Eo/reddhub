@@ -1,0 +1,12 @@
+div class="col-12 col-md-8 mx-auto text-center"
+  = link_to t(".title"), finder_users_path, class: "h2 text-dark text-uppercase"
+
+div class="col-12 col-md-8 mx-auto"
+  - if @users.nil?
+    = create_empty_state t(".empty.title"), t(".empty.subtitle"), "search"
+  - elsif @users.any?
+    div class="row justify-content-center mt-4"
+      = render partial: "users/summary", collection: @users, as: :user, locals: { wrapper_class: "col-12 col-lg-4 mb-4" }
+    = paginate @users
+  - else
+    = create_empty_state t(".no_results.title"), t(".no_results.subtitle"), "frown", "far"

@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   get "privacy", to: "pages#privacy"
   get "disclaimer", to: "pages#disclaimer"
 
+  namespace :finder, module: :finders do
+    resources :users, only: [:index]
+  end
+
   devise_for :users, path: "sudo", controllers: {
     confirmations: "users/confirmations",
     passwords: "users/passwords",

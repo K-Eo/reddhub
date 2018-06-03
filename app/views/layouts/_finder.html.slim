@@ -1,0 +1,6 @@
+= form_tag finder_users_path, method: :get, class: "form-inline mt-3 mb-2 my-sm-0" do
+  div class="input-group"
+    div class="input-group-prepend"
+      span class="input-group-text"
+        = icon "fas", "search"
+    = text_field_tag :q, params[:q], class: "form-control", placeholder: t(".q.placeholder")

@@ -1,4 +1,14 @@
 en:
+  finders:
+    users:
+      index:
+        title: "users finder"
+        empty:
+          title: "FIND PEOPLE"
+          subtitle: "You can find people by their username"
+        no_results:
+          title: "NO RESULTS"
+          subtitle: "We can't find someone with that username. Maybe a misspelling?"
   home:
     show:
       title: "EMPTY HOME"
@@ -45,6 +55,9 @@ en:
       terms: "Terms"
       privacy: "Privacy"
   layouts:
+    finder:
+      q:
+        placeholder: "Find users"
     navs:
       guest:
         sign_in: "Sign In"

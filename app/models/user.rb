@@ -36,6 +36,10 @@ class User < ApplicationRecord
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{L}]*)(\s\p{Lu}[\p{L}]*)*\z/ }
 
+  scope :username_finder, -> (query) do
+    where("username LIKE ?", "%#{sanitize_sql_like(query)}%")
+  end
+
   def reactions_for(reactables, type)
     if guest?
       Hash.new
