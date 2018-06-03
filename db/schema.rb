@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_044738) do
+ActiveRecord::Schema.define(version: 2018_06_03_024221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_044738) do
 
   create_table "pods", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "content"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false

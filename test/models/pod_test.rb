@@ -16,8 +16,20 @@ class PodTest < ActiveSupport::TestCase
   end
 
   test "is invalid if content is too long" do
-    @pod.content = "a" * 257
+    @pod.content = "a" * 281
     assert_not @pod.valid?
+  end
+
+  test "squeezeing new lines" do
+    @pod.content = "a\n\n\nb\n\n\n\nc\n\nd\n\n\n"
+    assert @pod.valid?
+    assert_equal @pod.content, "a\n\nb\n\nc\n\nd"
+  end
+
+  test "removes extra spaces" do
+    @pod.content = "     abc    "
+    assert @pod.valid?
+    assert_equal @pod.content, "abc"
   end
 
   test "is invalid if has no user" do

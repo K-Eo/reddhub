@@ -36,7 +36,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "li.pod", count: 2
       assert_select "form#new_pod" do
-        assert_select "input#pod_content"
+        assert_select "textarea#pod_content"
       end
 
       assert_difference "@user.pods.count" do
@@ -83,7 +83,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
       assert_select "li.pod", count: 2
       assert_select "form#new_pod" do
-        assert_select "input#pod_content"
+        assert_select "textarea#pod_content"
       end
 
       assert_no_difference "@user.pods.count" do
@@ -96,7 +96,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       assert_select "div", text: /can't be blank/
 
       assert_no_difference "@user.pods.count" do
-        post pods_path, params: { pod: { content: ("a" * 257) } }
+        post pods_path, params: { pod: { content: ("a" * 281) } }
       end
 
       assert_response :success
