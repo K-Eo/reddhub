@@ -17,5 +17,7 @@ module Reddhub
     # the framework and any gems in your application.
     I18n.available_locales = ["en", "es-MX"]
     I18n.default_locale = "en"
+
+    config.eager_load_paths.push(*%W[#{config.root}/lib])
   end
 end
