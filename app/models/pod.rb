@@ -1,5 +1,5 @@
 class Pod < ApplicationRecord
-  before_validation :content_squeeze_new_lines
+  before_validation :preprocess_content
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable
   has_many :reactions, as: :reactable
@@ -11,11 +11,13 @@ class Pod < ApplicationRecord
 
   private
 
-    def content_squeeze_new_lines
+    def preprocess_content
       if content.present?
         self.content = content
-                        .gsub(/\r?\n|\r/, "\n") # sanitize for Linux, Mac and Windows
-                        .gsub(/\n\n\n*/, "\n\n").strip
+                        .strip
+                        .encode(universal_newline: true)
+                        .gsub(/ +\n/, "\n")
+                        .gsub(/\n\n\n*/, "\n\n")
       end
     end
 end
