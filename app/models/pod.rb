@@ -13,7 +13,9 @@ class Pod < ApplicationRecord
 
     def content_squeeze_new_lines
       if content.present?
-        self.content = content.gsub(/[\n]{3,}/, "\n\n").strip
+        self.content = content
+                        .gsub(/\r?\n|\r/, "\n") # sanitize for Linux, Mac and Windows
+                        .gsub(/\n\n\n*/, "\n\n").strip
       end
     end
 end
