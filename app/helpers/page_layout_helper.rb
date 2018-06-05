@@ -1,4 +1,31 @@
 module PageLayoutHelper
+  def with_nav(option = nil)
+    if option.nil?
+      @with_nav = true if @with_nav.nil?
+      @with_nav
+    else
+      @with_nav = option
+    end
+  end
+
+  def with_messages(option = nil)
+    if option.nil?
+      @with_messages = true if @with_messages.nil?
+      @with_messages
+    else
+      @with_messages = option
+    end
+  end
+
+  def force_js(option = nil)
+    if option.nil?
+      @force_js = true if @force_js.nil?
+      @force_js
+    else
+      @force_js = option
+    end
+  end
+
   def page_layout(option = nil)
     if option
       @page_layout = option

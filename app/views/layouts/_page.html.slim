@@ -1,6 +1,9 @@
 div class=page_classes("content-wrapper")
-  = render "layouts/nav"
-  = render "layouts/messages"
+  - if defined?(with_nav) && with_nav
+    = render "layouts/nav"
+
+  - if defined?(with_messages) && with_messages
+    = render "layouts/messages"
 
   div id="content-body" class="container pt-4"
     - if defined?(page_layout)
@@ -21,3 +24,7 @@ div class=page_classes("content-wrapper")
 
   - if defined?(page_footer) && page_footer
     = render "layouts/footer"
+
+- if defined?(force_js) && force_js
+  noscript
+    meta http-equiv="refresh" content="0,url=/noscript"

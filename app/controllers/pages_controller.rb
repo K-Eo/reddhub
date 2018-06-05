@@ -7,4 +7,8 @@ class PagesController < ApplicationController
 
   def disclaimer
   end
+
+  def noscript
+    render layout: "noscript"
+  end
 end

@@ -1,4 +1,7 @@
 en:
+  pages:
+    noscript:
+      requires_js: "Requires JavaScript to work properly. Turn on JavaScript on your browser and refresh this page."
   pods:
     form:
       submit: "Create Pod"
