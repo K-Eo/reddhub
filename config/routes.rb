@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "terms", to: "pages#terms"
   get "privacy", to: "pages#privacy"
   get "disclaimer", to: "pages#disclaimer"
+  get "noscript", to: "pages#noscript"
 
   namespace :finder, module: :finders do
     resources :users, only: [:index]

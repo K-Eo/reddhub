@@ -1,4 +1,7 @@
 es-MX:
+  pages:
+    noscript:
+      requires_js: "Requiere JavaScript para funcionar correctamente. Activa JavaScript en tu navegador y refresca la página."
   pods:
     form:
       submit: "Crear Pod"
