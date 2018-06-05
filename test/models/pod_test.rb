@@ -26,6 +26,26 @@ class PodTest < ActiveSupport::TestCase
     assert_equal @pod.content, "a\n\nb\n\nc\n\nd"
   end
 
+  test "normalizing new lines" do
+    @pod.content = "a\r\n\nb"
+    assert @pod.valid?
+    assert_equal @pod.content, "a\n\nb"
+
+    @pod.content = "a\r\n\r\n\r\nb\r\nc\r\n\r\n\r\n"
+    assert @pod.valid?
+    assert_equal @pod.content, "a\n\nb\nc"
+
+    @pod.content = "a\r\n\n\nb"
+    assert @pod.valid?
+    assert_equal @pod.content, "a\n\nb"
+  end
+
+  test "removes space between new lines" do
+    @pod.content = "a\n\s\s\n\s\s\nb\s\n\n\n\nc\n\nd\n\n\n"
+    assert @pod.valid?
+    assert_equal @pod.content, "a\n\nb\n\nc\n\nd"
+  end
+
   test "removes extra spaces" do
     @pod.content = "     abc    "
     assert @pod.valid?
