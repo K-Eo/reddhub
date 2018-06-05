@@ -9,6 +9,7 @@ export default class extends Controller {
 
   initialize() {
     this._expandForm()
+    this.word()
     autosize(this.contentTarget)
   }
 
@@ -32,17 +33,14 @@ export default class extends Controller {
     return $(this.contentTarget)
   }
 
-  get content() {
-    return this.contentTarget.value
+  get contentLength() {
+    return this.contentTarget.value.length
   }
 
   word() {
-    const currentLength = this.content.length
-    this._renderProgress(currentLength)
-
-    const progressWidth = currentLength * 100 / MAX_POD_LENGTH
-
-    this.$progress.css('width', `${progressWidth}%`)
+    this._renderProgress()
+    this._renderSubmit()
+    this._updateProgress()
   }
 
   onFocus() {
@@ -53,8 +51,21 @@ export default class extends Controller {
     this._expandForm()
   }
 
+  _updateProgress() {
+    const progressWidth = this.contentLength * 100 / MAX_POD_LENGTH
+    this.$progress.css('width', `${progressWidth}%`)
+  }
+
+  _renderSubmit() {
+    if (this.contentLength > 0) {
+      this.$submit.prop('disabled', false)
+    } else {
+      this.$submit.prop('disabled', true)
+    }
+  }
+
   _expandForm(force = false) {
-    if (force || this.content.length > 0) {
+    if (force || this.contentLength > 0) {
       this.$submit.removeClass('d-none')
       this.$content.attr('rows', 3)
       this.$content.parent().removeClass('mb-0')
@@ -67,8 +78,8 @@ export default class extends Controller {
     autosize.update(this.contentTarget)
   }
 
-  _renderProgress(length) {
-    if (length > 0) {
+  _renderProgress() {
+    if (this.contentLength > 0) {
       this.$counterify.removeClass('d-none')
     } else {
       this.$counterify.addClass('d-none')
@@ -76,9 +87,12 @@ export default class extends Controller {
 
     this.$progress.removeClass('bg-danger').removeClass('bg-warning')
 
-    if (length > MAX_POD_LENGTH) {
+    if (this.contentLength > MAX_POD_LENGTH) {
       this.$progress.addClass('bg-danger')
-    } else if (length > WARNING_POD_LENGTH && length <= MAX_POD_LENGTH) {
+    } else if (
+      this.contentLength > WARNING_POD_LENGTH &&
+      this.contentLength <= MAX_POD_LENGTH
+    ) {
       this.$progress.addClass('bg-warning')
     }
   }
