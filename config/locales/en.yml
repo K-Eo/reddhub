@@ -3,6 +3,9 @@ en:
     noscript:
       requires_js: "Requires JavaScript to work properly. Turn on JavaScript on your browser and refresh this page."
   pods:
+    pod:
+      confirm:
+        destroy: "Are you sure?"
     form:
       submit: "Create Pod"
   finders:
