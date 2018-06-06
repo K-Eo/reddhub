@@ -91,4 +91,47 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_user_session_path
   end
+
+  test "destroying" do
+    pod = pods(:one)
+    sign_in @user
+
+    get root_path
+
+    assert_response :ok
+
+    assert_select "li.pod", count: 2
+
+    assert_select "div.action" do
+      assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+    end
+
+    get user_pod_path(@user.username, pod)
+
+    assert_select "div.action" do
+      assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+    end
+
+    assert_not pod.pending_delete
+
+    delete pod_path(pod)
+
+    assert_redirected_to root_path
+
+    follow_redirect!
+
+    pod.reload
+    assert pod.pending_delete
+    assert_select "li.pod", count: 1
+
+    assert_select "div", /Pod was successfully deleted/
+  end
+
+  test "redirects to login on destroying" do
+    pod = pods(:one)
+
+    delete pod_path(pod)
+
+    assert_redirected_to new_user_session_path
+  end
 end

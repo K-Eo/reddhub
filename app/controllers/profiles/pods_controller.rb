@@ -3,7 +3,7 @@ class Profiles::PodsController < ApplicationController
   layout "home"
 
   def show
-    @pod = @user.pods.find(params[:id])
+    @pod = @user.pods.no_deleted.find(params[:id])
     @comments = @pod.comments.newest.includes(user: [{ avatar_attachment: :blob }]).page(params[:page])
     @reactions = current_user.reactions_for(@comments, "Comment")
   end

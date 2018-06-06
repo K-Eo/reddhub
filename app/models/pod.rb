@@ -8,6 +8,11 @@ class Pod < ApplicationRecord
                       length: { maximum: 280 }
 
   scope :newest, -> { order(created_at: :desc) }
+  scope :no_deleted, -> { where(pending_delete: false) }
+
+  def mark_as_delete
+    update_attribute(:pending_delete, true)
+  end
 
   private
 

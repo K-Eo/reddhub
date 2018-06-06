@@ -15,6 +15,12 @@ class PodsController < ApplicationController
     end
   end
 
+  def destroy
+    @pod = current_user.pods.find(params[:id])
+    @pod.mark_as_delete
+    redirect_to root_path, notice: "Pod was successfully deleted."
+  end
+
   private
 
     def pod_params

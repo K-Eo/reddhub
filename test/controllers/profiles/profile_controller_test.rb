@@ -18,6 +18,26 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "can't see pods pending for delete" do
+    get user_profile_path(@user.username)
+
+    assert_response :ok
+
+    assert_select "p", @user.name
+
+    assert_select "li.pod", count: 2
+
+    pod = pods(:one)
+
+    pod.mark_as_delete
+
+    get user_profile_path(@user.username)
+
+    assert_response :ok
+
+    assert_select "li.pod", count: 1
+  end
+
   test "should redirect to 404 if user does not exist" do
     get user_profile_path("foo")
     assert_response :not_found

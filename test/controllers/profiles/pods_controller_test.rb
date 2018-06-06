@@ -29,6 +29,13 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "can't see if pod is pending for delete" do
+    @pod.mark_as_delete
+    get user_pod_path(@user.username, @pod)
+
+    assert_response :not_found
+  end
+
   test "comment form hidden" do
     get user_pod_path(@user.username, @pod)
 
