@@ -56,4 +56,16 @@ class PodTest < ActiveSupport::TestCase
     @pod.user = nil
     assert_not @pod.valid?
   end
+
+  test "destroying" do
+    pod = pods(:one)
+
+    assert_not pod.pending_delete
+    assert_enqueued_with(job: DestroyPodJob) do
+      pod.purge
+    end
+
+    pod.reload
+    assert pod.pending_delete
+  end
 end

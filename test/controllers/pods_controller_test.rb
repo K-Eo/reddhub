@@ -112,18 +112,14 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
     end
 
-    assert_not pod.pending_delete
-
-    delete pod_path(pod)
+    assert_enqueued_with(job: DestroyPodJob) do
+      delete pod_path(pod)
+    end
 
     assert_redirected_to root_path
-
     follow_redirect!
 
-    pod.reload
-    assert pod.pending_delete
     assert_select "li.pod", count: 1
-
     assert_select "div", /Pod was successfully deleted/
   end
 

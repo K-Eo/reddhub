@@ -29,7 +29,7 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
 
     pod = pods(:one)
 
-    pod.mark_as_delete
+    pod.purge
 
     get user_profile_path(@user.username)
 

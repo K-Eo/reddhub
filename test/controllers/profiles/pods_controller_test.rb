@@ -30,7 +30,7 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can't see if pod is pending for delete" do
-    @pod.mark_as_delete
+    @pod.purge
     get user_pod_path(@user.username, @pod)
 
     assert_response :not_found

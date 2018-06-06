@@ -2,7 +2,7 @@ class Pod < ApplicationRecord
   before_validation :preprocess_content
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable
-  has_many :reactions, as: :reactable
+  has_many :reactions, as: :reactable, dependent: :delete_all
 
   validates :content, presence: true,
                       length: { maximum: 280 }
@@ -10,8 +10,9 @@ class Pod < ApplicationRecord
   scope :newest, -> { order(created_at: :desc) }
   scope :no_deleted, -> { where(pending_delete: false) }
 
-  def mark_as_delete
+  def purge
     update_attribute(:pending_delete, true)
+    DestroyPodJob.perform_later(id)
   end
 
   private
