@@ -19,9 +19,10 @@ div class="card mb-4"
       div class="action"
         = render partial: "comments/action",
                  locals: { pod: @pod }
-      div class="action"
-        = link_to pod_path(@pod), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-light btn-action js-action"
-          = icon "far", "trash-alt", class: "action-icon"
+      - if @pod.user_id == current_user.id
+        div class="action"
+          = link_to pod_path(@pod), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-light btn-action js-action"
+            = icon "far", "trash-alt", class: "action-icon"
 
   - unless current_user.guest?
     = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }
