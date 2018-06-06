@@ -3,6 +3,9 @@ es-MX:
     noscript:
       requires_js: "Requiere JavaScript para funcionar correctamente. Activa JavaScript en tu navegador y refresca la página."
   pods:
+    pod:
+      confirm:
+        destroy: "¿Estás seguro?"
     form:
       submit: "Crear Pod"
   finders:

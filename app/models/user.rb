@@ -109,6 +109,7 @@ class User < ApplicationRecord
 
     Pod.includes(user: [{ avatar_attachment: :blob }])
        .where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+       .no_deleted
        .order(created_at: :desc)
   end
 

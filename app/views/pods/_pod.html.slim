@@ -21,3 +21,7 @@ li [class="list-group-item list-group-item-action d-flex pod"
       div class="action"
         = render partial: "comments/action",
                  locals: { pod: pod }
+      - if pod.user_id == current_user.id
+        div class="action"
+          = link_to pod_path(pod), data: { confirm: t(".confirm.destroy") }, method: :delete, class: "btn btn-light btn-action js-action"
+            = icon "far", "trash-alt", class: "action-icon"

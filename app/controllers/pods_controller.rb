@@ -15,6 +15,12 @@ class PodsController < ApplicationController
     end
   end
 
+  def destroy
+    @pod = current_user.pods.find(params[:id])
+    @pod.purge
+    redirect_to root_path, notice: t(".notice")
+  end
+
   private
 
     def pod_params

@@ -24,6 +24,8 @@ en:
         alert: "Snaps! Something went wrong. Try again."
         missing: "Select an image to be used as a cover."
   pods:
+    destroy:
+      notice: "Pod was successfully deleted."
     create:
       notice: "Pod was successfully created."
       alert: "Pod can't be created."

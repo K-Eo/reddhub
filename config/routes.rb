@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     delete "unpublish", on: :member
   end
 
-  resources :pods, only: [:create] do
+  resources :pods, only: [:create, :destroy] do
     resources :comments, only: [:create], module: :pods
     resource :reaction, only: [:create, :destroy], module: :pods
   end

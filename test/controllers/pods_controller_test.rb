@@ -91,4 +91,74 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_user_session_path
   end
+
+  test "destroying" do
+    pod = pods(:one)
+    sign_in @user
+
+    get root_path
+
+    assert_response :ok
+
+    assert_select "li.pod", count: 2
+
+    assert_select "div.action" do
+      assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+    end
+
+    get user_pod_path(@user.username, pod)
+
+    assert_select "div.action" do
+      assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+    end
+
+    assert_enqueued_with(job: DestroyPodJob) do
+      delete pod_path(pod)
+    end
+
+    assert_redirected_to root_path
+    follow_redirect!
+
+    assert_select "li.pod", count: 1
+    assert_select "div", /Pod was successfully deleted/
+  end
+
+  test "hides delete action" do
+    @user = users(:marty)
+    sign_in @user
+
+    get root_path
+    assert_response :ok
+
+    assert_select "li.pod", count: 6
+
+    @user.feed.each do |pod|
+      assert_select "li.pod" do
+        if pod.user == @user
+          assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+        else
+          assert_select "a[data-method=delete][href='#{pod_path(pod)}']", count: 0
+        end
+      end
+    end
+
+    pod = @user.pods.first
+
+    get user_pod_path(@user.username, pod)
+    assert_response :ok
+    assert_select "a[data-method=delete][href='#{pod_path(pod)}']"
+
+    pod = users(:thorin).pods.first
+    get user_pod_path(users(:thorin).username, pod)
+    assert_response :ok
+    assert_select "a[data-method=delete][href='#{pod_path(pod)}']", count: 0
+  end
+
+  test "redirects to login on destroying" do
+    pod = pods(:one)
+
+    delete pod_path(pod)
+
+    assert_redirected_to new_user_session_path
+  end
 end
