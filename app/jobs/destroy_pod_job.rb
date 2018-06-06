@@ -5,9 +5,13 @@ class DestroyPodJob < ApplicationJob
 
   def perform(pod_id)
     pod = Pod.find(pod_id)
+
+    return unless pod.pending_delete
+
     pod.comments.find_each do |comment|
       comment.destroy
     end
+
     pod.destroy
   end
 end
