@@ -1,8 +1,14 @@
 div class="card mb-3"
   div class="card-body d-flex bg-light"
     = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
-    div class="w-100" id="new-pod-wrapper"
-      = render "pods/form"
+    div class="w-100" id="new-pod-wrapper" data-controller="pods--placeholder"
+      = text_field_tag :placeholder,
+        nil,
+        class: "form-control",
+        data: { target: "pods--placeholder.placeholder", action: "focus->pods--placeholder#onFocus" }
+
+      div class="d-none" data-target="pods--placeholder.form"
+        = render "pods/form"
 
   - if @pods.any?
     = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
