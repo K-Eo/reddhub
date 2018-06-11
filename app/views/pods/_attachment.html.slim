@@ -1,0 +1,10 @@
+= form_tag "/", data: { controller: "pods--attachments" } do
+  = label_tag :images, class: "btn btn-secondary mb-0", data: { target: "pods--placeholder.attachments" } do
+    = icon "far", "image"
+    = file_field_tag :images,
+      accept: "image/x-png,image/jpeg",
+      hidden: true,
+      data: { action: "pods--attachments#picked", target: "pods--attachments.source" }
+
+  div class="attachments-previews mt-3 d-none" data-target="pods--attachments.previews"
+
