@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :pods, only: [:create, :destroy] do
+    resources :attachments, only: [:create], module: :pods
     resources :comments, only: [:create], module: :pods
     resource :reaction, only: [:create, :destroy], module: :pods
   end

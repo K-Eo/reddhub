@@ -3,7 +3,7 @@ class Profiles::ProfileController < ApplicationController
   layout "profile"
 
   def show
-    @pods = @user.pods.no_deleted.newest.page(params[:page])
+    @pods = @user.pods.with_attached_images.no_deleted.newest.page(params[:page])
     @reactions = current_user.reactions_for(@pods, "Pod")
   end
 end

@@ -1,7 +1,7 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['form', 'placeholder', 'source', 'attachments']
+  static targets = ['form', 'placeholder', 'source', 'attachments', 'media']
 
   initialize() {
     if (this.hasContent()) {
@@ -16,7 +16,8 @@ export default class extends Controller {
         !this.$source.is(e.target) &&
         !this.$attachments.is(e.target) &&
         this.$attachments.has(e.target).length === 0 &&
-        !this.hasContent()
+        !this.hasContent() &&
+        !this._hasAttachment()
       ) {
         this.hide()
       }
@@ -55,6 +56,10 @@ export default class extends Controller {
     if (this.hasContent()) {
       return
     }
+  }
+
+  _hasAttachment() {
+    return this.mediaTarget.files.length > 0
   }
 
   hide() {

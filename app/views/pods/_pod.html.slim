@@ -14,6 +14,9 @@ li [class="list-group-item list-group-item-action d-flex pod"
 
     p class="pod-content" = pod.content
 
+    - pod.images.each do |image|
+      = image_tag image, class: "attachment-preview rounded border"
+
     div class="actions"
       div class="action"
         = render partial: "reactions/action",

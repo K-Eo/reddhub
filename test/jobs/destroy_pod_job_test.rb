@@ -1,6 +1,8 @@
 require "test_helper"
 
 class DestroyPodJobTest < ActiveJob::TestCase
+  include ActionDispatch::TestProcess::FixtureFile
+
   test "removes pod" do
     pod = pods(:one)
     pod.update_attribute(:pending_delete, true)

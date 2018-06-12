@@ -6,6 +6,7 @@ globals:
   Rails: true
   Turbolinks: true
   Popper: true
+  Uint8Array: true
 extends: 'eslint:recommended'
 parserOptions:
   ecmaVersion: 7
@@ -15,6 +16,7 @@ rules:
   indent:
     - error
     - 2
+    - SwitchCase: 1
   linebreak-style:
     - error
     - unix
