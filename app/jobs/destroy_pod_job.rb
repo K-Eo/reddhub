@@ -12,6 +12,8 @@ class DestroyPodJob < ApplicationJob
       comment.destroy
     end
 
+    pod.images.purge
+
     pod.destroy
   end
 end

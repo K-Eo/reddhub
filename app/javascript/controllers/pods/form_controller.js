@@ -6,19 +6,15 @@ export default class extends Controller {
 
   initialize() {
     this.word()
-    autosize(this.contentTarget)
+    autosize(this.sourceTarget)
   }
 
   disconnect() {
-    autosize.destroy(this.contentTarget)
+    autosize.destroy(this.sourceTarget)
   }
 
   get $submit() {
     return $(this.submitTarget)
-  }
-
-  get contentLength() {
-    return this.contentTarget.value.length
   }
 
   hasContentInRange() {

@@ -11,6 +11,9 @@ div class="card mb-4"
 
     p class="card-text pod-content" = @pod.content
 
+    - @pod.images.each do |image|
+      = image_tag image, class: "attachment-preview rounded border"
+
   div class="card-body"
     div class="actions"
       div class="action"

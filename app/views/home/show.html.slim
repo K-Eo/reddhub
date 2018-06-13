@@ -9,6 +9,7 @@ div class="card mb-3"
 
       div class="d-none" data-target="pods--placeholder.form"
         = render "pods/form"
+        = render "pods/attachment"
 
   - if @pods.any?
     = render partial: "pods/pods", locals: { pods: @pods, reactions: @reactions }
