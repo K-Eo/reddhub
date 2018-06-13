@@ -95,7 +95,7 @@ export default class extends Controller {
     for (let i = 0; i < this.length; i++) {
       let preview = $('<img/>')
       preview.attr('src', window.URL.createObjectURL(this.files[i]))
-      preview.addClass('rounded border attachment-preview')
+      preview.addClass('img-fluid')
       this.$previews.append(preview)
     }
   }
