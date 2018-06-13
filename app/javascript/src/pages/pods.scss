@@ -9,7 +9,7 @@
 .actions {
   .action {
     display: inline-block;
-    min-width: 90px;
+    min-width: 78px;
 
     .btn-action {
       color: $gray-600;
@@ -35,6 +35,12 @@
         font-size: 0.85rem;
         margin-left: 8px;
       }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .action {
+      min-width: 90px;
     }
   }
 }
