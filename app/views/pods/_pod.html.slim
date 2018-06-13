@@ -15,8 +15,8 @@ li [class="list-group-item list-group-item-action d-flex pod pb-0 px-2 px-md-3"
     p class="pod-content" = pod.content
 
     - pod.images.each do |image|
-      div class="bg-light rounded text-center border text-truncate"
-        = image_tag image, class: "img-fluid"
+      div class="bg-light rounded text-center border text-truncate js-action"
+        = image_tag image, class: "img-fluid js-zoom"
 
     div class="actions my-2"
       div class="action"

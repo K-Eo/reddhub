@@ -12,8 +12,8 @@ div class="card mb-4"
     p class="card-text pod-content" = @pod.content
 
     - @pod.images.each do |image|
-      div class="bg-light rounded text-center border text-truncate"
-        = image_tag image, class: "img-fluid"
+      div class="bg-light rounded text-center border text-truncate js-action"
+        = image_tag image, class: "img-fluid js-zoom"
 
   div class="card-body py-2"
     div class="actions"
