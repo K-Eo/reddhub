@@ -14,7 +14,9 @@
     "lodash": "^4.17.10",
     "medium-zoom": "^0.4.0",
     "popper.js": "^1.14.3",
-    "stimulus": "^1.0.1"
+    "stimulus": "^1.0.1",
+    "ts-loader": "3.5.0",
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
