@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint 'app/javascript/**/*.js'",
-    "prettier": "prettier -l 'app/javascript/**/*.{js,css,scss,json,md}'"
+    "prettier": "prettier -l 'app/javascript/**/*.{js,ts,css,scss,json,md}'"
   },
   "dependencies": {
     "@rails/webpacker": "3.4",
