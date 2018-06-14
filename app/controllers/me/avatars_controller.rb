@@ -18,7 +18,9 @@ class Me::AvatarsController < ApplicationController
   end
 
   def update
-    if current_user.avatar.attach(avatar_params[:image])
+    current_user.avatar.attach(avatar_params[:image])
+
+    if current_user.avatar.attached?
       redirect_to edit_user_registration_path, notice: t(".notice")
     else
       redirect_to edit_user_registration_path, alert: t(".alert")

@@ -16,6 +16,7 @@ es-MX:
       edit:
         alert: "Primero sube un avatar."
       update:
+        alert: "Algo salío mal. Vuelve a intentar."
         notice: "Avatar guardado."
     covers:
       create:
