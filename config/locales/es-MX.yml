@@ -3,6 +3,11 @@ es-MX:
     noscript:
       requires_js: "Requiere JavaScript para funcionar correctamente. Activa JavaScript en tu navegador y refresca la página."
   pods:
+    attachment:
+      errors:
+        nogif: "En este momento no tenemos soporte para imágenes GIF"
+        noimg: "Solo puedes subir imágenes JPEG o GIF"
+        toobig: "La imagen es muy pesada. Max 5MB."
     pod:
       confirm:
         destroy: "¿Estás seguro?"

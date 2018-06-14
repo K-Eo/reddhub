@@ -1,9 +1,9 @@
 = form_for PodAttachment.new,
   url: "/",
   data: { "pods--attachments-url" => pod_attachments_path("id"),
-          "pods--attachments-no-gif" => "We do not support GIF images",
-          "pods--attachments-no-img" => "Ony images cowboy (JPEG, PNG)",
-          "pods--attachments-too-big" => "File is too big (Max. 5MB)",
+          "pods--attachments-no-gif" => t(".errors.nogif"),
+          "pods--attachments-no-img" => t(".errors.noimg"),
+          "pods--attachments-too-big" => t(".errors.toobig"),
           remote: true,
           controller: "pods--attachments" } do |f|
 

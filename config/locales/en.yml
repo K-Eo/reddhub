@@ -3,6 +3,11 @@ en:
     noscript:
       requires_js: "Requires JavaScript to work properly. Turn on JavaScript on your browser and refresh this page."
   pods:
+    attachment:
+      errors:
+        nogif: "We do not support GIF images at this time"
+        noimg: "You can only upload JPEG and PNG images"
+        toobig: "Your image is too big. Max 5MB."
     pod:
       confirm:
         destroy: "Are you sure?"
