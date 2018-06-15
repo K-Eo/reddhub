@@ -4,20 +4,23 @@ import autosize from 'autosize'
 export default class extends Controller {
   static targets = ['source', 'submit']
 
-  initialize() {
+  private sourceTarget: HTMLInputElement
+  private submitTarget: HTMLButtonElement
+
+  initialize(): void {
     this.word()
     autosize(this.sourceTarget)
   }
 
-  disconnect() {
+  disconnect(): void {
     autosize.destroy(this.sourceTarget)
   }
 
-  get $submit() {
-    return $(this.submitTarget)
+  word(): void {
+    this.enableSubmit()
   }
 
-  hasContentInRange() {
+  private hasContentInRange(): boolean {
     return (
       this.sourceTarget.value &&
       this.sourceTarget.value.length > 0 &&
@@ -25,15 +28,11 @@ export default class extends Controller {
     )
   }
 
-  word() {
-    this._enableSubmit()
-  }
-
-  _enableSubmit() {
+  private enableSubmit(): void {
     if (this.hasContentInRange()) {
-      this.$submit.prop('disabled', false)
+      this.submitTarget.disabled = false
     } else {
-      this.$submit.prop('disabled', true)
+      this.submitTarget.disabled = true
     }
   }
 }
