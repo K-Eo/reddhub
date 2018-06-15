@@ -6,5 +6,5 @@ import '../behavior'
 import '../src/application.scss'
 
 const application = Application.start()
-const context = require.context('controllers', true, /.js$/)
+const context = require.context('controllers', true, /.(ts|js)$/)
 application.load(definitionsFromContext(context))
