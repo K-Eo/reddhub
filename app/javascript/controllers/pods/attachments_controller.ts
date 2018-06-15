@@ -17,13 +17,11 @@ interface FileMetada {
 export default class extends Controller {
   static targets = ['source', 'previews']
 
-  private podForm: HTMLElement
   private previewsTarget: HTMLElement
   private sourceTarget: HTMLInputElement
   private ajaxSuccess: (e: any) => void
 
   connect() {
-    this.podForm = document.querySelector('#new_pod')
     this.podForm.addEventListener('ajax:success', this.ajaxSuccess)
   }
 
@@ -43,6 +41,23 @@ export default class extends Controller {
 
   get length(): number {
     return this.files.length
+  }
+
+  get podForm(): HTMLElement {
+    return document.querySelector('#new_pod')
+  }
+
+  get podSubmit(): HTMLButtonElement {
+    return document.querySelector('#new_pod input[type=submit')
+  }
+
+  get podTextarea(): HTMLTextAreaElement {
+    return document.querySelector('#pod_content')
+  }
+
+  ajaxError(): void {
+    this.podSubmit.disabled = false
+    this.podTextarea.disabled = false
   }
 
   async picked() {

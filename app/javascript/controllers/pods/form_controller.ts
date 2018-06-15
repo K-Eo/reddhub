@@ -10,6 +10,7 @@ export default class extends Controller {
   initialize(): void {
     this.word()
     autosize(this.sourceTarget)
+    this.submitTarget.removeAttribute('data-disable-with')
   }
 
   disconnect(): void {
@@ -18,6 +19,16 @@ export default class extends Controller {
 
   word(): void {
     this.enableSubmit()
+  }
+
+  beforeSend(): void {
+    this.sourceTarget.disabled = true
+    this.submitTarget.disabled = true
+  }
+
+  error(): void {
+    this.sourceTarget.disabled = false
+    this.submitTarget.disabled = false
   }
 
   private hasContentInRange(): boolean {

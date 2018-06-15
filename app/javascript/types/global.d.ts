@@ -4,6 +4,8 @@ declare namespace Rails {
   }
 
   export function fire(element: HTMLElement, event: string, data?: object): void
+  export function disableElement(element: HTMLElement): void
+  export function enableElement(element: HTMLElement): void
 }
 
 declare module 'autosize' {

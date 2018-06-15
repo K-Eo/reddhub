@@ -1,4 +1,4 @@
-= simple_form_for(@pod, data: { remote: true, type: "json", controller: "pods--form" }) do |f|
+= simple_form_for(@pod, data: pod_form_data) do |f|
   div data-controller="pods--counter"
     = f.input :content,
       input_html: { rows: 3, data: { action: "keyup->pods--form#word keyup->pods--counter#update blur->pods--placeholder#onBlur", target: "pods--form.source pods--counter.source pods--placeholder.source" } },
