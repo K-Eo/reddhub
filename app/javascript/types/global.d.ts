@@ -45,7 +45,7 @@ declare module 'stimulus' {
 
 declare namespace Turbolinks {
   export interface TurbolinksAction {
-    action: "replace" | "advance"
+    action: 'replace' | 'advance'
   }
 
   export function visit(location: string, action?: TurbolinksAction): void
