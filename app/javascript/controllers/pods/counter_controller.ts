@@ -1,18 +1,31 @@
 import { Controller } from 'stimulus'
+import ProgressBar from 'progressbar.js'
 
 const MAX_POD_LENGTH: number = 280
-const WARNING_POD_LENGTH: number = 260
+const BG_SUCCESS: string = '#34d058'
+const BG_WARNING: string = '#ffc107'
+const BG_DANGER: string = '#e83e8c'
+const BG_SECONDARY: string = '#eee'
 
 export default class extends Controller {
-  static targets = ['source', 'component', 'counter']
+  static targets = ['source', 'progress']
 
   private sourceTarget: HTMLInputElement
-  private componentTarget: HTMLElement
-  private counterTarget: HTMLElement
+  private progressTarget: HTMLDivElement
+  private progressBar: any
+  private beforeCache: () => void
 
   initialize(): void {
-    this.renderComponent()
+    this.progressBar = new ProgressBar.Circle(this.progressTarget, {
+      color: BG_SUCCESS,
+      strokeWidth: 20,
+      trailColor: BG_SECONDARY,
+    })
+
     this.updateProgress()
+    this.beforeCache = this.destroy.bind(this)
+
+    document.addEventListener('turbolinks:before-cache', this.beforeCache)
   }
 
   get length(): number {
@@ -20,31 +33,33 @@ export default class extends Controller {
   }
 
   update(): void {
-    this.renderComponent()
     this.updateProgress()
   }
 
-  private updateProgress(): void {
-    const progressWidth = this.length * 100 / MAX_POD_LENGTH
-    this.counterTarget.style.width = `${progressWidth}%`
+  private destroy() {
+    this.progressBar.destroy()
+    document.removeEventListener('turbolinks:before-cache', this.beforeCache)
   }
 
-  private renderComponent(): void {
-    if (this.length > 0) {
-      this.componentTarget.classList.remove('d-none')
+  private updateProgress(): void {
+    let color: string
+    const progress = this.length * 100 / MAX_POD_LENGTH / 100
+    const effectiveProgress = progress > 1 ? 1 : progress
+
+    if (progress > 0 && progress <= 0.9) {
+      color = BG_SUCCESS
+    } else if (progress > 0.9 && progress <= 1) {
+      color = BG_WARNING
     } else {
-      this.componentTarget.classList.add('d-none')
+      color = BG_DANGER
     }
 
-    this.counterTarget.classList.remove('bg-danger', 'bg-warning')
-
-    if (this.length > MAX_POD_LENGTH) {
-      this.counterTarget.classList.add('bg-danger')
-    } else if (
-      this.length > WARNING_POD_LENGTH &&
-      this.length <= MAX_POD_LENGTH
-    ) {
-      this.counterTarget.classList.add('bg-warning')
-    }
+    this.progressBar.animate(effectiveProgress, {
+      from: { color: color },
+      to: { color: color },
+      step: (state, circle) => {
+        circle.path.setAttribute('stroke', state.color)
+      },
+    })
   }
 }
