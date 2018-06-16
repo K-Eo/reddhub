@@ -1,5 +1,6 @@
 div class="col-12 col-md-8 mx-auto text-center"
   = link_to t(".title"), finder_users_path, class: "h2 text-dark text-uppercase"
+  = render "finders/form_alternative"
 
 div class="col-12 col-md-8 mx-auto"
   - if @users.nil?
