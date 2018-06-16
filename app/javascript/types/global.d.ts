@@ -53,3 +53,8 @@ declare namespace Turbolinks {
   export function visit(location: string, action?: TurbolinksAction): void
   export function clearCache(): void
 }
+
+declare class Popper {
+  constructor(a: HTMLElement, b: HTMLElement, options: object)
+  destroy(): void
+}
