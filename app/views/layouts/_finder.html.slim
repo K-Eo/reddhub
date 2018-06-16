@@ -1,4 +1,9 @@
-= form_tag finder_users_path, method: :get, class: "form-inline mt-3 mb-2 my-sm-0" do
+ul class="navbar-nav d-md-none"
+  li class="nav-item"
+    = link_to finder_users_path, class: "nav-link"
+      = icon "fas", "search"
+
+= form_tag finder_users_path, method: :get, class: "form-inline mt-3 mb-2 my-sm-0 d-none d-md-block" do
   div class="input-group"
     div class="input-group-prepend"
       span class="input-group-text"

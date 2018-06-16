@@ -1,11 +1,8 @@
-nav class="navbar navbar-expand-lg navbar-light navbar-default border-bottom"
+nav class="navbar navbar-expand navbar-light navbar-default border-bottom"
   div class="container"
     = link_to "ReddHub", root_path, class: "navbar-brand"
 
-    button aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#main-nav" data-toggle="collapse" type="button"
-      span class="navbar-toggler-icon"
-
-    div class="collapse navbar-collapse" id="main-nav"
+    div class="navbar-collapse" id="main-nav"
       span class="ml-auto navbar-text"
       - unless current_user.guest?
         = render "layouts/finder"
