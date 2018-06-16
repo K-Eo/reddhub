@@ -1,18 +1,6 @@
 import { Controller } from 'stimulus'
-
-const MAX_SIZE: number = 1024 * 1024 * 5
-
-enum FileType {
-  JPEG,
-  PNG,
-  GIF,
-  UNSUPPORTED,
-}
-
-interface FileMetada {
-  type: FileType
-  size: number
-}
+import { FileType, extractFileMetadata } from '../../utils/file'
+import { MAX_IMAGE_SIZE } from '../../constants'
 
 export default class extends Controller {
   static targets = ['source', 'previews']
@@ -65,7 +53,7 @@ export default class extends Controller {
       return
     }
 
-    const meta = await this.extractFileMetadata(this.files[0])
+    const meta = await extractFileMetadata(this.files[0])
 
     if (meta.type == FileType.GIF) {
       this.error('noGif')
@@ -73,7 +61,7 @@ export default class extends Controller {
       this.error('noImg')
     }
 
-    if (meta.size > MAX_SIZE) {
+    if (meta.size > MAX_IMAGE_SIZE) {
       this.error('tooBig')
     }
 
@@ -129,53 +117,5 @@ export default class extends Controller {
     } else {
       this.previewsTarget.classList.add('d-none')
     }
-  }
-
-  private extractFileMetadata(file: File): Promise<FileMetada> {
-    return new Promise<FileMetada>((resolve, reject) => {
-      if (!file) {
-        reject(new Error('Missing file'))
-        return
-      }
-
-      const reader = new FileReader()
-
-      reader.onloadend = e => {
-        let header = ''
-        const arr = new Uint8Array(e.target.result).subarray(0, 4)
-
-        for (let i = 0; i < arr.length; i++) {
-          header += arr[i].toString(16)
-        }
-
-        const metadata: FileMetada = {
-          type: FileType.UNSUPPORTED,
-          size: file.size,
-        }
-
-        switch (header) {
-          case '89504e47':
-            metadata.type = FileType.PNG
-            break
-          case 'ffd8ffe0':
-          case 'ffd8ffe1':
-          case 'ffd8ffe2':
-          case 'ffd8ffe3':
-          case 'ffd8ffe8':
-            metadata.type = FileType.JPEG
-            break
-          case '47494638':
-            metadata.type = FileType.GIF
-            break
-          default:
-            metadata.type = FileType.UNSUPPORTED
-            break
-        }
-
-        resolve(metadata)
-      }
-
-      reader.readAsArrayBuffer(file.slice(0, 4))
-    })
   }
 }
