@@ -62,6 +62,15 @@ en:
     pods: "Pods"
   me:
     avatars:
+      form:
+        avatar:
+          change: "Change"
+          errors:
+            small: "Is too small."
+            big: "To large."
+            failure: "Snaps! Something went wrong. Try again."
+          save: "Save"
+          resize: "Resize"
       edit:
         cancel: "Cancel"
         save: "Save"
@@ -104,14 +113,6 @@ en:
         unhappy: "Unhappy?"
         title: "Edit my account"
         cancel_account: "Cancel my account"
-        avatar:
-          change: "Change"
-          errors:
-            small: "Is too small."
-            big: "To large."
-            failure: "Snaps! Something went wrong. Try again."
-          save: "Save"
-          resize: "Resize"
       new:
         title: "Sign Up"
       form:
