@@ -38,7 +38,7 @@ class Me::AvatarsControllerTest < ActionDispatch::IntegrationTest
       follow_redirect!
 
       assert_select "img[src*='avatar_original.png']"
-      assert_select "img[data-filename='avatar_original.png']"
+      assert_select "div[data-controller=cropper][data-cropper-filename='avatar_original.png']"
       assert_select "button[data-action='cropper#save']", text: "Save"
       assert_select "div.alert", text: /You have successfully uploaded your avatar. Now you can cropped below\./
     end
@@ -69,7 +69,7 @@ class Me::AvatarsControllerTest < ActionDispatch::IntegrationTest
 
       assert :ok
       assert_select "img[src*='avatar_original.png']"
-      assert_select "img[data-filename='avatar_original.png']"
+      assert_select "div[data-controller=cropper][data-cropper-filename='avatar_original.png']"
       assert_select "button[data-action='cropper#save']", text: "Save"
     end
 
