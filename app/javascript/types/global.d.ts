@@ -6,6 +6,7 @@ declare namespace Rails {
   export function fire(element: HTMLElement, event: string, data?: object): void
   export function disableElement(element: HTMLElement): void
   export function enableElement(element: HTMLElement): void
+  export function ajax(options: object): void
 }
 
 declare module 'autosize' {
@@ -57,4 +58,13 @@ declare namespace Turbolinks {
 declare class Popper {
   constructor(a: HTMLElement, b: HTMLElement, options: object)
   destroy(): void
+}
+
+declare module 'croppie' {
+  export class Croppie {
+    constructor(element: HTMLElement, options: object)
+    result(action: string): Promise<Blob>
+  }
+
+  export default Croppie
 }

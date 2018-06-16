@@ -1,14 +1,14 @@
-div class="col-12 mx-auto col-lg-10 text-center" data-controller="cropper"
+div class="col-12 mx-auto col-lg-10 text-center" data-controller="cropper" data-cropper-filename=current_user.original.filename
   div class="btn-group mb-4 d-md-none"
-    = link_to t(".cancel"), edit_user_registration_path, class: "btn btn-secondary js-action"
-    button class="btn btn-success js-action" data-action="cropper#save" = t(".save")
+    = link_to t(".cancel"), edit_user_registration_path, class: "btn btn-secondary", data: { target: "cropper.trigger" }
+    button class="btn btn-success" data-action="cropper#save" data-target="cropper.trigger" = t(".save")
 
   div
     = image_tag current_user.original,
       class: "img-fluid",
       crossorigin: "anonymous",
-      data: { target: "cropper.image", filename: current_user.original.filename }
+      data: { target: "cropper.image" }
 
   div class="btn-group mb-4 d-none d-md-block"
-    = link_to t(".cancel"), edit_user_registration_path, class: "btn btn-secondary js-action"
-    button class="btn btn-success js-action" data-action="cropper#save" = t(".save")
+    = link_to t(".cancel"), edit_user_registration_path, class: "btn btn-secondary", data: { target: "cropper.trigger" }
+    button class="btn btn-success" data-action="cropper#save" data-target="cropper.trigger" = t(".save")
