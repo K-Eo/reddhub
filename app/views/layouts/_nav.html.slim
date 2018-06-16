@@ -5,6 +5,6 @@ nav class="navbar navbar-expand navbar-light navbar-default border-bottom"
     div class="navbar-collapse" id="main-nav"
       span class="ml-auto navbar-text"
       - unless current_user.guest?
-        = render "layouts/finder"
+        = render "finders/form"
       ul class="ml-4 navbar-nav"
         = render "layouts/navs/#{current_user.class.name.downcase}"
