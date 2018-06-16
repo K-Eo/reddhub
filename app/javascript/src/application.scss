@@ -14,18 +14,17 @@
 @import 'state';
 @import 'zoom';
 
-
 // Fix for navbar-expand https://github.com/twbs/bootstrap/issues/22471
 .navbar-expand > .container {
-	padding-right: 15px;
-	padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 @media (max-width: 575px) {
-	.navbar-expand > .container {
-		padding-right: 0;
-		padding-left: 0;
-	}
+  .navbar-expand > .container {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 html {
