@@ -88,3 +88,24 @@ blockquote {
 .form-check-input {
   margin-top: 0.2rem;
 }
+
+.pods--counter {
+  position: relative;
+  .content {
+    padding-right: 28px;
+  }
+}
+
+.word-progress {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 4px;
+
+  & > svg {
+    height: 100%;
+    display: block;
+  }
+}
