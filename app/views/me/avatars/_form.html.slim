@@ -3,7 +3,7 @@ div id="user_avatar_viewer" class="avatar-big-wrapper mb-4 d-block border rounde
 
 = form_for(Avatar.new, url: me_avatar_path, data: { controller: "avatar" }) do |f|
   div class="avatar-control"
-    label class="btn btn-success" data-target="avatar.label"
+    label class="btn btn-success mb-0" data-target="avatar.label"
       = t(".avatar.change")
       = f.file_field :image,
         direct_upload: true,
@@ -11,6 +11,10 @@ div id="user_avatar_viewer" class="avatar-big-wrapper mb-4 d-block border rounde
         accept: "image/x-png,image/jpeg",
         data: { action: "avatar#onPickImage", target: "avatar.image" }
 
+    - if current_user.original.attached?
+      = link_to t(".avatar.resize"), edit_me_avatar_path, class: "btn btn-outline-primary ml-2", data: { turbolinks: false, target: "avatar.crop" }
+
+    div class="my-2"
     div class="is-default" data-target="avatar.feedback"
       p class="error too-small" = t(".avatar.errors.small")
       p class="error too-big" = t(".avatar.errors.big")
@@ -21,5 +25,3 @@ div id="user_avatar_viewer" class="avatar-big-wrapper mb-4 d-block border rounde
           div class="progress-bar" data-target="avatar.value" role="progressbar" style="width: 0;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
 
   = f.submit t(".avatar.save"), class: "btn btn-success", data: { target: "avatar.submit" }
-  - if current_user.original.attached?
-    = link_to t(".avatar.resize"), edit_me_avatar_path, class: "btn btn-outline-primary", data: { turbolinks: false, target: "avatar.crop" }
