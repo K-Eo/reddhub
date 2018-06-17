@@ -29,7 +29,8 @@
     .too-small,
     .too-big,
     .loading,
-    .failure {
+    .failure,
+    .img {
       display: none;
     }
   }
@@ -54,6 +55,12 @@
 
   .has-failure {
     .failure {
+      display: block;
+    }
+  }
+
+  .is-img {
+    .img {
       display: block;
     }
   }

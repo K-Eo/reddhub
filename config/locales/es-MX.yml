@@ -69,6 +69,7 @@ es-MX:
             small: "Es muy pequeña."
             big: "Es muy pesada."
             failure: "¡Rayos! Algo salío mal. Vuelve a intentar."
+            img: "Solo tenemos soporte para imágenes JPEG o PNG en este momento."
           save: "Guardar"
           resize: "Editar"
       edit:

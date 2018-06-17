@@ -69,6 +69,7 @@ en:
             small: "Is too small."
             big: "To large."
             failure: "Snaps! Something went wrong. Try again."
+            img: "We only support JPEG and PNG images at this time."
           save: "Save"
           resize: "Resize"
       edit:

@@ -1,6 +1,10 @@
 import { Controller } from 'stimulus'
 
-import { extractFileMetadata, extractImageMetadata } from '../utils/file'
+import {
+  extractFileMetadata,
+  extractImageMetadata,
+  FileType,
+} from '../utils/file'
 import { MAX_IMAGE_SIZE } from '../constants'
 
 export default class extends Controller {
@@ -145,7 +149,12 @@ export default class extends Controller {
     if (meta.size > MAX_IMAGE_SIZE) {
       this.setFeedback('is-big')
       this.resetImage()
+      return
+    }
 
+    if (meta.type == FileType.GIF || meta.type == FileType.UNSUPPORTED) {
+      this.setFeedback('is-img')
+      this.resetImage()
       return
     }
 
