@@ -1,0 +1,7 @@
+en:
+  form:
+    errors:
+      img:
+        dimension: "Your image is to small. Min. 256x256px."
+        size: "Your image si too big. Max. 5MB."
+        type: "We only support PNG and JPEG images."

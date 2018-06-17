@@ -61,6 +61,9 @@ es-MX:
     follow: "Seguir"
     pods: "Pods"
   me:
+    covers:
+      form:
+        submit: "Cambiar portada"
     avatars:
       form:
         avatar:
@@ -112,8 +115,6 @@ es-MX:
         title: "Desbloquear mi cuenta"
         submit: "Reenviar instrucciones de desbloqueo"
     registrations:
-      cover:
-        submit: "Cambiar portada"
       edit:
         unhappy: "¿No estás contento?"
         title: "Editar mi cuenta"

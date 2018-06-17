@@ -61,6 +61,9 @@ en:
     follow: "Follow"
     pods: "Pods"
   me:
+    covers:
+      form:
+        submit: "Change cover"
     avatars:
       form:
         avatar:
@@ -108,8 +111,6 @@ en:
         title: "Sign In"
         submit: "Sign In"
     registrations:
-      cover:
-        submit: "Change cover"
       edit:
         unhappy: "Unhappy?"
         title: "Edit my account"

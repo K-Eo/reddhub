@@ -1,0 +1,9 @@
+es-MX:
+  form:
+    errors:
+      img:
+        dimension: "La imagen es muy pequeña. Min. 256x256px."
+        size: "La imagen es muy pesadaba. Max. 5MB."
+        type: "Solo tenemos soporte para imágenes PNG y JPEG."
+
+
