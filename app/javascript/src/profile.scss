@@ -2,7 +2,12 @@
   font-weight: $font-weight-bold;
 
   .nav-item.nav-link {
-    color: $gray-800;
+    color: $gray-700;
+    border-radius: 0;
+  }
+
+  .nav-item.nav-link:hover {
+    color: $gray-900;
   }
 
   .nav-item.nav-link.active {
