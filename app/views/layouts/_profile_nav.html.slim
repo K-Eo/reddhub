@@ -1,4 +1,4 @@
-nav class="nav nav-pills nav-fill mb-4 profile-nav"
+nav class="nav nav-pills nav-fill mb-4 bg-white border rounded text-truncate profile-nav"
   = link_to user_profile_path(@user.username), class: active_when(controller_name == "profile", "nav-item nav-link")
     span class="profile-nav-label" = t("common.pods")
     span class="profile-nav-value" = @user.pods.size

@@ -1,6 +1,17 @@
 .profile-nav {
   font-weight: $font-weight-bold;
 
+  .nav-item.nav-link {
+    color: $gray-800;
+  }
+
+  .nav-item.nav-link.active {
+    background: $white;
+    color: $gray-800;
+    border-bottom: 4px solid $primary;
+    padding-bottom: 4px;
+  }
+
   &-label {
     display: block;
     font-size: 0.815rem;
