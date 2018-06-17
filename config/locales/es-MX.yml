@@ -62,6 +62,16 @@ es-MX:
     pods: "Pods"
   me:
     avatars:
+      form:
+        avatar:
+          change: "Cambiar"
+          errors:
+            small: "Es muy pequeña."
+            big: "Es muy pesada."
+            failure: "¡Rayos! Algo salío mal. Vuelve a intentar."
+            img: "Solo tenemos soporte para imágenes JPEG o PNG en este momento."
+          save: "Guardar"
+          resize: "Editar"
       edit:
         cancel: "Cancelar"
         save: "Guardar"
@@ -108,14 +118,6 @@ es-MX:
         unhappy: "¿No estás contento?"
         title: "Editar mi cuenta"
         cancel_account: "Cancelar mi cuenta"
-        avatar:
-          change: "Cambiar"
-          errors:
-            small: "Es muy pequeña."
-            big: "Es muy pesada."
-            failure: "¡Rayos! Algo salío mal. Vuelve a intentar."
-          save: "Guardar"
-          resize: "Editar"
       new:
         title: "Crear cuenta"
       form:

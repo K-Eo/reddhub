@@ -5,29 +5,8 @@
 </div>
 
 <div class="text-center mr-auto col-12 col-lg-5 order-lg-2">
-  <%= render 'user_avatar' %>
-  <%= form_for(Avatar.new, url: me_avatar_path, data: { controller: "avatar" }) do |f| %>
-    <div class="avatar-control">
-      <label class="btn btn-success">
-        <%= t(".avatar.change") %>
-        <%= f.file_field :image, direct_upload: true, hidden: true, accept: "image/x-png,image/jpeg", data: { action: "avatar#onPickImage", target: "avatar.image" } %>
-      </label>
-      <div class="is-default" data-target="avatar.feedback">
-        <p class="error too-small"><%= t(".avatar.errors.small") %></p>
-        <p class="error too-big"><%= t(".avatar.errors.big") %></p>
-        <p class="error failure"><%= t(".avatar.errors.failure") %></p>
-        <div class="loading"></div>
-      </div>
-    </div>
-
-    <%= f.submit t(".avatar.save"), class: "btn btn-success" %>
-    <% if current_user.original.attached? %>
-      <%= link_to t(".avatar.resize"), edit_me_avatar_path, class: "js-resize-avatar btn btn-outline-primary", data: { turbolinks: false } %>
-    <% end %>
-  <% end %>
-
-  <hr/>
-
+  <%= render "me/avatars/form"%>
+  <div class="my-4"></div>
   <%= render "cover" %>
 </div>
 
