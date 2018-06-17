@@ -3,8 +3,19 @@
 - else
   div class="cover rounded mb-4"
 
-= form_for(Cover.new, url: me_cover_path) do |f|
+= form_for(Cover.new,
+  url: me_cover_path,
+  data: { controller: "cover", cover_dimension: t("form.errors.img.dimension"), cover_size: t("form.errors.img.size"), cover_type: t("form.errors.img.type") }) do |f|
+  p class="text-danger mb-2 d-none" data-target="cover.error"
+
   div class="form-group"
-    = f.file_field :image, class: "form-control", accept: "image/x-png,image/jpeg"
-  = f.submit t(".submit"), class: "btn btn-success"
+    label class="btn btn-success mb-0" data-target="cover.label"
+      = t(".submit")
+      = f.file_field :image,
+        hidden: true,
+        class: "form-control",
+        accept: "image/x-png,image/jpeg",
+        data: { action: "cover#pick", target: "cover.source" }
+
+  = f.submit t(".submit"), class: "btn btn-success", data: { target: "cover.submit" }
 
