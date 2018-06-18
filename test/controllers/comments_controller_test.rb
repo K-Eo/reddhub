@@ -43,7 +43,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#comment_#{@comment.id}"
-    assert_select "a[href='/comments/#{@comment.id}'][data-method=delete]"
+    assert_select "a[href='/comments/#{@comment.id}'][data-method=delete]", count: 0
 
     assert_no_difference ["pod.comments.count", "Reaction.count"] do
       delete comment_path(@comment)
