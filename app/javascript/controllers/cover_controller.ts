@@ -13,7 +13,7 @@ export default class extends Controller {
   private errorTarget: HTMLParagraphElement
 
   initialize() {
-    this.submitTarget.remove()
+    this.submitTarget.classList.add('d-none')
   }
 
   @validates({
