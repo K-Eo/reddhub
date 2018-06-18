@@ -47,9 +47,6 @@ en:
     submit:
       user:
         update: "Save"
-  comments:
-    form:
-      reply: "Reply"
   footer:
     terms: "Terms"
     privacy: "Privacy"

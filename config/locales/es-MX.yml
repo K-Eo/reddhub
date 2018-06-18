@@ -47,9 +47,6 @@ es-MX:
     submit:
       user:
         update: "Guardar"
-  comments:
-    form:
-      reply: "Responder"
   footer:
     terms: "Términos"
     privacy: "Privacidad"

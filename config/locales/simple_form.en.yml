@@ -25,8 +25,6 @@ en:
           password_confirmation: "Confirm your new password"
       pod:
         content: "Write a message..."
-      comment:
-        body: "Write a reply"
     hints:
       user:
         name: "You can enter your first name (Tom) or full name (Tom Snow)."
