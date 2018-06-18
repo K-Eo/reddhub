@@ -1,6 +1,16 @@
-div class="card-footer d-flex"
+div class="card-footer d-flex" data-controller="comments--placeholder"
   = image_tag avatar_url(current_user), class: "border rounded-circle mr-3 avatar-33"
-  div class="w-100"
+
+  div data-target="comments--placeholder.placeholder" class="w-100"
+    = text_field_tag :placeholder, nil,
+      placeholder: t('form.comment.body.placeholder'),
+      class: "form-control",
+      data: { action: "focus->comments--placeholder#onFocus" }
+
+  div data-target="comments--placeholder.form" class="d-none w-100"
     = simple_form_for([commentable, comment]) do |f|
-      = f.input :body, label: false, input_html: { rows: 2 }
-      = f.submit t(".reply"), class: "btn btn-success btn-sm float-right"
+      = f.input :body,
+        placeholder: t("form.comment.body.placeholder"),
+        label: false,
+        input_html: { rows: 2, data: { target: "comments--placeholder.source" } }
+      = f.submit t("form.comment.submit"), class: "btn btn-success float-right"
