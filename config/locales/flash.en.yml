@@ -1,4 +1,8 @@
 en:
+  comments:
+    destroy:
+      notice: "Your comment was successfully deleted."
+      alert: "You can delete comments from other users."
   profiles:
     relationships:
       create:

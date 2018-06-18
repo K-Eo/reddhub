@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resource :reaction, only: [:create, :destroy], module: :pods
   end
 
-  resources :comments, only: [] do
+  resources :comments, only: [:destroy] do
     resource :reaction, only: [:create, :destroy], module: :comments
   end
 

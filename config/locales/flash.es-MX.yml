@@ -1,4 +1,8 @@
 es-MX:
+  comments:
+    destroy:
+      notice: "Tu comentario fue eliminado."
+      alert: "No puedes eliminar comentarios de otros usuarios."
   profiles:
     relationships:
       create:

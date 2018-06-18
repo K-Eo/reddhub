@@ -15,6 +15,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @pod = @comment.commentable
+    if @comment.user == current_user
+      @comment.destroy
+      redirect_to user_pod_path(@pod.user.username, @pod), notice: t(".notice")
+    else
+      redirect_to user_pod_path(@pod.user.username, @pod), alert: t(".alert")
+    end
+  end
+
   private
 
     def comment_params
