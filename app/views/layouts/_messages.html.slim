@@ -1,7 +1,4 @@
 div class="messages"
   - flash.each do |key, value|
-    div class="alert alert-#{key} fade show border-0 rounded-0" role="alert"
-      div class="container"
-        = value
-        button type="button" class="close" data-dismiss="alert" aria-label="Close"
-          span aria-hidden="true" &times;
+    div class="alert alert-#{key} fade show border-0 rounded-0 js-actionable" role="alert" data-controller="alert" data-action="click->alert#close"
+      div class="container" = value
