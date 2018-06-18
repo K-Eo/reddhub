@@ -15,4 +15,12 @@ li class="list-group-item d-flex comment" id="comment_#{comment.id}"
       div class="action"
         = render partial: "reactions/action",
                  locals: { reactable: comment, reaction: reaction }
+      - if comment.user == current_user
+        div class="action"
+          = link_to comment_path(comment),
+            method: :delete,
+            class: "btn btn-light btn-action js-action",
+            data: { confirm: t("confirm.comment.delete") }
+            = icon "far", "trash-alt", class: "action-icon"
+
 
