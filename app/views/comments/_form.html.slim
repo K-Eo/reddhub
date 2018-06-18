@@ -8,9 +8,9 @@ div class="card-footer d-flex" data-controller="comments--placeholder"
       data: { action: "focus->comments--placeholder#onFocus" }
 
   div data-target="comments--placeholder.form" class="d-none w-100"
-    = simple_form_for([commentable, comment]) do |f|
+    = simple_form_for([commentable, comment], data: { controller: "comments--form" }) do |f|
       = f.input :body,
         placeholder: t("form.comment.body.placeholder"),
         label: false,
-        input_html: { rows: 2, data: { target: "comments--placeholder.source" } }
-      = f.submit t("form.comment.submit"), class: "btn btn-success float-right"
+        input_html: { rows: 2, data: { action: "keyup->comments--form#typing", target: "comments--placeholder.source comments--form.source" } }
+      = f.submit t("form.comment.submit"), class: "btn btn-success float-right", data: { target: "comments--form.submit" }
