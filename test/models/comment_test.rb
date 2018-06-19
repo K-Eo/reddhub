@@ -30,4 +30,10 @@ class CommentTest < ActiveSupport::TestCase
     @comment.body = "a" * 8001
     assert_not @comment.valid?
   end
+
+  test "squeezeing new lines" do
+    @comment.body = "a\n\n\nb\n\n\n\nc\n\nd\n\n\n"
+    assert @comment.valid?
+    assert_equal @comment.body, "a\n\nb\n\nc\n\nd"
+  end
 end
