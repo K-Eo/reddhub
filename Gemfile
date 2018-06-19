@@ -48,7 +48,6 @@ gem "redcarpet"
 gem "slim"
 gem "font-awesome-sass", "~> 5.0.9"
 gem "recaptcha", require: "recaptcha/rails"
-gem "google-cloud-storage", "~> 1.8", require: false
 gem "http_accept_language"
 gem "twemoji"
 gem "sidekiq"
