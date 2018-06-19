@@ -36,7 +36,7 @@ class User < ApplicationRecord
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{L}]*)(\s\p{Lu}[\p{L}]*)*\z/ }
 
-  before_save :set_default_access_level
+  after_initialize :set_default_access_level, if: :new_record?
 
   scope :username_finder, -> (query) do
     where("username LIKE ?", "%#{sanitize_sql_like(query)}%")
@@ -119,7 +119,7 @@ class User < ApplicationRecord
   private
 
     def set_default_access_level
-      if User.first == nil
+      if User.first.nil?
         self.access_level = Reddhub::Access::ROOT
       else
         self.access_level = Reddhub::Access::USER

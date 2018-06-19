@@ -43,8 +43,17 @@ class UserTest < ActiveSupport::TestCase
     Story.delete_all
     User.delete_all
 
-    @user.save
-    assert_equal Reddhub::Access::ROOT, @user.access_level
+    first = User.new(
+      email: "first@bar.com",
+      password: "password",
+      password_confirmation: "password",
+      username: "first",
+      name: "Foo Bar",
+      access_level: Reddhub::Access::USER
+    )
+
+    first.save
+    assert_equal Reddhub::Access::ROOT, first.access_level
 
     second = User.new(
       email: "second@bar.com",
