@@ -20,11 +20,7 @@ class Pod < ApplicationRecord
 
     def preprocess_content
       if content.present?
-        self.content = content
-                        .strip
-                        .encode(universal_newline: true)
-                        .gsub(/ +\n/, "\n")
-                        .gsub(/\n\n\n*/, "\n\n")
+        self.content = Reddhub::Sanitizer.extra_space(content)
       end
     end
 end
