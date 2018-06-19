@@ -7,12 +7,56 @@ class UserTest < ActiveSupport::TestCase
       password: "password",
       password_confirmation: "password",
       username: "foobar",
-      name: "Foo Bar"
+      name: "Foo Bar",
+      access_level: Reddhub::Access::USER
     )
   end
 
   test "valid user" do
     assert @user.valid?
+  end
+
+  test "guest by default" do
+    @user.save
+    assert_equal Reddhub::Access::USER, @user.access_level
+  end
+
+  test "invalid if has no access_level" do
+    @user.access_level = nil
+    assert_not @user.valid?
+  end
+
+  test "access level inclusion" do
+    @user.access_level = Reddhub::Access::USER
+    assert @user.valid?
+    @user.access_level = Reddhub::Access::ROOT
+    assert @user.valid?
+    @user.access_level = 20
+    assert_not @user.valid?
+  end
+
+  test "first user as root" do
+    Relationship.delete_all
+    Reaction.delete_all
+    Comment.delete_all
+    Pod.delete_all
+    Story.delete_all
+    User.delete_all
+
+    @user.save
+    assert_equal Reddhub::Access::ROOT, @user.access_level
+
+    second = User.new(
+      email: "second@bar.com",
+      password: "password",
+      password_confirmation: "password",
+      username: "second",
+      name: "Foo Bar",
+      access_level: Reddhub::Access::USER
+    )
+
+    second.save
+    assert_equal Reddhub::Access::USER, second.access_level
   end
 
   test "is not guest" do
