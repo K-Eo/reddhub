@@ -280,7 +280,7 @@ class UserTest < ActiveSupport::TestCase
     follower = users(:marty)
     followed = users(:marty)
 
-    assert_raises(User::NotDifferentUsers) do
+    assert_raises(Reddhub::Relationship::SameUser) do
       follower.follow(followed)
     end
   end

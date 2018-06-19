@@ -6,7 +6,7 @@ class Profiles::RelationshipsController < ApplicationController
     redirect_to(user_profile_path(@user.username), notice: t(".already", username: @user.username))
   end
 
-  rescue_from User::NotDifferentUsers do
+  rescue_from Reddhub::Relationship::SameUser do
     redirect_to(user_profile_path(@user.username), notice: t(".same"))
   end
 
