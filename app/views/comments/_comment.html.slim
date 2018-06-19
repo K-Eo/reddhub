@@ -9,7 +9,7 @@ li class="list-group-item d-flex comment" id="comment_#{comment.id}"
       span class="small text-secondary"
         = time_ago_in_words comment.created_at
 
-    p = comment.body
+    p class="comment-content" = comment.body
 
     div class="actions"
       div class="action"
