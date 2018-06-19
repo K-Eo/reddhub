@@ -25,15 +25,18 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
 
+  validate :username_exclusion
   validates :username, presence: true,
                        format: { with: /\A[a-zA-Z0-9_]*\z/i },
                        length: { minimum: 4, maximum: 32 },
                        uniqueness: { case_sensitive: false }
-  validate :username_exclusion
-
+  validates :access_level, inclusion: { in: Reddhub::Access.values },
+                           presence: true
   validates :name, presence: true,
                    length: { maximum: 96 },
                    format: { with: /\A(\p{Lu}[\p{L}]*)(\s\p{Lu}[\p{L}]*)*\z/ }
+
+  after_initialize :set_default_access_level, if: :new_record?
 
   scope :username_finder, -> (query) do
     where("username LIKE ?", "%#{sanitize_sql_like(query)}%")
@@ -114,6 +117,14 @@ class User < ApplicationRecord
   end
 
   private
+
+    def set_default_access_level
+      if User.first.nil?
+        self.access_level = Reddhub::Access::ROOT
+      else
+        self.access_level = Reddhub::Access::USER
+      end
+    end
 
     def sanitize_emoji_name(name)
       if name.nil? || !Reaction::NAMES.include?(name)
