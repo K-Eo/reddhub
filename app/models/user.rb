@@ -87,7 +87,7 @@ class User < ApplicationRecord
   end
 
   def follow(user)
-    raise NotDifferentUsers if user == self
+    raise Reddhub::Relationship::SameUser if user == self
 
     following << user
   end
@@ -111,9 +111,6 @@ class User < ApplicationRecord
        .where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
        .no_deleted
        .order(created_at: :desc)
-  end
-
-  class NotDifferentUsers < StandardError
   end
 
   private
