@@ -14,6 +14,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "li#comment_#{@comment.id}" do
       assert_select "div[data-controller=reactions]"
+      assert_select "span.action-count", count: 0
     end
 
     assert_difference "@comment.reactions.count" do
@@ -28,6 +29,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#comment_#{@comment.id}" do
       assert_select "a#reaction_#{@owner.reactions.last.id}[data-method=delete][href='/comments/#{@comment.id}/reaction']" do
         assert_select "img[title=':+1:']"
+        assert_select "span.action-count", text: "1"
       end
     end
   end
@@ -47,6 +49,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#comment_#{@comment.id}" do
       assert_select "a#reaction_#{@reactions.id}"
       assert_select "img[title=':+1:']"
+      assert_select "span.action-count", text: "1"
     end
 
     assert_difference "@comment.reactions.count", -1 do
@@ -60,6 +63,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "li#comment_#{@comment.id}" do
       assert_select "div[data-controller=reactions]"
+      assert_select "span.action-count", count: 0
     end
   end
 

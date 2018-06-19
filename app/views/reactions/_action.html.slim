@@ -1,10 +1,14 @@
 - if current_user.reacted?(reaction)
   = link_to [reactable, :reaction], method: :delete, class: "btn btn-light btn-action js-action", id: "reaction_#{reaction.id}"
     = Twemoji.parse(":#{reaction.name}:", class_name: "action-icon").html_safe
+    - if reactable.reactions.size > 0
+      span class="action-count" = reactable.reactions.size
 - else
   div [data-controller="reactions"
     data-reactions-id=reactable.id
     data-reactions-type=reactable.class.name.downcase.pluralize]
     button type="button" class="btn btn-light btn-action js-action" data-action="reactions#show" data-target="reactions.toggler"
       = icon "far", "smile", class: "action-icon"
+      - if reactable.reactions.size > 0
+        span class="action-count" = reactable.reactions.size
     div data-target="reactions.picker" class="d-none btn-group border border-white rounded shadow reactions-collection"

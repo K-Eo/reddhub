@@ -3,7 +3,7 @@ class Reaction < ApplicationRecord
   NAMES = [DEFAULT_NAME, "heart", "laughing", "astonished", "disappointed_relieved", "rage"].freeze
 
   belongs_to :user
-  belongs_to :reactable, polymorphic: true
+  belongs_to :reactable, polymorphic: true, counter_cache: true
 
   validates :name, presence: true,
                    inclusion: { in: Reaction::NAMES }

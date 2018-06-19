@@ -8,4 +8,5 @@ with_reactions:
   body: "Welcome!"
   user: marty
   commentable: pod_with_comments (Pod)
+  reactions_count: 1
 
