@@ -1,4 +1,5 @@
 class Comments::ReactionsController < ReactionsController
+  before_action :authenticate_user!
   before_action :set_reactable
 
   private

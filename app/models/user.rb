@@ -42,12 +42,6 @@ class User < ApplicationRecord
     where("username LIKE ?", "%#{sanitize_sql_like(query)}%")
   end
 
-  def username_exclusion
-    if username.present? && Reddhub::Username::RESERVED.include?(username.downcase)
-      errors.add(:username, :exclusion)
-    end
-  end
-
   def reactions_for(reactables, type)
     if guest?
       Hash.new
@@ -78,7 +72,7 @@ class User < ApplicationRecord
   def react(reactable, name)
     reactable
       .reactions
-      .where(user: self, name: sanitize_emoji_name(name))
+      .where(user: self, name: Reddhub::Reaction.sanitize(name))
       .first_or_create
   end
 
@@ -91,7 +85,6 @@ class User < ApplicationRecord
 
   def follow(user)
     raise Reddhub::Relationship::SameUser if user == self
-
     following << user
   end
 
@@ -118,19 +111,17 @@ class User < ApplicationRecord
 
   private
 
+    def username_exclusion
+      if username.present? && Reddhub::Username::RESERVED.include?(username.downcase)
+        errors.add(:username, :exclusion)
+      end
+    end
+
     def set_default_access_level
       if User.first.nil?
         self.access_level = Reddhub::Access::ROOT
       else
         self.access_level = Reddhub::Access::USER
-      end
-    end
-
-    def sanitize_emoji_name(name)
-      if name.nil? || !Reaction::NAMES.include?(name)
-        Reaction::DEFAULT_NAME
-      else
-        name
       end
     end
 end
