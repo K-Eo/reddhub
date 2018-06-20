@@ -1,21 +1,18 @@
 #!/bin/bash
 
-echo Deploy.
-
 APP_NAME="reddhub-staging"
 
-if [ ! $CI_COMMIT_REF_NAME = "master" ] || [ ! $CI_COMMIT_REF_NAME = $CI_COMMIT_TAG ]
-then
-  echo Not in master\($CI_COMMIT_REF_NAME\), skipping deployment.
-  exit 0
-fi
-
-if [[ $CI_COMMIT_TAG == v* ]]
+if [ $CI_COMMIT_REF_NAME == "$CI_COMMIT_TAG" ] && [[ $CI_COMMIT_TAG == v* ]]
 then
   APP_NAME="reddhub"
+  echo Deploy to production \($APP_NAME\). $CI_COMMIT_REF_NAME:$CI_COMMIT_TAG.
+elif [ $CI_COMMIT_REF_NAME == "master" ]
+then
+  echo Deploy to staging \($APP_NAME\). $CI_COMMIT_REF_NAME:$CI_COMMIT_TAG.
+else
+  echo Not in master\($CI_COMMIT_REF_NAME\) or tag empty \($CI_COMMIT_TAG\). Skipping deployment.
+  exit 0
 fi
-
-echo Deploy to $APP_NAME app.
 
 # Install private ssh key
 which ssh-agent
