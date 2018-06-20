@@ -4,7 +4,7 @@ echo Deploy.
 
 APP_NAME="reddhub-staging"
 
-if [ ! $CI_COMMIT_REF_NAME = "master" ]
+if [ ! $CI_COMMIT_REF_NAME = "master" ] || [ ! $CI_COMMIT_REF_NAME = $CI_COMMIT_TAG ]
 then
   echo Not in master\($CI_COMMIT_REF_NAME\), skipping deployment.
   exit 0
