@@ -1,15 +1,17 @@
 - if current_user.reacted?(reaction)
-  button [type="button"
-    data-reactions--destroy-href=url_for([reactable, :reaction])
-    class="btn btn-light btn-action js-action"
-    id="reaction_#{reactable.id}"
-    data-controller="reactions--destroy"
-    data-action="reactions--destroy#execute"]
+  button[type="button"
+         data-reactions--destroy-href=url_for([reactable, :reaction])
+         class="btn btn-light btn-action js-action"
+         id="reaction_#{reactable.id}"
+         data-controller="reactions--destroy"
+         data-action="reactions--destroy#execute"]
     = Twemoji.parse(":#{reaction.name}:", class_name: "action-icon").html_safe
     - if reactable.reactions.size > 0
       span class="action-count" = reactable.reactions.size
 - else
-  div data-controller="reactions--create" data-reactions--create-href=url_for([reactable, :reaction])
+  div[data-controller="reactions--create"
+      data-reactions--create-href=url_for([reactable, :reaction])
+      id="reaction_#{reactable.id}"]
     button type="button" class="btn btn-light btn-action js-action" data-action="reactions--create#show" data-target="reactions--create.toggler"
       = icon "far", "smile", class: "action-icon"
       - if reactable.reactions.size > 0
