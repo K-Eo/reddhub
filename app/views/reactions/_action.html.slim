@@ -4,9 +4,7 @@
     - if reactable.reactions.size > 0
       span class="action-count" = reactable.reactions.size
 - else
-  div [data-controller="reactions"
-    data-reactions-id=reactable.id
-    data-reactions-type=reactable.class.name.downcase.pluralize]
+  div data-controller="reactions" data-reactions-href=url_for([reactable, :reaction])
     button type="button" class="btn btn-light btn-action js-action" data-action="reactions#show" data-target="reactions.toggler"
       = icon "far", "smile", class: "action-icon"
       - if reactable.reactions.size > 0

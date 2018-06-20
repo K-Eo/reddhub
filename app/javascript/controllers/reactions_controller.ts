@@ -63,14 +63,10 @@ export default class extends Controller {
   }
 
   private buildReactions() {
-    const type = this.data.get('type')
-    const id = this.data.get('id')
-    return EMOJI_REACIONS.map(emoji => this.buildReaction(emoji, type, id))
+    return EMOJI_REACIONS.map(emoji => this.buildReaction(emoji))
   }
 
-  private buildReaction(emoji: Emoji, type: string, id: string): HTMLElement {
-    const name = encodeURIComponent(emoji.name)
-
+  private buildReaction(emoji: Emoji): HTMLElement {
     const img = document.createElement('img')
     img.draggable = false
     img.title = emoji.name
@@ -80,15 +76,25 @@ export default class extends Controller {
     img.style.height = '18px'
     img.src = `https://twemoji.maxcdn.com/2/svg/${emoji.src}.svg`
 
-    const a = document.createElement('a')
-    a.classList.add('btn', 'btn-light', 'border-0', 'js-action')
-    a.rel = 'nofollow'
-    a.setAttribute('data-method', 'post')
-    a.href = `/${type}/${id}/reaction?name=${name}`
+    const button = document.createElement('button')
+    button.classList.add('btn', 'btn-light', 'border-0', 'js-action')
+    button.setAttribute('data-method', 'post')
+    button.addEventListener('click', this.react.bind(this, emoji.name))
+    button.appendChild(img)
 
-    a.appendChild(img)
+    return button
+  }
 
-    return a
+  private react(name) {
+    const formData = new FormData()
+    formData.append('name', name)
+
+    Rails.ajax({
+      type: 'POST',
+      url: this.data.get('href'),
+      data: formData,
+      dataType: 'script',
+    })
   }
 
   private autoclose(e: MouseEvent) {

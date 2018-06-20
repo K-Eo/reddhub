@@ -51,7 +51,7 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    assert_select "div[data-controller=reactions][data-reactions-id='#{@pod.id}']"
+    assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{@pod.id}/reaction']"
   end
 
   test "comment form visible" do
