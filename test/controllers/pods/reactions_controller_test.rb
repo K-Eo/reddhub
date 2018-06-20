@@ -12,7 +12,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{pod.id}/reaction']", text: ""
+      assert_select "div#reaction_#{pod.id}[data-controller=reactions--create][data-reactions--create-href='/pods/#{pod.id}/reaction']", text: ""
       assert_select "span.action-count", count: 0
     end
 
@@ -25,7 +25,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "a#reaction_#{user.reactions.last.id}[data-method=delete][href='/pods/#{pod.id}/reaction']" do
+      assert_select "button#reaction_#{pod.id}[data-reactions--destroy-href='/pods/#{pod.id}/reaction']" do
         assert_select "img[title=':rage:']"
         assert_select "span.action-count", text: "1"
       end
@@ -44,7 +44,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "a#reaction_#{reaction.id}[data-method=delete][href='/pods/#{pod.id}/reaction']" do
+      assert_select "button#reaction_#{pod.id}[data-reactions--destroy-href='/pods/#{pod.id}/reaction']" do
         assert_select "img[title=':rage:']"
         assert_select "span.action-count", text: "1"
       end
@@ -59,7 +59,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{pod.id}/reaction']"
+      assert_select "div#reaction_#{pod.id}[data-controller=reactions--create][data-reactions--create-href='/pods/#{pod.id}/reaction']"
       assert_select "span.action-count", count: 0
     end
   end
@@ -74,7 +74,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{pod.id}/reaction']", text: ""
+      assert_select "div#reaction_#{pod.id}[data-controller=reactions--create][data-reactions--create-href='/pods/#{pod.id}/reaction']", text: ""
     end
 
     assert_no_difference "pod.reactions.count" do
@@ -94,7 +94,7 @@ class Pods::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#pod_#{pod.id}" do
-      assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{pod.id}/reaction']", text: "1"
+      assert_select "div#reaction_#{pod.id}[data-controller=reactions--create][data-reactions--create-href='/pods/#{pod.id}/reaction']", text: "1"
     end
 
     assert_no_difference "pod.reactions.count" do

@@ -1,0 +1,3 @@
+var target = document.querySelector("button#reaction_<%= @reactable.id %>")
+target.insertAdjacentHTML('beforebegin', '<%= j render(partial: "reactions/action", locals: { reaction: nil, reactable: @reactable }) %>')
+target.remove()

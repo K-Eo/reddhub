@@ -63,7 +63,7 @@ class Profiles::ProfileControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    assert_select "a.btn-action" do
+    assert_select "button.btn-action" do
       assert_select "img[title=':rage:']"
     end
   end

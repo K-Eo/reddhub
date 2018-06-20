@@ -51,7 +51,7 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    assert_select "div[data-controller=reactions][data-reactions-href='/pods/#{@pod.id}/reaction']"
+    assert_select "div[data-controller=reactions--create][data-reactions--create-href='/pods/#{@pod.id}/reaction']"
   end
 
   test "comment form visible" do
@@ -71,7 +71,7 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :ok
 
-    assert_select "a#reaction_#{@reaction.id}[data-method=delete][href='/pods/#{@pod.id}/reaction']" do
+    assert_select "button#reaction_#{@pod.id}[data-reactions--destroy-href='/pods/#{@pod.id}/reaction']" do
       assert_select "img[title=':+1:']"
     end
   end
