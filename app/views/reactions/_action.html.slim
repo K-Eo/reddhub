@@ -1,5 +1,10 @@
 - if current_user.reacted?(reaction)
-  = link_to [reactable, :reaction], method: :delete, class: "btn btn-light btn-action js-action", id: "reaction_#{reaction.id}"
+  button [type="button"
+    data-reactions--destroy-href=url_for([reactable, :reaction])
+    class="btn btn-light btn-action js-action"
+    id="reaction_#{reactable.id}"
+    data-controller="reactions--destroy"
+    data-action="reactions--destroy#execute"]
     = Twemoji.parse(":#{reaction.name}:", class_name: "action-icon").html_safe
     - if reactable.reactions.size > 0
       span class="action-count" = reactable.reactions.size
