@@ -13,7 +13,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "div[data-controller=reactions]"
+      assert_select "div[data-controller=reactions--create]"
       assert_select "span.action-count", count: 0
     end
 
@@ -27,7 +27,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "a#reaction_#{@owner.reactions.last.id}[data-method=delete][href='/comments/#{@comment.id}/reaction']" do
+      assert_select "button#reaction_#{@comment.id}[data-reactions--destroy-href='/comments/#{@comment.id}/reaction']" do
         assert_select "img[title=':+1:']"
         assert_select "span.action-count", text: "1"
       end
@@ -47,7 +47,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "a#reaction_#{@reactions.id}"
+      assert_select "button#reaction_#{@comment.id}"
       assert_select "img[title=':+1:']"
       assert_select "span.action-count", text: "1"
     end
@@ -62,7 +62,7 @@ class Comments::ReactionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select "li#comment_#{@comment.id}" do
-      assert_select "div[data-controller=reactions]"
+      assert_select "div[data-controller=reactions--create]"
       assert_select "span.action-count", count: 0
     end
   end
