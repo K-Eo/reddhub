@@ -4,9 +4,9 @@
     - if reactable.reactions.size > 0
       span class="action-count" = reactable.reactions.size
 - else
-  div data-controller="reactions" data-reactions-href=url_for([reactable, :reaction])
-    button type="button" class="btn btn-light btn-action js-action" data-action="reactions#show" data-target="reactions.toggler"
+  div data-controller="reactions--create" data-reactions--create-href=url_for([reactable, :reaction])
+    button type="button" class="btn btn-light btn-action js-action" data-action="reactions--create#show" data-target="reactions--create.toggler"
       = icon "far", "smile", class: "action-icon"
       - if reactable.reactions.size > 0
         span class="action-count" = reactable.reactions.size
-    div data-target="reactions.picker" class="d-none btn-group border border-white rounded shadow reactions-collection"
+    div data-target="reactions--create.picker" class="d-none btn-group border border-white rounded shadow reactions-collection"
