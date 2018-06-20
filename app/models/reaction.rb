@@ -1,12 +1,9 @@
 class Reaction < ApplicationRecord
-  DEFAULT_NAME = "+1".freeze
-  NAMES = [DEFAULT_NAME, "heart", "laughing", "astonished", "disappointed_relieved", "rage"].freeze
-
   belongs_to :user
   belongs_to :reactable, polymorphic: true, counter_cache: true
 
   validates :name, presence: true,
-                   inclusion: { in: Reaction::NAMES }
+                   inclusion: { in: Reddhub::Reaction.values }
 
   class << self
     def votes_for_collection(ids, type)
