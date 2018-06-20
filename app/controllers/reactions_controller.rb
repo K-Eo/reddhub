@@ -2,8 +2,12 @@ class ReactionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    current_user.react(@reactable, params[:name])
-    redirect_back(fallback_location: root_path)
+    @reaction = current_user.react(@reactable, params[:name])
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.js
+    end
   end
 
   def destroy
