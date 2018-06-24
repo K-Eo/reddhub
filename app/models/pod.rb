@@ -5,8 +5,8 @@ class Pod < ApplicationRecord
   has_many :reactions, as: :reactable, dependent: :delete_all
   has_many_attached :images
 
-  validates :content, presence: true,
-                      length: { maximum: 280 }
+  validates_presence_of :content
+  validates_length_of :content, maximum: 280, if: :pod?
 
   scope :newest, -> { order(created_at: :desc) }
   scope :no_deleted, -> { where(pending_delete: false) }
@@ -17,6 +17,10 @@ class Pod < ApplicationRecord
   end
 
   private
+
+    def pod?
+      self.class == Pod
+    end
 
     def preprocess_content
       if content.present?
