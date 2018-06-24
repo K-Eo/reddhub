@@ -1,6 +1,6 @@
 require "test_helper"
 
-class SanitizerTest < ActionView::TestCase
+class SanitizerTest < ActiveSupport::TestCase
   test "removes extra break lines" do
     content = "a\n\n\nb\n\n\n\nc\n\nd\n\n\n"
     assert_equal "a\n\nb\n\nc\n\nd", Reddhub::Sanitizer.extra_space(content)

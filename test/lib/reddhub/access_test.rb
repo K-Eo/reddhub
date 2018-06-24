@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AccessTest < ActionView::TestCase
+class AccessTest < ActiveSupport::TestCase
   test "returns options" do
     options = {
       "User" => 0,
