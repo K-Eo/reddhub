@@ -68,30 +68,4 @@ class PodTest < ActiveSupport::TestCase
     pod.reload
     assert pod.pending_delete
   end
-
-  test "is large pod" do
-    content = "# My title\n\nMy description"
-    assert Pod.large?(content)
-
-    content = "# My title\n\n# My description"
-    assert Pod.large?(content)
-
-    content = "My title\n\nMy description"
-    assert_not Pod.large?(content)
-
-    content = "#  My title\n\nMy description"
-    assert_not Pod.large?(content)
-
-    content = "#My title\n\nMy description"
-    assert_not Pod.large?(content)
-
-    content = " # My title\n\nMy description"
-    assert_not Pod.large?(content)
-
-    content = "## My title\n\nMy description"
-    assert_not Pod.large?(content)
-
-    content = "  My title\n\nMy description"
-    assert_not Pod.large?(content)
-  end
 end

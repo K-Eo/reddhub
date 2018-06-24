@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_24_034129) do
+ActiveRecord::Schema.define(version: 2018_06_24_044427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -57,6 +57,9 @@ ActiveRecord::Schema.define(version: 2018_06_24_034129) do
     t.integer "comments_count", default: 0, null: false
     t.boolean "pending_delete", default: false
     t.integer "reactions_count", default: 0, null: false
+    t.string "type"
+    t.text "title"
+    t.text "description"
     t.index ["user_id"], name: "index_pods_on_user_id"
   end
 
