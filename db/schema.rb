@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_215810) do
+ActiveRecord::Schema.define(version: 2018_06_24_034129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -81,19 +81,6 @@ ActiveRecord::Schema.define(version: 2018_06_19_215810) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "stories", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.string "state"
-    t.datetime "published_at"
-    t.string "subtitle"
-    t.index ["state"], name: "index_stories_on_state"
-    t.index ["user_id"], name: "index_stories_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -132,5 +119,4 @@ ActiveRecord::Schema.define(version: 2018_06_19_215810) do
   add_foreign_key "reactions", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
-  add_foreign_key "stories", "users"
 end

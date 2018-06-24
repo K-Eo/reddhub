@@ -16,12 +16,6 @@ Rails.application.routes.draw do
     unlocks: "users/unlocks"
   }
 
-  resources :stories, except: [:create] do
-    post "preview", on: :collection
-    post "publish", on: :member
-    delete "unpublish", on: :member
-  end
-
   resources :pods, only: [:create, :destroy] do
     resources :attachments, only: [:create], module: :pods
     resources :comments, only: [:create], module: :pods
