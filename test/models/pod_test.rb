@@ -16,40 +16,17 @@ class PodTest < ActiveSupport::TestCase
   end
 
   test "is invalid if content is too long" do
+    @pod.content = "a" * 280
+    assert @pod.valid?
+
     @pod.content = "a" * 281
     assert_not @pod.valid?
   end
 
-  test "squeezeing new lines" do
-    @pod.content = "a\n\n\nb\n\n\n\nc\n\nd\n\n\n"
+  test "sanitizes content" do
+    @pod.content = "a\n\n\nb\n\n\n\nc\s\s\s\n\nd\n\n\n"
     assert @pod.valid?
-    assert_equal @pod.content, "a\n\nb\n\nc\n\nd"
-  end
-
-  test "normalizing new lines" do
-    @pod.content = "a\r\n\nb"
-    assert @pod.valid?
-    assert_equal @pod.content, "a\n\nb"
-
-    @pod.content = "a\r\n\r\n\r\nb\r\nc\r\n\r\n\r\n"
-    assert @pod.valid?
-    assert_equal @pod.content, "a\n\nb\nc"
-
-    @pod.content = "a\r\n\n\nb"
-    assert @pod.valid?
-    assert_equal @pod.content, "a\n\nb"
-  end
-
-  test "removes space between new lines" do
-    @pod.content = "a\n\s\s\n\s\s\nb\s\n\n\n\nc\n\nd\n\n\n"
-    assert @pod.valid?
-    assert_equal @pod.content, "a\n\nb\n\nc\n\nd"
-  end
-
-  test "removes extra spaces" do
-    @pod.content = "     abc    "
-    assert @pod.valid?
-    assert_equal @pod.content, "abc"
+    assert_equal "a\n\nb\n\nc\n\nd", @pod.content
   end
 
   test "is invalid if has no user" do
