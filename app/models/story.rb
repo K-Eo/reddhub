@@ -18,7 +18,7 @@ class Story < Pod
     def extract_metadata
       title, description = content.match(/\A# (\S.+)\n\n(.+)/).captures
 
-      self.title = title[0,100]
-      self.description = description[0,150]
+      self.title = title[0, 100]
+      self.description = description[0, 150]
     end
 end
