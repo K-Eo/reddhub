@@ -4,7 +4,7 @@ class Story < Pod
   before_save :extract_metadata
 
   def self.story?(content)
-    content.match(/\A# \S.+/)
+    content.match(Reddhub::Pod::STORY_REGEX)
   end
 
   private
@@ -16,7 +16,9 @@ class Story < Pod
     end
 
     def extract_metadata
-      title, description = content.match(/\A# (\S.+)\n\n(.+)/).captures
+      title, description = content
+                             .match(Reddhub::Pod::STORY_META_REGEX)
+                             .captures
 
       self.title = title[0, 100]
       self.description = description[0, 150]
