@@ -40,7 +40,6 @@ class UserTest < ActiveSupport::TestCase
     Reaction.delete_all
     Comment.delete_all
     Pod.delete_all
-    Story.delete_all
     User.delete_all
 
     first = User.new(
