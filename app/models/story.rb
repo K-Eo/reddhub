@@ -16,11 +16,12 @@ class Story < Pod
     end
 
     def extract_metadata
-      title, description = content
+      title, description, body = content
                              .match(Reddhub::Pod::STORY_META_REGEX)
                              .captures
 
       self.title = title[0, 100]
       self.description = description[0, 150]
+      self.content_html = ApplicationController.helpers.markdown(body)
     end
 end
