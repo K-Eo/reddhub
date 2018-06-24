@@ -109,4 +109,12 @@ class StoryTest < ActiveSupport::TestCase
     content = "  My title\n\nMy description"
     assert_not Story.story?(content)
   end
+
+  test "parses content to markdown on save" do
+    @story.content = "# My title\n\nMy description\n\nMy content\n\nMore content"
+    @story.save
+    @story.reload
+
+    assert_equal "<p>My content</p>\n\n<p>More content</p>\n", @story.content_html
+  end
 end
