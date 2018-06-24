@@ -16,6 +16,10 @@ class Pod < ApplicationRecord
     DestroyPodJob.perform_later(id)
   end
 
+  def self.large?(content)
+    content.match(/\A# \S.+/)
+  end
+
   private
 
     def preprocess_content
