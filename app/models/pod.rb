@@ -1,12 +1,14 @@
 class Pod < ApplicationRecord
   before_validation :preprocess_content
+  before_save :check_for_story
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable
   has_many :reactions, as: :reactable, dependent: :delete_all
   has_many_attached :images
 
   validates_presence_of :content
-  validates_length_of :content, maximum: 280, if: :pod?
+  validates_length_of :content, maximum: 8000, if: :is_story?
+  validates_length_of :content, maximum: 280, unless: :is_story?
 
   scope :newest, -> { order(created_at: :desc) }
   scope :no_deleted, -> { where(pending_delete: false) }
@@ -17,9 +19,18 @@ class Pod < ApplicationRecord
   end
 
   private
+    def is_story?
+      Reddhub::Pod.story?(self.content)
+    end
 
-    def pod?
-      self.class == Pod
+    def check_for_story
+      return unless is_story?
+
+      title, description, body = Reddhub::Pod.parse_story(self.content)
+      self.title = title
+      self.description = description
+      self.content_html = ApplicationController.helpers.markdown(body)
+      self.kind = Reddhub::Pod::STORY
     end
 
     def preprocess_content
