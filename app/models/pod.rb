@@ -20,7 +20,7 @@ class Pod < ApplicationRecord
 
   private
     def is_story?
-      self.content.present? && Reddhub::Pod.story?(self.content)
+      Reddhub::Pod.story?(self.content)
     end
 
     def check_for_story

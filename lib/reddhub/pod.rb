@@ -8,7 +8,7 @@ module Reddhub
 
     class << self
       def story?(content)
-        content.match(STORY_REGEX)
+        content.present? && content.match(STORY_REGEX)
       end
 
       def parse_story(content)

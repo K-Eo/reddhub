@@ -8,6 +8,12 @@ class PodTest < ActiveSupport::TestCase
     content = "# My title\n\n# My description\n\n#My content"
     assert Reddhub::Pod.story?(content)
 
+    content = nil
+    assert_not Reddhub::Pod.story?(content)
+
+    content = ""
+    assert_not Reddhub::Pod.story?(content)
+
     content = "# My title\n\n My description\n\n#My content"
     assert_not Reddhub::Pod.story?(content)
 
