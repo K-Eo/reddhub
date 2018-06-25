@@ -7,7 +7,9 @@ li [class="list-group-item list-group-item-action d-flex pod pb-0 px-2 px-md-3"
   = image_tag avatar_url(pod.user), class: "rounded-circle mr-2 mr-md-3 avatar-48"
   div class="w-100"
     div class="d-flex justify-content-between"
-      = link_to pod.user.name, user_profile_path(pod.user.username), class: "h6 text-dark js-action"
+      = link_to user_profile_path(pod.user.username), class: "h6 text-dark js-action"
+        = pod.user.name
+        span class="font-weight-normal ml-1" = "@#{pod.user.username}"
 
       span class="small text-secondary"
         = time_ago_in_words pod.created_at
