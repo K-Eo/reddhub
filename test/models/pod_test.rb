@@ -37,6 +37,8 @@ class PodTest < ActiveSupport::TestCase
   test "saving as pod" do
     @pod.save
     assert_equal 0, @pod.kind
+    assert @pod.pod?
+    assert_not @pod.story?
   end
 
   test "destroying" do
@@ -56,6 +58,8 @@ class PodTest < ActiveSupport::TestCase
     assert @pod.valid?
     @pod.save
     assert_equal 1, @pod.kind
+    assert @pod.story?
+    assert_not @pod.pod?
   end
 
   test "too long when is story" do
