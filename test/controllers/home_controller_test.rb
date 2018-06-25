@@ -49,7 +49,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_select "a", text: "Bilbo Baggins", count: 2
+    assert_select "a", text: "Bilbo Baggins@Bilbo", count: 2
     assert_select "p", text: "First pod"
     assert_select "p", text: "Second pod"
 
