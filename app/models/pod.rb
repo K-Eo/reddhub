@@ -7,8 +7,8 @@ class Pod < ApplicationRecord
   has_many_attached :images
 
   validates_presence_of :content
-  validates_length_of :content, maximum: 8000, if: :is_story?
-  validates_length_of :content, maximum: 280, unless: :is_story?
+  validates_length_of :content, maximum: 8000, if: :story_format?
+  validates_length_of :content, maximum: 280, unless: :story_format?
 
   scope :newest, -> { order(created_at: :desc) }
   scope :no_deleted, -> { where(pending_delete: false) }
@@ -18,13 +18,21 @@ class Pod < ApplicationRecord
     DestroyPodJob.perform_later(id)
   end
 
+  def story?
+    self.kind == Reddhub::Pod::STORY
+  end
+
+  def pod?
+    self.kind == Reddhub::Pod::POD
+  end
+
   private
-    def is_story?
+    def story_format?
       Reddhub::Pod.story?(self.content)
     end
 
     def check_for_story
-      return unless is_story?
+      return unless story_format?
 
       title, description, body = Reddhub::Pod.parse_story(self.content)
       self.title = title
