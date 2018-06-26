@@ -32,3 +32,11 @@ eight:
 nine:
   user: doc
   content: "Nine pod"
+
+ten:
+  user: doc
+  content: "# My Story\n\nStory description\n\nStory content"
+  title: "My Story"
+  description: "Story description"
+  content_html: "<p>Story content</p>\n"
+  kind: 1

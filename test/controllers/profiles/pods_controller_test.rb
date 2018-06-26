@@ -29,6 +29,25 @@ class Profiles::PodsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "seeing story" do
+    @pod = pods(:ten)
+
+    get user_profile_path(@pod.user.username)
+
+    assert_response :ok
+
+    assert_select "h6", text: @pod.title
+    assert_select "p", text: @pod.description
+
+    get user_pod_path(@pod.user.username, @pod)
+
+    assert_response :ok
+
+    assert_select "h3", @pod.title
+    assert_select "p", @pod.description
+    assert_match @pod.content_html, @response.body
+  end
+
   test "can't see if pod is pending for delete" do
     @pod.purge
     get user_pod_path(@user.username, @pod)

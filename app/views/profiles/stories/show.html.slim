@@ -1,0 +1,54 @@
+div class="col-md-10 mx-auto"
+  h3 class="text-center" = @pod.title
+
+div class="col-md-6 mx-auto"
+  p class="text-secondary text-center font-size-lecture" = @pod.description
+
+div class="w-100"
+
+div class="col-12 mx-auto mb-5 mt-4"
+  div class="d-flex justify-content-center"
+    = image_tag avatar_url(@pod.user), class: "rounded-circle border mr-3 avatar-48"
+
+    div
+      = link_to user_profile_path(@pod.user.username), class: "h6 text-dark"
+        = @pod.user.name
+        span class="font-weight-normal ml-1" = "@#{@pod.user.username}"
+
+      div class="text-secondary"
+        span class="font-weight-bold" = @pod.user.following_count
+        span class="ml-1" = t('common.following')
+
+        span class="font-weight-bold ml-3" = @pod.user.followers_count
+        span class="ml-1" = t('common.followers')
+
+div class="w-100"
+
+div class="col-md-8 mx-auto font-size-lecture"
+  == @pod.content_html
+
+div class="col-md-8 mx-auto"
+  hr
+  div class="actions"
+    div class="action"
+      = render partial: "reactions/action",
+               locals: { reactable: @pod, reaction: current_user.reaction(@pod) }
+    div class="action"
+      = render partial: "comments/action",
+               locals: { pod: @pod }
+
+    - if @pod.user_id = current_user.id
+      div class="action"
+        = link_to pod_path(@pod),
+                  data: { confirm: t("pods.pod.confirm.destroy") },
+                  method: :delete,
+                  class: "btn btn-light btn-action js-action"
+          = icon "far", "trash-alt", class: "action-icon"
+
+div class="col-md-8 mx-auto mt-3"
+  div class="card border-top-0"
+    - unless current_user.guest?
+      = render partial: "comments/form", locals: { commentable: @pod, comment: @comment || Comment.new }
+    = render partial: "comments/comments",
+            locals: { comments: @comments, reactions: @reactions }
+

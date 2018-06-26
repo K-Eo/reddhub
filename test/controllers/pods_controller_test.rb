@@ -130,7 +130,7 @@ class PodsControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :ok
 
-    assert_select "li.pod", count: 6
+    assert_select "li.pod", count: 7
 
     @user.feed.each do |pod|
       assert_select "li.pod" do
