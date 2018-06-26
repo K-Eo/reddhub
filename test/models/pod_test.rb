@@ -62,6 +62,26 @@ class PodTest < ActiveSupport::TestCase
     assert_not @pod.pod?
   end
 
+  test "invalid if title is too long" do
+    title = "a" * 101
+    @pod.content = "# #{title}\n\nDescription\n\nContent"
+    assert_not @pod.valid?
+
+    title = "Title"
+    @pod.content = "# #{title}\n\nDescription\n\nContent"
+    assert @pod.valid?
+  end
+
+  test "invalid if description is too long" do
+    description = "a" * 151
+    @pod.content = "# Title\n\n#{description}\n\nContent"
+    assert_not @pod.valid?
+
+    description = "Description"
+    @pod.content = "# Title\n\n#{description}\n\nContent"
+    assert @pod.valid?
+  end
+
   test "too long when is story" do
     @pod.content = "# My title\n\nMy long long description\n\nFoo" + "a" * 7960
     assert_not @pod.valid?

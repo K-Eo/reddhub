@@ -1,14 +1,21 @@
 class Pod < ApplicationRecord
   before_validation :preprocess_content
-  before_save :check_for_story
+  before_save :markdownfy
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable
   has_many :reactions, as: :reactable, dependent: :delete_all
   has_many_attached :images
 
-  validates_presence_of :content
-  validates_length_of :content, maximum: 8000, if: :story_format?
-  validates_length_of :content, maximum: 280, unless: :story_format?
+  with_options unless: :story_format? do |pod|
+    pod.validates :content, presence: true
+    pod.validates :content, length: { maximum: 280 }
+  end
+
+  with_options if: :story_format? do |pod|
+    pod.validates :title, length: { maximum: 100 }
+    pod.validates :description, length: { maximum: 150 }
+    pod.validates :content, length: { maximum: 8000 }
+  end
 
   scope :newest, -> { order(created_at: :desc) }
   scope :no_deleted, -> { where(pending_delete: false) }
@@ -28,16 +35,23 @@ class Pod < ApplicationRecord
 
   private
     def story_format?
-      Reddhub::Pod.story?(self.content)
+      self.kind == Reddhub::Pod::STORY
+    end
+
+    def markdownfy
+      return unless story_format?
+      self.content_html = ApplicationController.helpers.markdown(@body)
     end
 
     def check_for_story
-      return unless story_format?
+      meta = Reddhub::Pod.parse_story(self.content)
 
-      title, description, body = Reddhub::Pod.parse_story(self.content)
+      return if meta.nil?
+
+      title, description, @body = meta
+
       self.title = title
       self.description = description
-      self.content_html = ApplicationController.helpers.markdown(body)
       self.kind = Reddhub::Pod::STORY
     end
 
@@ -45,5 +59,7 @@ class Pod < ApplicationRecord
       if content.present?
         self.content = Reddhub::Sanitizer.extra_space(content)
       end
+
+      check_for_story
     end
 end
