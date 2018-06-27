@@ -4,6 +4,6 @@ set -e
 
 echo Setting up js modules.
 
-npm install
+yarn install --no-progress --frozen-lockfile
 
 echo Setting up js modules DONE.
