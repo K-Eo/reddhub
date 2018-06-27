@@ -136,12 +136,14 @@ describe('Story', () => {
 
   const expectations = [
     ['# ', true],
+    ['# F', true],
+    ['#  ', false],
     [' # ', false],
     [' # F', false],
     ['F', false],
     ['\n# F', false],
     ['#', false],
-    ['# \nfoo', true],
+    ['# \nfoo', false],
   ]
 
   test.each(expectations)(

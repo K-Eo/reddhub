@@ -2,7 +2,7 @@ import Model from './model'
 
 export const STORY_REGEX = /^# ([^\n]*)(\n\n)?([^\n]*)(\n\n)?([\s\S]*)$/
 export const STORY_REGEX_STRICT = /^# (\S.*)\n\n(\S.*)\n\n(\S[\s\S]*)$/
-export const STORY_SIGNATURE = /^# .*/
+export const STORY_SIGNATURE = /^# $|^# \S.*/
 
 export class Pod extends Model {
   private _content: string
