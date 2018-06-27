@@ -1,6 +1,6 @@
 module Reddhub
   module Pod
-    STORY_META_REGEX = /\A# (\S[^\n]+)\n\n(\S[^\n]+)\n\n(\S.*)\z/m
+    STORY_META_REGEX = /\A# (\S.+)\n\n(\S.+)\n\n([\S\s]+)\z/
 
     POD = 0
     STORY = 1
