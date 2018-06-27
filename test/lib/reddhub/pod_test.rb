@@ -20,6 +20,12 @@ class PodTest < ActiveSupport::TestCase
     content = ""
     assert_nil Reddhub::Pod.parse_story(content)
 
+    content = "# My title\n\n"
+    assert_nil Reddhub::Pod.parse_story(content)
+
+    content = "# My title\n\n\n\nMy Content"
+    assert_nil Reddhub::Pod.parse_story(content)
+
     content = "# My title\n\n My description\n\n#My content"
     assert_nil Reddhub::Pod.parse_story(content)
 
