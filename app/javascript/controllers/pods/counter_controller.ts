@@ -43,7 +43,7 @@ export default class extends Controller {
 
   private updateProgress(): void {
     let color: string
-    const progress = this.length * 100 / MAX_POD_LENGTH / 100
+    const progress = (this.length * 100) / MAX_POD_LENGTH / 100
     const effectiveProgress = progress > 1 ? 1 : progress
 
     if (progress > 0 && progress <= 0.9) {
