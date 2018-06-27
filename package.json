@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint 'app/javascript/**/*.js'",
-    "prettier": "prettier -l 'app/javascript/**/*.{js,ts,css,scss,json,md}'"
+    "prettier": "prettier -l 'app/javascript/**/*.{js,ts,css,scss,json,md}'",
+    "test": "jest"
   },
   "dependencies": {
     "@rails/webpacker": "3.4",
@@ -20,9 +21,29 @@
     "typescript": "^2.9.2"
   },
   "devDependencies": {
+    "@types/jest": "^23.1.2",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
+    "jest": "^23.2.0",
     "prettier": "^1.12.1",
+    "ts-jest": "^22.4.6",
     "webpack-dev-server": "2.11.2"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/app/javascript/"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
