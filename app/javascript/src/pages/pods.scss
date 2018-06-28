@@ -8,6 +8,12 @@
   &-body {
     min-width: 0;
   }
+
+  &-story-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
 }
 
 .font-size-lecture {
