@@ -46,7 +46,6 @@ gem "aws-sdk-s3", require: false
 gem "kaminari"
 gem "redcarpet"
 gem "slim"
-gem "font-awesome-sass", "~> 5.0.9"
 gem "recaptcha", require: "recaptcha/rails"
 gem "http_accept_language"
 gem "twemoji"
