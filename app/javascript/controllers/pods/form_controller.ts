@@ -2,6 +2,7 @@ import { Controller } from 'stimulus'
 import autosize from 'autosize'
 import Model from '../../types/model'
 import { Pod, Story } from '../../types/pod'
+import { sanitizeNewLines } from '../../utils/text'
 
 enum Models {
   Pod = 0,
@@ -34,7 +35,7 @@ export default class extends Controller {
   word(): void {
     this.checkForModel()
 
-    const value = this.sourceTarget.value
+    const value = sanitizeNewLines(this.sourceTarget.value)
 
     if (this.currentModel == Models.Pod) {
       ;(this.getCurrentModel() as Pod).content = value
