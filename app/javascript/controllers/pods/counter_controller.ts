@@ -1,7 +1,9 @@
 import { Controller } from 'stimulus'
 import ProgressBar from 'progressbar.js'
+import { Story } from '../../types/pod'
 
 const MAX_POD_LENGTH: number = 280
+const MAX_STORY_LENGTH: number = 8000
 const BG_SUCCESS: string = '#34d058'
 const BG_WARNING: string = '#ffc107'
 const BG_DANGER: string = '#e83e8c'
@@ -14,8 +16,11 @@ export default class extends Controller {
   private progressTarget: HTMLDivElement
   private progressBar: any
   private beforeCache: () => void
+  private maxLength: number
 
   initialize(): void {
+    this.maxLength = MAX_POD_LENGTH
+
     this.progressBar = new ProgressBar.Circle(this.progressTarget, {
       color: BG_SUCCESS,
       strokeWidth: 20,
@@ -33,7 +38,16 @@ export default class extends Controller {
   }
 
   update(): void {
+    this.checkMaxLength()
     this.updateProgress()
+  }
+
+  private checkMaxLength() {
+    if (Story.hasSignature(this.sourceTarget.value)) {
+      this.maxLength = MAX_STORY_LENGTH
+    } else {
+      this.maxLength = MAX_POD_LENGTH
+    }
   }
 
   private destroy() {
@@ -43,7 +57,7 @@ export default class extends Controller {
 
   private updateProgress(): void {
     let color: string
-    const progress = (this.length * 100) / MAX_POD_LENGTH / 100
+    const progress = (this.length * 100) / this.maxLength / 100
     const effectiveProgress = progress > 1 ? 1 : progress
 
     if (progress > 0 && progress <= 0.9) {
