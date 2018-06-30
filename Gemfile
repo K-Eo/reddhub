@@ -42,7 +42,6 @@ gem "simple_form"
 gem "webpacker", "~> 3.4"
 gem "mini_magick"
 gem "state_machines-activerecord"
-gem "aws-sdk-s3", require: false
 gem "kaminari"
 gem "redcarpet"
 gem "slim"
@@ -50,6 +49,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem "http_accept_language"
 gem "twemoji"
 gem "sidekiq"
+gem "google-cloud-storage", "~> 1.8", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
