@@ -20,11 +20,12 @@ li [class="list-group-item list-group-item-action d-flex pod pb-0 px-2 px-md-3"
         div class="bg-light rounded text-center border text-truncate js-action"
           = image_tag image, class: "img-fluid js-zoom"
     - else
-      div class="rounded border p-2 d-flex"
+      div class="rounded border mt-2" style="overflow: hidden;"
         - if pod.images.attached?
-          = image_tag pod.images.first.variant(resize: "80x80^"),
-            class: 'mr-2 rounded border pod-story-thumbnail'
-        div class="flex-fix-width"
+          div style="width: 100%; height: 0; padding-bottom: 56.25%; position: relative;"
+            = image_tag pod.images.first.variant(resize: "500x281^"),
+              style: 'width: 100%; height: 100%; position: absolute; object-fit: cover'
+        div class="flex-fix-width px-3 py-2 border-top"
           h6 class="text-truncate" title=pod.title = pod.title
           p class="m-0" = pod.description
 
