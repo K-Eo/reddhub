@@ -39,7 +39,7 @@ class Pod < ApplicationRecord
     end
 
     def markdownfy
-      return unless story_format?
+      return unless @body.present? && story_format?
       self.content_html = ApplicationController.helpers.markdown(@body)
     end
 
