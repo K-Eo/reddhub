@@ -32,3 +32,6 @@ yarn-debug.log*
 
 tools/
 .vscode
+
+# Ignore application configuration
+/config/application.yml
