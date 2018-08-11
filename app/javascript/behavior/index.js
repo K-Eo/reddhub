@@ -1,2 +1,2 @@
 import './zoom'
-import './google_analytics'
+import './ga'
